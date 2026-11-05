@@ -10,3 +10,4 @@ export const GdgColorsBar: React.FC<{ className?: string }> = ({ className = '' 
     </div>
   );
 };
+

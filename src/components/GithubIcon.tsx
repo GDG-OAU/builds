@@ -9,3 +9,4 @@ export const GithubIcon: React.FC<{ className?: string }> = ({ className = 'w-4 
     />
   </svg>
 );
+

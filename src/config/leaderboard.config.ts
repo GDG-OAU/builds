@@ -24,3 +24,4 @@ export const LEADERBOARD_CONFIG = {
     maxDailyVotesPerUser: 10
   }
 };
+

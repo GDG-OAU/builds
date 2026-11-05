@@ -1,11 +1,10 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { ProjectCard } from '../components/ProjectCard';
 import { ProjectDetailModal } from '../components/ProjectDetailModal';
 import type { Project, CommunityName, GoogleTool } from '../types';
-import { Search, Filter, Sparkles, X, PlusCircle } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Search, X, Plus, Filter, Sparkles } from 'lucide-react';
 
 const ALL_COMMUNITIES: CommunityName[] = [
   'Web Development',
@@ -16,7 +15,7 @@ const ALL_COMMUNITIES: CommunityName[] = [
   'Data Science / Machine Learning',
   'Design',
   'Quantum Computing',
-  'Cybersecurity'
+  'Cybersecurity',
 ];
 
 const ALL_TOOLS: GoogleTool[] = [
@@ -32,197 +31,208 @@ const ALL_TOOLS: GoogleTool[] = [
   'Forms',
   'Sheets',
   'Android',
-  'Other'
+  'Other',
 ];
 
 export const GalleryPage: React.FC = () => {
   const { projects } = useApp();
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCommunity, setSelectedCommunity] = useState<string>(searchParams.get('community') || 'ALL');
-  const [selectedTool, setSelectedTool] = useState<string>('ALL');
-  const [activeModalProject, setActiveModalProject] = useState<Project | null>(null);
+  const [query, setQuery] = useState('');
+  const [community, setCommunity] = useState<string>(searchParams.get('community') || 'ALL');
+  const [tool, setTool] = useState<string>('ALL');
+  const [modal, setModal] = useState<Project | null>(null);
 
   useEffect(() => {
-    const communityParam = searchParams.get('community');
-    if (communityParam) {
-      setSelectedCommunity(communityParam);
-    }
-    const projectParam = searchParams.get('project');
-    if (projectParam) {
-      const match = projects.find(p => p.id === projectParam);
-      if (match) {
-        setActiveModalProject(match);
-      }
+    const c = searchParams.get('community');
+    if (c) setCommunity(c);
+    const pId = searchParams.get('project');
+    if (pId) {
+      const found = projects.find((p) => p.id === pId);
+      if (found) setModal(found);
     }
   }, [searchParams, projects]);
 
-  const filteredProjects = useMemo(() => {
+  const filtered = useMemo(() => {
     return projects
-      .filter((project) => {
-        const matchesSearch =
-          project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          project.builderName.toLowerCase().includes(searchQuery.toLowerCase());
-
-        const matchesCommunity =
-          selectedCommunity === 'ALL' || project.community === selectedCommunity;
-
-        const matchesTool =
-          selectedTool === 'ALL' || project.googleTools.includes(selectedTool as GoogleTool);
-
-        return matchesSearch && matchesCommunity && matchesTool;
+      .filter((p) => {
+        const q = query.toLowerCase();
+        const matchesQuery =
+          !q ||
+          p.title.toLowerCase().includes(q) ||
+          p.description.toLowerCase().includes(q) ||
+          p.builderName.toLowerCase().includes(q);
+        const matchesCommunity = community === 'ALL' || p.community === community;
+        const matchesTool = tool === 'ALL' || p.googleTools.includes(tool as GoogleTool);
+        return matchesQuery && matchesCommunity && matchesTool;
       })
       .sort((a, b) => b.createdAt - a.createdAt);
-  }, [projects, searchQuery, selectedCommunity, selectedTool]);
+  }, [projects, query, community, tool]);
 
-  const resetFilters = () => {
-    setSearchQuery('');
-    setSelectedCommunity('ALL');
-    setSelectedTool('ALL');
+  const handleSelectCommunity = (commName: string) => {
+    setCommunity(commName);
+    if (commName === 'ALL') {
+      const newParams = new URLSearchParams(searchParams);
+      newParams.delete('community');
+      setSearchParams(newParams);
+    } else {
+      setSearchParams({ community: commName });
+    }
+  };
+
+  const handleResetFilters = () => {
+    setQuery('');
+    setCommunity('ALL');
+    setTool('ALL');
     setSearchParams({});
   };
 
-  const hasActiveFilters = searchQuery !== '' || selectedCommunity !== 'ALL' || selectedTool !== 'ALL';
-
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
-      
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-gray-200 pb-6">
-        <div>
-          <div className="flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-[#188038] mb-1.5">
-            <Sparkles className="w-4 h-4 text-[#188038]" />
-            <span>Builder Jam Showcase</span>
+    <div className="bg-white min-h-screen py-10 sm:py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Gallery Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 pb-6 border-b border-gray-100">
+          <div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-50 border border-green-200 text-[#188038] text-xs font-bold uppercase tracking-wider mb-2">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>GDG OAU Showcase</span>
+            </div>
+            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
+              Project Gallery
+            </h1>
+            <p className="text-gray-500 text-sm mt-1">
+              Explore {projects.length} submissions from builders across Obafemi Awolowo University.
+            </p>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black text-gray-900 tracking-tight">
-            Project Gallery
-          </h1>
-          <p className="text-sm sm:text-base text-gray-600 mt-1">
-            Discover {projects.length} inspiring solutions built by GDG on Campus OAU developers.
-          </p>
+
+          <Link
+            to="/submit"
+            className="inline-flex items-center gap-1.5 bg-black hover:bg-gray-800 text-white text-xs font-semibold px-5 py-2.5 rounded-full shadow-2xs transition-all self-start sm:self-auto"
+          >
+            <Plus className="w-3.5 h-3.5" />
+            Submit Your Project
+          </Link>
         </div>
 
-        <Link
-          to="/submit"
-          className="inline-flex items-center space-x-2 bg-[#188038] hover:bg-[#137333] text-white px-5 py-2.5 rounded-xl font-semibold text-sm shadow-sm hover:shadow transition-all self-start md:self-auto"
-        >
-          <PlusCircle className="w-4 h-4" />
-          <span>Submit Project</span>
-        </Link>
-      </div>
-
-      <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-5 shadow-2xs space-y-4">
-        <div className="flex flex-col sm:flex-row gap-3">
+        {/* Search & Tool Filter Row */}
+        <div className="flex flex-col sm:flex-row gap-3 mb-4">
           <div className="relative flex-1">
-            <Search className="w-5 h-5 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by title, builder name, or keywords..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-300 focus:border-[#188038] focus:ring-2 focus:ring-[#188038]/20 outline-hidden text-sm transition-all"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search by project title, description, or builder..."
+              className="w-full pl-10 pr-10 py-2.5 bg-gray-50/70 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:bg-white focus:border-[#188038] focus:ring-1 focus:ring-[#188038]/20 transition-all"
             />
-            {searchQuery && (
+            {query && (
               <button
-                onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                onClick={() => setQuery('')}
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 p-0.5"
               >
                 <X className="w-4 h-4" />
               </button>
             )}
           </div>
 
-          <div className="flex flex-wrap sm:flex-nowrap gap-3">
-            <div className="w-full sm:w-56">
-              <select
-                value={selectedCommunity}
-                onChange={(e) => {
-                  setSelectedCommunity(e.target.value);
-                  if (e.target.value === 'ALL') {
-                    searchParams.delete('community');
-                    setSearchParams(searchParams);
-                  } else {
-                    setSearchParams({ ...Object.fromEntries(searchParams.entries()), community: e.target.value });
-                  }
-                }}
-                className="w-full px-3 py-2.5 rounded-xl border border-gray-300 bg-white text-sm text-gray-700 focus:border-[#188038] focus:ring-2 focus:ring-[#188038]/20 outline-hidden"
-              >
-                <option value="ALL">All Communities</option>
-                {ALL_COMMUNITIES.map((comm) => (
-                  <option key={comm} value={comm}>{comm}</option>
-                ))}
-              </select>
-            </div>
+          <div className="flex items-center gap-2">
+            <select
+              value={tool}
+              onChange={(e) => setTool(e.target.value)}
+              className="px-3.5 py-2.5 bg-gray-50/70 border border-gray-200 rounded-xl text-sm font-medium text-gray-700 focus:outline-none focus:bg-white focus:border-[#188038] transition-all"
+            >
+              <option value="ALL">All Google Tools</option>
+              {ALL_TOOLS.map((t) => (
+                <option key={t} value={t}>
+                  {t}
+                </option>
+              ))}
+            </select>
 
-            <div className="w-full sm:w-52">
-              <select
-                value={selectedTool}
-                onChange={(e) => setSelectedTool(e.target.value)}
-                className="w-full px-3 py-2.5 rounded-xl border border-gray-300 bg-white text-sm text-gray-700 focus:border-[#188038] focus:ring-2 focus:ring-[#188038]/20 outline-hidden"
+            {(query || community !== 'ALL' || tool !== 'ALL') && (
+              <button
+                onClick={handleResetFilters}
+                className="text-xs font-semibold text-gray-500 hover:text-gray-900 px-3 py-2.5 hover:bg-gray-100 rounded-xl transition-colors whitespace-nowrap"
               >
-                <option value="ALL">All Google Tools</option>
-                {ALL_TOOLS.map((tool) => (
-                  <option key={tool} value={tool}>{tool}</option>
-                ))}
-              </select>
-            </div>
+                Clear Filters
+              </button>
+            )}
           </div>
         </div>
 
-        {hasActiveFilters && (
-          <div className="flex items-center justify-between text-xs text-gray-500 pt-2 border-t border-gray-100">
-            <span>
-              Showing {filteredProjects.length} of {projects.length} projects
-            </span>
+        {/* Track Pills Horizontal Scrollbar */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-4 pt-1 no-scrollbar mb-8">
+          <button
+            onClick={() => handleSelectCommunity('ALL')}
+            className={`px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+              community === 'ALL'
+                ? 'bg-black text-white shadow-2xs'
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+            }`}
+          >
+            All Tracks ({projects.length})
+          </button>
+
+          {ALL_COMMUNITIES.map((c) => {
+            const count = projects.filter((p) => p.community === c).length;
+            const active = community === c;
+            return (
+              <button
+                key={c}
+                onClick={() => handleSelectCommunity(c)}
+                className={`px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+                  active
+                    ? 'bg-[#188038] text-white shadow-2xs'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
+              >
+                {c} {count > 0 && `(${count})`}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Results Info */}
+        <div className="flex items-center justify-between text-xs text-gray-500 mb-6">
+          <span>Showing {filtered.length} {filtered.length === 1 ? 'project' : 'projects'}</span>
+          <span>Sorted by newest</span>
+        </div>
+
+        {/* Projects Grid */}
+        {filtered.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filtered.map((p) => (
+              <ProjectCard
+                key={p.id}
+                project={p}
+                onOpenDetails={(project) => setModal(project)}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-20 bg-gray-50 rounded-2xl border border-dashed border-gray-200 p-8">
+            <Filter className="w-10 h-10 text-gray-300 mx-auto mb-3" />
+            <h3 className="text-base font-bold text-gray-900 mb-1">No projects matched your filters</h3>
+            <p className="text-xs text-gray-500 max-w-sm mx-auto mb-4">
+              Try searching for something else or clearing your community and tool filters.
+            </p>
             <button
-              onClick={resetFilters}
-              className="text-[#188038] font-semibold hover:underline flex items-center gap-1"
+              onClick={handleResetFilters}
+              className="px-4 py-2 bg-black text-white text-xs font-semibold rounded-full hover:bg-gray-800 transition-colors"
             >
-              <X className="w-3.5 h-3.5" /> Clear all filters
+              Reset All Filters
             </button>
           </div>
         )}
+
       </div>
 
-      {filteredProjects.length === 0 ? (
-        <div className="bg-white rounded-2xl border border-dashed border-gray-300 p-12 text-center max-w-xl mx-auto space-y-4">
-          <div className="w-12 h-12 rounded-full bg-gray-100 text-gray-400 flex items-center justify-center mx-auto">
-            <Filter className="w-6 h-6" />
-          </div>
-          <h3 className="text-lg font-bold text-gray-900">No projects found</h3>
-          <p className="text-sm text-gray-500">
-            No projects matched your search criteria. Try clearing filters or submit a new project in this category!
-          </p>
-          <button
-            onClick={resetFilters}
-            className="text-sm font-semibold text-[#188038] hover:underline"
-          >
-            Reset Filters
-          </button>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              onOpenDetails={(p) => setActiveModalProject(p)}
-            />
-          ))}
-        </div>
+      {modal && (
+        <ProjectDetailModal
+          project={modal}
+          onClose={() => setModal(null)}
+        />
       )}
-
-      <ProjectDetailModal
-        project={activeModalProject}
-        onClose={() => {
-          setActiveModalProject(null);
-          if (searchParams.get('project')) {
-            searchParams.delete('project');
-            setSearchParams(searchParams);
-          }
-        }}
-      />
     </div>
   );
 };

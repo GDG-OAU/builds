@@ -3,18 +3,68 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-green: #188038;
+    --color-blue: #4285F4;
+    --color-red: #EA4335;
+    --color-yellow: #FBBC04;
+  }
+
   body {
-    @apply bg-[#F8F9FA] text-[#202124] antialiased;
-    font-family: Arial, Inter, system-ui, -apple-system, sans-serif;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    @apply bg-white text-gray-900 antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: -0.025em;
+  }
+
+  code, .mono {
+    font-family: 'Roboto Mono', monospace;
   }
 }
 
-.gdg-gradient {
-  background: linear-gradient(90deg, #4285F4 0%, #EA4335 33%, #FBBC04 66%, #188038 100%);
+/* GDG 4-color accent top/bottom bar */
+.gdg-bar {
+  background: linear-gradient(90deg, #4285F4 0% 25%, #EA4335 25% 50%, #FBBC04 50% 75%, #188038 75% 100%);
 }
 
-.glass-nav {
-  background: rgba(255, 255, 255, 0.92);
+/* Light Graph Grid from inspo */
+.inspo-grid {
+  background-color: #ffffff;
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+
+.subtle-grid {
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Navbar glass effect */
+.nav-frosted {
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.stat-number {
+  font-family: 'Roboto Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background: #188038;
+  color: white;
 }

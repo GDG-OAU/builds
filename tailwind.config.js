@@ -6,57 +6,47 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        google: {
-          green: {
-            DEFAULT: '#188038',
-            hover: '#137333',
-            light: '#E6F4EA',
-            border: '#CEEAD6',
-            bright: '#34A853'
-          },
-          blue: {
-            DEFAULT: '#4285F4',
-            hover: '#1A73E8',
-            light: '#E8F0FE',
-            border: '#D2E3FC'
-          },
-          red: {
-            DEFAULT: '#EA4335',
-            hover: '#D93025',
-            light: '#FCE8E6',
-            border: '#FAD2CF'
-          },
-          yellow: {
-            DEFAULT: '#FBBC04',
-            hover: '#F9AB00',
-            light: '#FEF7E0',
-            border: '#FEEFC3'
-          },
-          gray: {
-            50: '#F8F9FA',
-            100: '#F1F3F4',
-            200: '#E8EAED',
-            300: '#DADCE0',
-            400: '#BDC1C6',
-            500: '#9AA0A6',
-            600: '#80868B',
-            700: '#5F6368',
-            800: '#3C4043',
-            900: '#202124'
-          }
-        }
-      },
       fontFamily: {
-        sans: ['Arial', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['Space Grotesk', 'Arial', 'system-ui', 'sans-serif'],
+        mono: ['Roboto Mono', 'monospace'],
+      },
+      colors: {
+        gdg: {
+          green: '#188038',
+          'green-hover': '#137333',
+          'green-light': '#E6F4EA',
+          blue: '#4285F4',
+          'blue-light': '#E8F0FE',
+          red: '#EA4335',
+          'red-light': '#FCE8E6',
+          yellow: '#FBBC04',
+          'yellow-light': '#FEF7E0',
+        },
+        ink: '#0d0d0d',
+        'ink-secondary': '#5f6368',
+        'ink-muted': '#9aa0a6',
+        surface: '#f8f9fa',
+        line: '#e8eaed',
+      },
+      letterSpacing: {
+        tighter: '-0.03em',
+        tight: '-0.02em',
       },
       animation: {
-        'pulse-subtle': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'bounce-subtle': 'bounce 2s infinite',
-        'spin-slow': 'spin 12s linear infinite'
-      }
+        'slide-up': 'slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'fade-in': 'fadeIn 0.4s ease forwards',
+      },
+      keyframes: {
+        slideUp: {
+          from: { opacity: '0', transform: 'translateY(16px)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
+        },
+        fadeIn: {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
+        },
+      },
     },
   },
   plugins: [],
 }
-

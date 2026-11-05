@@ -166,20 +166,22 @@ export const SubmitPage: React.FC = () => {
 
   if (!user) {
     return (
-      <div className="max-w-2xl mx-auto px-4 py-16 sm:py-24 text-center">
-        <div className="bg-white rounded-3xl border border-gray-200 p-8 sm:p-12 shadow-sm space-y-6">
+      <div className="max-w-md mx-auto px-4 py-20 text-center">
+        <div className="bg-white rounded-3xl border border-gray-200 p-8 sm:p-10 shadow-xs space-y-6">
           <div className="w-16 h-16 rounded-2xl bg-green-50 text-[#188038] flex items-center justify-center mx-auto">
             <Sparkles className="w-8 h-8" />
           </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900">
-            Sign In to Submit Your Project
-          </h2>
-          <p className="text-sm sm:text-base text-gray-600 max-w-md mx-auto">
-            Submissions are credited directly to your builder profile and count toward your community track’s leaderboard rank.
-          </p>
+          <div>
+            <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">
+              Sign In to Submit
+            </h2>
+            <p className="text-sm text-gray-500 mt-2 leading-relaxed">
+              Submissions are credited directly to your builder profile and count toward your community track’s leaderboard rank.
+            </p>
+          </div>
           <button
             onClick={signInWithGoogle}
-            className="inline-flex items-center space-x-3 bg-white border border-gray-300 hover:border-gray-400 text-gray-800 px-6 py-3.5 rounded-xl text-sm font-semibold shadow-2xs hover:shadow transition-all"
+            className="w-full inline-flex items-center justify-center space-x-3 bg-white border border-gray-300 hover:border-gray-400 text-gray-800 px-6 py-3 rounded-full text-sm font-semibold shadow-2xs hover:shadow-xs transition-all"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path
@@ -207,38 +209,39 @@ export const SubmitPage: React.FC = () => {
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-      <div className="bg-white rounded-3xl border border-gray-200 shadow-sm p-6 sm:p-10 space-y-8">
+    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+      <div className="bg-white rounded-3xl border border-gray-200/90 shadow-xs p-6 sm:p-10 space-y-8">
         
         <div className="border-b border-gray-100 pb-5">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#188038]">
-            Builder Jam Submission
-          </span>
-          <h1 className="text-2xl sm:text-3xl font-black text-gray-900 mt-1">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-50 border border-green-200 text-[#188038] text-xs font-bold uppercase tracking-wider mb-2">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Builder Jam Submission</span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">
             Submit Your Project
           </h1>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-xs sm:text-sm text-gray-500 mt-1">
             Submitting as <span className="font-semibold text-gray-800">{user.displayName}</span> ({user.email})
           </p>
         </div>
 
         {errorMsg && (
-          <div className="bg-red-50 border border-red-200 text-[#D93025] px-4 py-3 rounded-xl text-sm flex items-start space-x-2">
-            <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
+          <div className="bg-red-50 border border-red-200 text-[#D93025] px-4 py-3 rounded-2xl text-xs sm:text-sm flex items-start space-x-2">
+            <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
             <span>{errorMsg}</span>
           </div>
         )}
 
         {successMsg && (
-          <div className="bg-green-50 border border-green-200 text-[#188038] px-4 py-3 rounded-xl text-sm flex items-center space-x-2">
-            <CheckCircle2 className="w-5 h-5 shrink-0" />
+          <div className="bg-green-50 border border-green-200 text-[#188038] px-4 py-3 rounded-2xl text-xs sm:text-sm flex items-center space-x-2">
+            <CheckCircle2 className="w-4 h-4 shrink-0" />
             <span>{successMsg}</span>
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-1.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">
               Project Title <span className="text-red-500">*</span>
             </label>
             <input
@@ -247,12 +250,12 @@ export const SubmitPage: React.FC = () => {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g., CampusPulse OAU"
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-[#188038] focus:ring-2 focus:ring-[#188038]/20 text-sm outline-hidden"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-[#188038] focus:ring-2 focus:ring-[#188038]/20 text-sm outline-hidden transition-all"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-1.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">
               One-Line Description <span className="text-red-500">*</span>
             </label>
             <textarea
@@ -261,14 +264,14 @@ export const SubmitPage: React.FC = () => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Explain what it does and the campus problem it addresses..."
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-[#188038] focus:ring-2 focus:ring-[#188038]/20 text-sm outline-hidden resize-none"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-[#188038] focus:ring-2 focus:ring-[#188038]/20 text-sm outline-hidden resize-none transition-all"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-bold text-gray-900 mb-1.5 flex items-center gap-1.5">
-                <GithubIcon className="w-4 h-4 text-gray-800" /> GitHub Repository <span className="text-red-500">*</span>
+              <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5 flex items-center gap-1.5">
+                <GithubIcon className="w-3.5 h-3.5 text-gray-800" /> GitHub Repository <span className="text-red-500">*</span>
               </label>
               <input
                 type="url"
@@ -276,34 +279,34 @@ export const SubmitPage: React.FC = () => {
                 value={githubUrl}
                 onChange={(e) => setGithubUrl(e.target.value)}
                 placeholder="https://github.com/username/project"
-                className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-[#188038] focus:ring-2 focus:ring-[#188038]/20 text-sm outline-hidden"
+                className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-[#188038] focus:ring-2 focus:ring-[#188038]/20 text-sm outline-hidden transition-all"
               />
               <p className="text-[11px] text-gray-400 mt-1">Must be a valid github.com link</p>
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-gray-900 mb-1.5 flex items-center gap-1.5">
-                <LinkIcon className="w-4 h-4 text-[#188038]" /> Live Demo Link (Optional)
+              <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5 flex items-center gap-1.5">
+                <LinkIcon className="w-3.5 h-3.5 text-[#188038]" /> Live Demo Link (Optional)
               </label>
               <input
                 type="url"
                 value={demoUrl}
                 onChange={(e) => setDemoUrl(e.target.value)}
                 placeholder="https://your-demo.web.app"
-                className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-[#188038] focus:ring-2 focus:ring-[#188038]/20 text-sm outline-hidden"
+                className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-[#188038] focus:ring-2 focus:ring-[#188038]/20 text-sm outline-hidden transition-all"
               />
-              <p className="text-[11px] text-[#188038] font-medium mt-1">Boosts your leaderboard completeness score!</p>
+              <p className="text-[11px] text-[#188038] font-semibold mt-1">Boosts your leaderboard completeness score!</p>
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-1.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">
               Community Track <span className="text-red-500">*</span>
             </label>
             <select
               value={community}
               onChange={(e) => setCommunity(e.target.value as CommunityName)}
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-300 bg-white text-sm text-gray-800 focus:border-[#188038] focus:ring-2 focus:ring-[#188038]/20 outline-hidden"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-300 bg-white text-sm text-gray-800 focus:border-[#188038] focus:ring-2 focus:ring-[#188038]/20 outline-hidden transition-all"
             >
               {COMMUNITIES.map((c) => (
                 <option key={c} value={c}>{c}</option>
@@ -313,11 +316,11 @@ export const SubmitPage: React.FC = () => {
 
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="block text-sm font-bold text-gray-900">
+              <label className="block text-xs font-bold uppercase tracking-wider text-gray-700">
                 Google Tools Used (Multi-select) <span className="text-red-500">*</span>
               </label>
-              <span className="text-xs text-gray-500">
-                {selectedTools.length} selected (2+ boosts score)
+              <span className="text-xs text-gray-400 font-medium">
+                {selectedTools.length} selected {selectedTools.length >= 2 && '· 2+ boosts score ✓'}
               </span>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -334,7 +337,7 @@ export const SubmitPage: React.FC = () => {
                         : 'bg-white border-gray-200 text-gray-700 hover:border-gray-300 hover:bg-gray-50'
                     }`}
                   >
-                    <span>{tool}</span>
+                    <span className="truncate">{tool}</span>
                     {active && <CheckCircle2 className="w-3.5 h-3.5 shrink-0 ml-1 text-[#188038]" />}
                   </button>
                 );
@@ -343,31 +346,31 @@ export const SubmitPage: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2">
+            <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">
               Project Screenshot <span className="text-red-500">*</span>
             </label>
-            <div className="flex space-x-4 border-b border-gray-200 mb-3">
+            <div className="flex space-x-2 mb-3">
               <button
                 type="button"
                 onClick={() => setScreenshotMode('upload')}
-                className={`pb-2 text-xs font-semibold border-b-2 transition-all ${
+                className={`px-4 py-1.5 text-xs font-bold rounded-full transition-all ${
                   screenshotMode === 'upload'
-                    ? 'border-[#188038] text-[#188038]'
-                    : 'border-transparent text-gray-500 hover:text-gray-800'
+                    ? 'bg-black text-white shadow-2xs'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
-                Upload Image File
+                Upload File
               </button>
               <button
                 type="button"
                 onClick={() => setScreenshotMode('url')}
-                className={`pb-2 text-xs font-semibold border-b-2 transition-all ${
+                className={`px-4 py-1.5 text-xs font-bold rounded-full transition-all ${
                   screenshotMode === 'url'
-                    ? 'border-[#188038] text-[#188038]'
-                    : 'border-transparent text-gray-500 hover:text-gray-800'
+                    ? 'bg-black text-white shadow-2xs'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
-                Paste Image URL
+                Paste Image Link
               </button>
             </div>
 
@@ -378,7 +381,7 @@ export const SubmitPage: React.FC = () => {
                     <img
                       src={filePreview}
                       alt="Preview"
-                      className="max-h-48 mx-auto rounded-lg object-contain shadow-2xs"
+                      className="max-h-48 mx-auto rounded-lg object-contain shadow-2xs border border-gray-200"
                     />
                     <button
                       type="button"
@@ -388,14 +391,14 @@ export const SubmitPage: React.FC = () => {
                       }}
                       className="text-xs text-red-600 font-semibold hover:underline"
                     >
-                      Remove and choose different image
+                      Remove image
                     </button>
                   </div>
                 ) : (
                   <div>
                     <ImageIcon className="w-8 h-8 text-gray-400 mx-auto mb-2" />
                     <label className="cursor-pointer">
-                      <span className="text-sm font-semibold text-[#188038] hover:underline">
+                      <span className="text-xs sm:text-sm font-semibold text-[#188038] hover:underline">
                         Click to select an image
                       </span>
                       <input
@@ -405,7 +408,7 @@ export const SubmitPage: React.FC = () => {
                         onChange={handleFileChange}
                       />
                     </label>
-                    <p className="text-xs text-gray-400 mt-1">PNG, JPG, or WEBP up to 5MB</p>
+                    <p className="text-[11px] text-gray-400 mt-1">PNG, JPG, or WEBP up to 5MB</p>
                   </div>
                 )}
               </div>
@@ -437,14 +440,14 @@ export const SubmitPage: React.FC = () => {
             <button
               type="button"
               onClick={() => navigate('/gallery')}
-              className="px-5 py-2.5 rounded-xl border border-gray-300 text-gray-700 text-sm font-semibold hover:bg-gray-50 transition-all"
+              className="px-5 py-2.5 rounded-full border border-gray-300 text-gray-700 text-xs sm:text-sm font-semibold hover:bg-gray-50 transition-all"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={uploading}
-              className="flex items-center space-x-2 bg-[#188038] hover:bg-[#137333] text-white px-6 py-2.5 rounded-xl text-sm font-semibold shadow-sm hover:shadow transition-all disabled:opacity-50"
+              className="flex items-center space-x-2 bg-black hover:bg-gray-800 text-white px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold shadow-xs hover:shadow-md transition-all disabled:opacity-50"
             >
               {uploading && <Loader2 className="w-4 h-4 animate-spin" />}
               <span>{uploading ? 'Uploading...' : 'Publish Submission'}</span>

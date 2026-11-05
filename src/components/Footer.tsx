@@ -1,54 +1,59 @@
 import React from 'react';
-import { GdgColorsBar } from './GdgColorsBar';
 import { GithubIcon } from './GithubIcon';
-import { Heart, Globe } from 'lucide-react';
+import { Globe, Heart } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-white border-t border-gray-200 mt-20">
+    <footer className="border-t border-gray-100 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center space-x-3">
-            <div className="flex font-mono font-bold text-base">
-              <span className="text-[#4285F4]">&lt;</span>
-              <span className="text-[#EA4335]">G</span>
-              <span className="text-[#FBBC04]">D</span>
-              <span className="text-[#188038]">G</span>
-              <span className="text-[#4285F4]">&gt;</span>
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1 px-2 py-1 border border-gray-200 rounded-md bg-white">
+              <span className="font-mono text-xs text-gray-400">{`{`}</span>
+              <div className="flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#4285F4]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#EA4335]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FBBC04]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#188038]" />
+              </div>
+              <span className="font-mono text-xs text-gray-400">{`}`}</span>
             </div>
             <div>
-              <p className="font-semibold text-gray-900 text-sm">Google Developer Groups on Campus</p>
-              <p className="text-xs text-gray-500">Obafemi Awolowo University, Ile-Ife</p>
+              <p className="font-bold text-sm text-gray-900 leading-none">
+                GDG on Campus OAU
+              </p>
+              <p className="text-[11px] text-gray-400 font-medium tracking-wide mt-1">
+                Builder Jam '26 · Obafemi Awolowo University
+              </p>
             </div>
           </div>
 
-          <p className="text-xs text-gray-500 flex items-center">
-            Built with <Heart className="w-3.5 h-3.5 text-[#EA4335] mx-1 fill-current" /> by the GDG OAU Developer Community
-          </p>
-
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center gap-6">
             <a
               href="https://github.com/GDG-OAU"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-gray-700 transition-colors"
-              aria-label="GitHub"
+              className="text-gray-400 hover:text-gray-900 transition-colors"
+              title="GDG OAU GitHub"
             >
-              <GithubIcon className="w-5 h-5" />
+              <GithubIcon className="w-4 h-4" />
             </a>
             <a
               href="https://www.bwaioau.site"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-[#188038] transition-colors"
-              aria-label="Website"
+              title="Build with AI OAU"
             >
-              <Globe className="w-5 h-5" />
+              <Globe className="w-4 h-4" />
             </a>
+            <span className="inline-flex items-center gap-1 text-xs text-gray-400 font-medium">
+              Made with <Heart className="w-3 h-3 text-red-500 fill-red-500" /> by GDG OAU
+            </span>
           </div>
         </div>
       </div>
-      <GdgColorsBar />
+      <div className="h-[3px] gdg-bar w-full" />
     </footer>
   );
 };
