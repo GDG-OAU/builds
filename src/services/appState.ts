@@ -1,5 +1,5 @@
 import type { Project, VoteRecord, CommunityMeta, UserProfile, IndividualScore, CommunityScore } from '../types';
-import { INITIAL_COMMUNITIES, SEED_PROJECTS } from '../data/seedData';
+import { INITIAL_COMMUNITIES } from '../data/seedData';
 import { LEADERBOARD_CONFIG } from '../config/leaderboard.config';
 
 const STORAGE_KEYS = {
@@ -12,13 +12,18 @@ const STORAGE_KEYS = {
 export const getStoredProjects = (): Project[] => {
   const data = localStorage.getItem(STORAGE_KEYS.PROJECTS);
   if (!data) {
-    localStorage.setItem(STORAGE_KEYS.PROJECTS, JSON.stringify(SEED_PROJECTS));
-    return SEED_PROJECTS;
+    return [];
   }
   try {
-    return JSON.parse(data);
+    const list: Project[] = JSON.parse(data);
+    // Filter out old seed projects if any remain in browser storage
+    const realProjects = list.filter(p => !p.id.startsWith('seed-proj-'));
+    if (realProjects.length !== list.length) {
+      saveProjects(realProjects);
+    }
+    return realProjects;
   } catch {
-    return SEED_PROJECTS;
+    return [];
   }
 };
 
@@ -29,24 +34,16 @@ export const saveProjects = (projects: Project[]): void => {
 export const getStoredVotes = (): VoteRecord[] => {
   const data = localStorage.getItem(STORAGE_KEYS.VOTES);
   if (!data) {
-    const initialVotes: VoteRecord[] = [];
-    SEED_PROJECTS.forEach(p => {
-      const count = p.votesCount || 0;
-      for (let i = 0; i < count; i++) {
-        initialVotes.push({
-          id: `vote-${p.id}-${i}`,
-          projectId: p.id,
-          voterUid: `anon-voter-${i}`,
-          voterEmail: `voter${i}@oau.edu`,
-          votedAt: Date.now() - 1000 * 60 * 60 * (i + 1)
-        });
-      }
-    });
-    localStorage.setItem(STORAGE_KEYS.VOTES, JSON.stringify(initialVotes));
-    return initialVotes;
+    return [];
   }
   try {
-    return JSON.parse(data);
+    const list: VoteRecord[] = JSON.parse(data);
+    // Filter out votes on old seed projects
+    const realVotes = list.filter(v => !v.projectId.startsWith('seed-proj-'));
+    if (realVotes.length !== list.length) {
+      saveVotes(realVotes);
+    }
+    return realVotes;
   } catch {
     return [];
   }

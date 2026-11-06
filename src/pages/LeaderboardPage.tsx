@@ -157,7 +157,16 @@ export const LeaderboardPage: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100 font-medium">
-                  {individual.map((item, idx) => {
+                  {individual.length === 0 ? (
+                    <tr>
+                      <td colSpan={6} className="px-6 py-16 text-center text-gray-500">
+                        <Trophy className="w-10 h-10 text-amber-400 mx-auto mb-2 opacity-60" />
+                        <p className="font-bold text-gray-800 text-sm">No builder rankings yet</p>
+                        <p className="text-xs text-gray-500 mt-1">Standings will calculate live once projects are submitted and scored!</p>
+                      </td>
+                    </tr>
+                  ) : (
+                    individual.map((item, idx) => {
                     const theme = COMMUNITY_THEMES[item.projects[0]?.community as keyof typeof COMMUNITY_THEMES] || COMMUNITY_THEMES['Web Development'];
                     return (
                       <tr
@@ -210,7 +219,7 @@ export const LeaderboardPage: React.FC = () => {
                         </td>
                       </tr>
                     );
-                  })}
+                  }))}
                 </tbody>
               </table>
             </div>

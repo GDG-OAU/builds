@@ -221,6 +221,22 @@ export const GalleryPage: React.FC = () => {
               />
             ))}
           </div>
+        ) : projects.length === 0 ? (
+          <div className="text-center py-20 bg-gradient-to-br from-emerald-50/40 to-teal-50/30 rounded-3xl border border-dashed border-emerald-300 p-8">
+            <Sparkles className="w-12 h-12 text-gdg-green mx-auto mb-3 opacity-80" />
+            <h3 className="text-xl font-extrabold text-gray-900 mb-1">Submissions Are Live!</h3>
+            <p className="text-xs sm:text-sm text-gray-600 max-w-sm mx-auto mb-6 font-medium">
+              No projects have been submitted yet. Be the very first builder across campus to showcase your build!
+            </p>
+            <Link
+              to="/submit"
+              style={{ backgroundColor: '#188038', color: '#FFFFFF' }}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gdg-green text-white text-xs font-bold rounded-full hover:bg-emerald-700 transition-colors shadow-md shadow-green-200"
+            >
+              <Plus className="w-4 h-4" />
+              <span>Submit First Project</span>
+            </Link>
+          </div>
         ) : (
           <div className="text-center py-20 bg-gradient-to-br from-emerald-50/40 to-teal-50/30 rounded-3xl border border-dashed border-emerald-300 p-8">
             <Filter className="w-12 h-12 text-gdg-green mx-auto mb-3 opacity-70" />
@@ -230,7 +246,8 @@ export const GalleryPage: React.FC = () => {
             </p>
             <button
               onClick={handleResetFilters}
-              className="px-6 py-2.5 bg-gdg-green text-white text-xs font-bold rounded-full hover:bg-gdg-green-hover transition-colors shadow-md shadow-green-200"
+              style={{ backgroundColor: '#188038', color: '#FFFFFF' }}
+              className="px-6 py-2.5 bg-gdg-green text-white text-xs font-bold rounded-full hover:bg-emerald-700 transition-colors shadow-md shadow-green-200"
             >
               Reset All Filters
             </button>
