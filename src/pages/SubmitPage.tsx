@@ -158,7 +158,27 @@ export const SubmitPage: React.FC = () => {
 
       setUploading(true);
       try {
-        if (isFirebaseConfigured && fbStorage && selectedFile) {
+        const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+        const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
+
+        if (cloudName && uploadPreset && selectedFile) {
+          const formData = new FormData();
+          formData.append('file', selectedFile);
+          formData.append('upload_preset', uploadPreset);
+
+          const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+            method: 'POST',
+            body: formData,
+          });
+
+          const data = await res.json();
+          if (data.secure_url) {
+            finalScreenshot = data.secure_url;
+          } else {
+            console.warn('Cloudinary upload response:', data);
+            finalScreenshot = filePreview;
+          }
+        } else if (isFirebaseConfigured && fbStorage && selectedFile) {
           const fileRef = ref(fbStorage, `screenshots/${Date.now()}_${selectedFile.name}`);
           const snapshot = await uploadBytes(fileRef, selectedFile);
           finalScreenshot = await getDownloadURL(snapshot.ref);
