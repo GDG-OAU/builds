@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import confetti from 'canvas-confetti';
+import type { ToastData } from '../components/Toast';
 import type { Project, VoteRecord, CommunityMeta, UserProfile, CommunityName } from '../types';
 import {
   getStoredProjects,
@@ -24,6 +25,13 @@ interface AppContextType {
   votes: VoteRecord[];
   communities: CommunityMeta[];
   votingClosed: boolean;
+  toast: ToastData | null;
+  showToast: (
+    message: string,
+    type?: 'info' | 'success' | 'warning' | 'error',
+    action?: { label: string; onClick: () => void }
+  ) => void;
+  dismissToast: () => void;
   signInWithGoogle: () => Promise<void>;
   mockSignIn: (email?: string, name?: string) => void;
   signOutUser: () => Promise<void>;
@@ -56,6 +64,28 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const [votes, setVotes] = useState<VoteRecord[]>(getStoredVotes);
   const [communities, setCommunities] = useState<CommunityMeta[]>(getStoredCommunities);
   const [votingClosed, setVotingClosed] = useState<boolean>(fetchVotingClosedState);
+  const [toast, setToast] = useState<ToastData | null>(null);
+
+  const showToast = (
+    message: string,
+    type: 'info' | 'success' | 'warning' | 'error' = 'info',
+    action?: { label: string; onClick: () => void }
+  ) => {
+    const id = `toast-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
+    setToast({ id, message, type, action });
+  };
+
+  const dismissToast = () => {
+    setToast(null);
+  };
+
+  useEffect(() => {
+    if (!toast) return;
+    const timer = setTimeout(() => {
+      setToast(null);
+    }, 4500);
+    return () => clearTimeout(timer);
+  }, [toast]);
 
   useEffect(() => {
     if (isFirebaseConfigured && auth) {
@@ -155,12 +185,25 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
   const castVote = (projectId: string) => {
     if (votingClosed && !isAdmin) {
-      return { success: false, message: 'Voting has been closed by the organizers.' };
+      const msg = 'Voting has been closed by the organizers.';
+      showToast(msg, 'warning');
+      return { success: false, message: msg };
     }
 
     const check = canUserVoteOnProject(projectId, user, projects, votes);
     if (!check.allowed) {
-      return { success: false, message: check.reason || 'Voting not permitted.' };
+      const msg = check.reason || 'Voting not permitted.';
+      if (!user) {
+        showToast(msg, 'warning', {
+          label: 'Sign in with Google',
+          onClick: () => {
+            signInWithGoogle();
+          }
+        });
+      } else {
+        showToast(msg, 'warning');
+      }
+      return { success: false, message: msg };
     }
 
     const newVote: VoteRecord = {
@@ -186,7 +229,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       // fallback
     }
 
-    return { success: true, message: 'Vote registered successfully! Thank you for supporting your peer!' };
+    const successMsg = 'Vote registered successfully! Thank you for supporting your peer!';
+    showToast(successMsg, 'success');
+    return { success: true, message: successMsg };
   };
 
   const removeProject = (projectId: string) => {
@@ -227,6 +272,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         votes,
         communities,
         votingClosed,
+        toast,
+        showToast,
+        dismissToast,
         signInWithGoogle,
         mockSignIn,
         signOutUser,

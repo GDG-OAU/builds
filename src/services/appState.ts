@@ -3,21 +3,55 @@ import { INITIAL_COMMUNITIES } from '../data/seedData';
 import { LEADERBOARD_CONFIG } from '../config/leaderboard.config';
 
 const STORAGE_KEYS = {
-  PROJECTS: 'gdg_builderjam_projects',
-  VOTES: 'gdg_builderjam_votes',
-  COMMUNITIES: 'gdg_builderjam_communities',
+  PROJECTS: 'gdg_builderjam_live_projects_v1',
+  VOTES: 'gdg_builderjam_live_votes_v1',
+  COMMUNITIES: 'gdg_builderjam_live_communities_v1',
   VOTING_CLOSED: 'gdg_builderjam_voting_closed'
 };
 
-export const getStoredProjects = (): Project[] => {
-  const data = localStorage.getItem(STORAGE_KEYS.PROJECTS);
-  if (!data) {
-    return [];
+// Aggressively clean up legacy seed mock data from all browsers
+const LEGACY_STORAGE_KEYS = [
+  'gdg_builderjam_projects',
+  'gdg_builderjam_votes',
+  'gdg_builderjam_communities',
+  'projects',
+  'votes',
+  'communities'
+];
+
+try {
+  if (typeof window !== 'undefined' && window.localStorage) {
+    LEGACY_STORAGE_KEYS.forEach((key) => localStorage.removeItem(key));
   }
+} catch {
+  // ignore
+}
+
+const isMockProject = (p: Partial<Project>): boolean => {
+  if (!p || !p.id) return true;
+  if (p.id.startsWith('seed-')) return true;
+  if (p.submitterEmail && p.submitterEmail.includes('student.oauife.edu.ng')) return true;
+  if (p.title && ['CampusPulse OAU', 'OAU AgriVision', 'StudyBuddy OAU', 'ScholarSync', 'MedCheck Africa', 'TransitRide Ife'].includes(p.title)) return true;
+  if (p.builderName && ['Tobi Adebayo', 'Chioma Nwosu', 'Emeka Okafor', 'Folake Alabi', 'Damilola Bakare'].includes(p.builderName)) return true;
+  if (p.githubUrl && (
+    p.githubUrl.includes('campuspulse-oau') ||
+    p.githubUrl.includes('agrivision-ml') ||
+    p.githubUrl.includes('studybuddy-android') ||
+    p.githubUrl.includes('scholarsync-agent') ||
+    p.githubUrl.includes('medcheck-africa') ||
+    p.githubUrl.includes('transitride-ife')
+  )) return true;
+  return false;
+};
+
+export const getStoredProjects = (): Project[] => {
   try {
+    const data = localStorage.getItem(STORAGE_KEYS.PROJECTS);
+    if (!data) {
+      return [];
+    }
     const list: Project[] = JSON.parse(data);
-    // Filter out old seed projects if any remain in browser storage
-    const realProjects = list.filter(p => !p.id.startsWith('seed-proj-'));
+    const realProjects = list.filter((p) => !isMockProject(p));
     if (realProjects.length !== list.length) {
       saveProjects(realProjects);
     }
@@ -28,18 +62,27 @@ export const getStoredProjects = (): Project[] => {
 };
 
 export const saveProjects = (projects: Project[]): void => {
-  localStorage.setItem(STORAGE_KEYS.PROJECTS, JSON.stringify(projects));
+  try {
+    localStorage.setItem(STORAGE_KEYS.PROJECTS, JSON.stringify(projects.filter((p) => !isMockProject(p))));
+  } catch {
+    // fallback
+  }
 };
 
 export const getStoredVotes = (): VoteRecord[] => {
-  const data = localStorage.getItem(STORAGE_KEYS.VOTES);
-  if (!data) {
-    return [];
-  }
   try {
+    const data = localStorage.getItem(STORAGE_KEYS.VOTES);
+    if (!data) {
+      return [];
+    }
     const list: VoteRecord[] = JSON.parse(data);
-    // Filter out votes on old seed projects
-    const realVotes = list.filter(v => !v.projectId.startsWith('seed-proj-'));
+    const realVotes = list.filter((v) => {
+      if (!v || !v.projectId) return false;
+      if (v.projectId.startsWith('seed-proj-') || v.projectId.startsWith('seed-')) return false;
+      if (v.voterUid && (v.voterUid.startsWith('anon-voter-') || v.voterUid.startsWith('seed-user-'))) return false;
+      if (v.voterEmail && v.voterEmail.includes('@oau.edu')) return false;
+      return true;
+    });
     if (realVotes.length !== list.length) {
       saveVotes(realVotes);
     }
@@ -50,16 +93,20 @@ export const getStoredVotes = (): VoteRecord[] => {
 };
 
 export const saveVotes = (votes: VoteRecord[]): void => {
-  localStorage.setItem(STORAGE_KEYS.VOTES, JSON.stringify(votes));
+  try {
+    localStorage.setItem(STORAGE_KEYS.VOTES, JSON.stringify(votes));
+  } catch {
+    // fallback
+  }
 };
 
 export const getStoredCommunities = (): CommunityMeta[] => {
-  const data = localStorage.getItem(STORAGE_KEYS.COMMUNITIES);
-  if (!data) {
-    localStorage.setItem(STORAGE_KEYS.COMMUNITIES, JSON.stringify(INITIAL_COMMUNITIES));
-    return INITIAL_COMMUNITIES;
-  }
   try {
+    const data = localStorage.getItem(STORAGE_KEYS.COMMUNITIES);
+    if (!data) {
+      localStorage.setItem(STORAGE_KEYS.COMMUNITIES, JSON.stringify(INITIAL_COMMUNITIES));
+      return INITIAL_COMMUNITIES;
+    }
     return JSON.parse(data);
   } catch {
     return INITIAL_COMMUNITIES;
@@ -67,7 +114,11 @@ export const getStoredCommunities = (): CommunityMeta[] => {
 };
 
 export const saveCommunities = (communities: CommunityMeta[]): void => {
-  localStorage.setItem(STORAGE_KEYS.COMMUNITIES, JSON.stringify(communities));
+  try {
+    localStorage.setItem(STORAGE_KEYS.COMMUNITIES, JSON.stringify(communities));
+  } catch {
+    // fallback
+  }
 };
 
 export const isVotingClosed = (): boolean => {

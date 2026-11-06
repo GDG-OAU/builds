@@ -6,8 +6,6 @@ export const INITIAL_COMMUNITIES: CommunityMeta[] = [
     description: 'Modern full-stack web applications, APIs, and progressive web apps.',
     color: '#4285F4',
     icon: 'Globe',
-    eventDate: '2026-11-06',
-    attendeesCount: 120,
     joinUrl: 'https://gdgoau.com/page?community=web-development'
   },
   {
@@ -36,8 +34,6 @@ export const INITIAL_COMMUNITIES: CommunityMeta[] = [
     description: 'Turn ideas into mobile applications and build experiences for everyday users.',
     color: '#F59E0B',
     icon: 'Smartphone',
-    eventDate: '2026-11-08',
-    attendeesCount: 110,
     joinUrl: 'https://gdgoau.com/page?community=mobile-app-development'
   },
   {
@@ -45,8 +41,6 @@ export const INITIAL_COMMUNITIES: CommunityMeta[] = [
     description: 'Explore artificial intelligence, machine learning and the science behind data.',
     color: '#188038',
     icon: 'Cpu',
-    eventDate: '2026-11-07',
-    attendeesCount: 95,
     joinUrl: 'https://gdgoau.com/page?community=data-science-machine-learning'
   },
   {

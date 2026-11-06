@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import confetti from 'canvas-confetti';
 import type { Project } from '../types';
 import { useApp } from '../context/AppContext';
 import { GithubIcon } from './GithubIcon';
@@ -39,16 +38,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
   };
 
   const handleVote = () => {
-    const res = castVote(project.id);
-    if (!res.success) {
-      alert(res.message);
-    } else {
-      confetti({
-        particleCount: 50,
-        spread: 60,
-        origin: { y: 0.7 }
-      });
-    }
+    castVote(project.id);
   };
 
   const handleShare = () => {

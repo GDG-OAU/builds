@@ -119,4 +119,31 @@
   .text-gdg-yellow {
     color: #B06000 !important;
   }
+  .bg-track-web {
+    background-color: #4285F4 !important;
+  }
+  .bg-track-ml {
+    background-color: #188038 !important;
+  }
+  .bg-track-mobile {
+    background-color: #D97706 !important;
+  }
+  .bg-track-cyber {
+    background-color: #EA4335 !important;
+  }
+  .bg-track-design {
+    background-color: #DB2777 !important;
+  }
+  .bg-track-game {
+    background-color: #7C3AED !important;
+  }
+  .bg-track-pm {
+    background-color: #0D9488 !important;
+  }
+  .bg-track-research {
+    background-color: #0284C7 !important;
+  }
+  .bg-track-quantum {
+    background-color: #4F46E5 !important;
+  }
 }

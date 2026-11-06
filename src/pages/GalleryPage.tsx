@@ -4,8 +4,9 @@ import { useApp } from '../context/AppContext';
 import { ProjectCard } from '../components/ProjectCard';
 import { ProjectDetailModal } from '../components/ProjectDetailModal';
 import type { Project, CommunityName, GoogleTool } from '../types';
-import { Search, X, Plus, Filter, Sparkles } from 'lucide-react';
+import { Search, X, Plus, Terminal, ArrowUpDown } from 'lucide-react';
 import { COMMUNITY_THEMES } from '../utils/theme';
+import { getVotesCountForProject } from '../services/appState';
 
 const ALL_COMMUNITIES: CommunityName[] = [
   'Web Development',
@@ -37,12 +38,15 @@ const ALL_TOOLS: GoogleTool[] = [
   'Other',
 ];
 
+type SortMode = 'newest' | 'votes';
+
 export const GalleryPage: React.FC = () => {
-  const { projects } = useApp();
+  const { projects, votes } = useApp();
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState('');
   const [community, setCommunity] = useState<string>(searchParams.get('community') || 'ALL');
   const [tool, setTool] = useState<string>('ALL');
+  const [sort, setSort] = useState<SortMode>('newest');
   const [modal, setModal] = useState<Project | null>(null);
 
   useEffect(() => {
@@ -58,7 +62,7 @@ export const GalleryPage: React.FC = () => {
   const filtered = useMemo(() => {
     return projects
       .filter((p) => {
-        const q = query.toLowerCase();
+        const q = query.toLowerCase().trim();
         const matchesQuery =
           !q ||
           p.title.toLowerCase().includes(q) ||
@@ -68,8 +72,15 @@ export const GalleryPage: React.FC = () => {
         const matchesTool = tool === 'ALL' || p.googleTools.includes(tool as GoogleTool);
         return matchesQuery && matchesCommunity && matchesTool;
       })
-      .sort((a, b) => b.createdAt - a.createdAt);
-  }, [projects, query, community, tool]);
+      .sort((a, b) => {
+        if (sort === 'votes') {
+          const vA = getVotesCountForProject(a.id, votes);
+          const vB = getVotesCountForProject(b.id, votes);
+          if (vB !== vA) return vB - vA;
+        }
+        return b.createdAt - a.createdAt;
+      });
+  }, [projects, votes, query, community, tool, sort]);
 
   const handleSelectCommunity = (commName: string) => {
     setCommunity(commName);
@@ -90,60 +101,71 @@ export const GalleryPage: React.FC = () => {
   };
 
   return (
-    <div className="bg-white min-h-screen py-10 sm:py-16">
+    <div className="bg-[#FAFAFA] min-h-screen py-8 sm:py-12 text-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Gallery Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 pb-6 border-b border-gray-100">
+        {/* Developer Directory Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 mb-8 border-b border-slate-200">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-gdg-green-light border border-green-200 text-gdg-green text-xs font-extrabold uppercase tracking-wider mb-2">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>GDG on Campus OAU</span>
+            <div className="flex items-center gap-2 text-[11px] font-mono font-bold uppercase tracking-wider text-slate-500 mb-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>GDG OAU · BUILDER JAM 2026</span>
+              <span className="text-slate-300">/</span>
+              <span>SHOWCASE</span>
             </div>
-            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-gray-900">
-              Project Gallery
+            <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-950 tracking-tight">
+              Projects Directory
             </h1>
-            <p className="text-gray-500 text-sm sm:text-base mt-1 font-medium">
-              Explore {projects.length} submissions from builders across Obafemi Awolowo University.
+            <p className="text-sm text-slate-600 mt-1 max-w-2xl">
+              Software, AI applications, and systems shipped by OAU builders across 11 technical tracks.
             </p>
           </div>
 
-          <Link
-            to="/submit"
-            style={{ backgroundColor: '#188038', color: '#FFFFFF' }}
-            className="inline-flex items-center gap-2 bg-gdg-green hover:bg-emerald-700 text-white text-xs sm:text-sm font-extrabold px-6 py-3 rounded-full shadow-md shadow-green-200 transition-all self-start sm:self-auto hover:scale-105 active:scale-95"
-          >
-            <Plus className="w-4 h-4" />
-            Submit Your Project
-          </Link>
+          <div className="flex items-center gap-3 shrink-0">
+            <div className="hidden sm:flex items-center gap-2 px-3 py-2 bg-white rounded-xl border border-slate-200 text-xs font-mono text-slate-600">
+              <span className="font-bold text-slate-900">{projects.length}</span> builds
+              <span className="text-slate-300">·</span>
+              <span className="font-bold text-slate-900">{ALL_COMMUNITIES.length}</span> tracks
+            </div>
+
+            <Link
+              to="/submit"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-slate-950 hover:bg-slate-800 text-white transition-all shadow-sm active:scale-95 cursor-pointer"
+            >
+              <Plus className="w-4 h-4 text-emerald-400" />
+              <span>Submit Build</span>
+            </Link>
+          </div>
         </div>
 
-        {/* Search & Tool Filter Controls */}
-        <div className="flex flex-col sm:flex-row gap-3 mb-6">
+        {/* Filter Toolbar: Search, Tools, Sort */}
+        <div className="flex flex-col sm:flex-row gap-3 mb-4">
+          {/* Search Box */}
           <div className="relative flex-1">
-            <Search className="w-4 h-4 text-gdg-green absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search by project name, description, or builder..."
-              className="w-full pl-10 pr-10 py-3 bg-emerald-50/30 border border-emerald-200 rounded-2xl text-sm font-medium text-gray-900 placeholder:text-gray-400 focus:outline-none focus:bg-white focus:border-gdg-green focus:ring-2 focus:ring-gdg-green/20 transition-all shadow-2xs"
+              placeholder="Search by title, description, or builder name..."
+              className="w-full pl-9 pr-9 py-2.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 transition-all shadow-2xs font-medium"
             />
             {query && (
               <button
                 onClick={() => setQuery('')}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 p-0.5"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-0.5 cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
             )}
           </div>
 
+          {/* Tool Dropdown */}
           <div className="flex items-center gap-2">
             <select
               value={tool}
               onChange={(e) => setTool(e.target.value)}
-              className="px-4 py-3 bg-blue-50/40 border border-blue-200 rounded-2xl text-sm font-bold text-gray-800 focus:outline-none focus:bg-white focus:border-gdg-blue transition-all shadow-2xs"
+              className="px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm font-medium text-slate-700 focus:outline-none focus:border-slate-900 transition-all shadow-2xs cursor-pointer"
             >
               <option value="ALL">All Google Tools ({ALL_TOOLS.length})</option>
               {ALL_TOOLS.map((t) => (
@@ -153,66 +175,108 @@ export const GalleryPage: React.FC = () => {
               ))}
             </select>
 
+            {/* Sort Dropdown */}
+            <div className="relative">
+              <select
+                value={sort}
+                onChange={(e) => setSort(e.target.value as SortMode)}
+                className="px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm font-medium text-slate-700 focus:outline-none focus:border-slate-900 transition-all shadow-2xs cursor-pointer"
+              >
+                <option value="newest">Sort: Newest</option>
+                <option value="votes">Sort: Most Upvoted</option>
+              </select>
+            </div>
+
             {(query || community !== 'ALL' || tool !== 'ALL') && (
               <button
                 onClick={handleResetFilters}
-                style={{ backgroundColor: '#EA4335', color: '#FFFFFF' }}
-                className="text-xs font-extrabold text-white bg-gdg-red hover:bg-red-700 px-4 py-3 rounded-2xl transition-all shadow-sm whitespace-nowrap cursor-pointer"
+                className="text-xs font-semibold text-rose-600 bg-rose-50 hover:bg-rose-100 border border-rose-200 px-3 py-2.5 rounded-xl transition-all whitespace-nowrap cursor-pointer"
               >
-                Reset Filters
+                Clear Filters
               </button>
             )}
           </div>
         </div>
 
-        {/* Community Filter Chips (WRAPPED CLEANLY - ZERO HORIZONTAL SCROLLBAR) */}
-        <div className="flex flex-wrap items-center gap-2 mb-8">
-          <button
-            onClick={() => handleSelectCommunity('ALL')}
-            style={community === 'ALL' ? { backgroundColor: '#111827' } : { backgroundColor: '#F3F4F6' }}
-            className={`px-5 py-2 rounded-full text-xs font-bold transition-all ${
-              community === 'ALL'
-                ? 'bg-gray-900 text-white shadow-sm'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-            }`}
-          >
-            All Tracks ({projects.length})
-          </button>
-
-          {ALL_COMMUNITIES.map((c) => {
-            const count = projects.filter((p) => p.community === c).length;
-            const active = community === c;
-            const theme = COMMUNITY_THEMES[c] || {
-              chipClass: 'bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold',
-              chipActiveClass: 'bg-gray-900 text-white font-bold',
-            };
-            return (
-              <button
-                key={c}
-                onClick={() => handleSelectCommunity(c)}
-                className={`px-4 py-2 rounded-full text-xs font-bold transition-all ${
-                  active
-                    ? `${theme.chipActiveClass} shadow-sm scale-102`
-                    : theme.chipClass
+        {/* Track Filter Segmented Control Bar */}
+        <div className="bg-slate-100/80 p-1.5 rounded-2xl border border-slate-200/90 mb-8">
+          <div className="flex flex-wrap items-center gap-1.5">
+            {/* All Tracks */}
+            <button
+              onClick={() => handleSelectCommunity('ALL')}
+              className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer ${
+                community === 'ALL'
+                  ? 'bg-slate-950 text-white shadow-xs font-bold'
+                  : 'bg-white hover:bg-slate-50 text-slate-700 border border-slate-200/80 shadow-2xs'
+              }`}
+            >
+              <span>All Tracks</span>
+              <span
+                className={`font-mono text-[10px] px-1.5 py-0.5 rounded ${
+                  community === 'ALL'
+                    ? 'bg-white/20 text-white font-bold'
+                    : 'bg-slate-100 text-slate-500'
                 }`}
               >
-                {c} {count > 0 && `(${count})`}
-              </button>
-            );
-          })}
+                {projects.length}
+              </span>
+            </button>
+
+            {/* Individual Tracks */}
+            {ALL_COMMUNITIES.map((c) => {
+              const count = projects.filter((p) => p.community === c).length;
+              const active = community === c;
+              const theme = COMMUNITY_THEMES[c] || {
+                color: '#188038',
+              };
+
+              return (
+                <button
+                  key={c}
+                  onClick={() => handleSelectCommunity(c)}
+                  style={
+                    active
+                      ? { backgroundColor: '#0F172A', color: '#FFFFFF' }
+                      : undefined
+                  }
+                  className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer ${
+                    active
+                      ? 'bg-slate-900 text-white shadow-xs font-bold'
+                      : 'bg-white hover:bg-slate-50 text-slate-700 border border-slate-200/80 shadow-2xs'
+                  }`}
+                >
+                  <span
+                    className="w-2 h-2 rounded-full shrink-0"
+                    style={{ backgroundColor: theme.color }}
+                  />
+                  <span>{c}</span>
+                  <span
+                    className={`font-mono text-[10px] px-1.5 py-0.5 rounded ${
+                      active
+                        ? 'bg-white/20 text-white font-bold'
+                        : 'bg-slate-100 text-slate-500'
+                    }`}
+                  >
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Results Info */}
-        <div className="flex items-center justify-between text-xs font-bold text-gray-500 mb-6">
-          <span className="bg-emerald-50 text-emerald-800 border border-emerald-200 px-3.5 py-1 rounded-full">
-            Showing {filtered.length} {filtered.length === 1 ? 'project' : 'projects'}
+        {/* Directory Results Header */}
+        <div className="flex items-center justify-between text-xs font-mono text-slate-500 mb-5">
+          <span>
+            {filtered.length === 1 ? '1 PROJECT' : `${filtered.length} PROJECTS`}{' '}
+            {community !== 'ALL' && `IN ${community.toUpperCase()}`}
           </span>
-          <span className="text-gray-400">Sorted by newest</span>
+          <span>ORDERED BY {sort === 'votes' ? 'VOTES' : 'RECENCY'}</span>
         </div>
 
         {/* Projects Grid */}
         {filtered.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {filtered.map((p) => (
               <ProjectCard
                 key={p.id}
@@ -222,32 +286,40 @@ export const GalleryPage: React.FC = () => {
             ))}
           </div>
         ) : projects.length === 0 ? (
-          <div className="text-center py-20 bg-gradient-to-br from-emerald-50/40 to-teal-50/30 rounded-3xl border border-dashed border-emerald-300 p-8">
-            <Sparkles className="w-12 h-12 text-gdg-green mx-auto mb-3 opacity-80" />
-            <h3 className="text-xl font-extrabold text-gray-900 mb-1">Submissions Are Live!</h3>
-            <p className="text-xs sm:text-sm text-gray-600 max-w-sm mx-auto mb-6 font-medium">
-              No projects have been submitted yet. Be the very first builder across campus to showcase your build!
+          /* Empty State: Pre-Launch / Zero Submissions */
+          <div className="bg-white border border-slate-200 rounded-2xl p-10 sm:p-16 text-center max-w-xl mx-auto shadow-2xs">
+            <div className="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center mx-auto mb-4 text-slate-600">
+              <Terminal className="w-6 h-6" />
+            </div>
+            <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-1.5">
+              No builds submitted yet
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto mb-6 leading-relaxed">
+              Submissions are officially open for all 11 GDG OAU communities. Be the very first builder on campus to showcase your project.
             </p>
             <Link
               to="/submit"
-              style={{ backgroundColor: '#188038', color: '#FFFFFF' }}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gdg-green text-white text-xs font-bold rounded-full hover:bg-emerald-700 transition-colors shadow-md shadow-green-200"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-950 hover:bg-slate-800 text-white text-xs font-semibold rounded-xl transition-all shadow-sm"
             >
-              <Plus className="w-4 h-4" />
+              <Plus className="w-4 h-4 text-emerald-400" />
               <span>Submit First Project</span>
             </Link>
           </div>
         ) : (
-          <div className="text-center py-20 bg-gradient-to-br from-emerald-50/40 to-teal-50/30 rounded-3xl border border-dashed border-emerald-300 p-8">
-            <Filter className="w-12 h-12 text-gdg-green mx-auto mb-3 opacity-70" />
-            <h3 className="text-lg font-extrabold text-gray-900 mb-1">No builds found</h3>
-            <p className="text-xs sm:text-sm text-gray-500 max-w-sm mx-auto mb-5 font-medium">
-              Try adjusting your search query, or clear your community and Google tool filters.
+          /* Empty State: Filter Returned No Match */
+          <div className="bg-white border border-slate-200 rounded-2xl p-10 sm:p-14 text-center max-w-xl mx-auto shadow-2xs">
+            <div className="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center mx-auto mb-4 text-slate-600">
+              <ArrowUpDown className="w-6 h-6" />
+            </div>
+            <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-1.5">
+              No builds match current filter
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto mb-5 leading-relaxed">
+              No projects found for the selected track or tool criteria. Try broadening your query.
             </p>
             <button
               onClick={handleResetFilters}
-              style={{ backgroundColor: '#188038', color: '#FFFFFF' }}
-              className="px-6 py-2.5 bg-gdg-green text-white text-xs font-bold rounded-full hover:bg-emerald-700 transition-colors shadow-md shadow-green-200"
+              className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded-xl transition-all cursor-pointer shadow-xs"
             >
               Reset All Filters
             </button>
