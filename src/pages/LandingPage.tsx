@@ -22,83 +22,83 @@ const FLOATING_PILLS: FloatingPill[] = [
   {
     name: 'Data Science / Machine Learning',
     label: 'Data Science & ML',
-    bgClass: 'bg-track-ml',
-    textClass: 'text-white',
+    bgClass: 'bg-[#38BDF8]',
+    textClass: 'text-gray-950 font-bold',
     rotateClass: '-rotate-3',
-    shadowClass: 'shadow-xl shadow-emerald-400/40',
-    colorHex: '#188038',
+    shadowClass: 'shadow-md shadow-sky-100',
+    colorHex: '#38BDF8',
   },
   {
     name: 'Mobile App Development',
     label: 'Mobile & Web Dev',
-    bgClass: 'bg-track-mobile',
-    textClass: 'text-white',
+    bgClass: 'bg-[#4ADE80]',
+    textClass: 'text-gray-950 font-bold',
     rotateClass: 'rotate-2',
-    shadowClass: 'shadow-xl shadow-amber-400/40',
-    colorHex: '#F59E0B',
+    shadowClass: 'shadow-md shadow-emerald-100',
+    colorHex: '#4ADE80',
   },
   {
     name: 'Cybersecurity',
     label: 'Cybersecurity',
-    bgClass: 'bg-track-cyber',
-    textClass: 'text-white',
+    bgClass: 'bg-white',
+    textClass: 'text-gray-800 font-bold',
     rotateClass: '-rotate-2',
-    shadowClass: 'shadow-xl shadow-rose-400/40',
-    colorHex: '#EA4335',
+    shadowClass: 'shadow-md shadow-gray-200/60 border border-gray-100',
+    colorHex: '#FFFFFF',
   },
   {
     name: 'Game Development',
     label: 'Game Development',
-    bgClass: 'bg-track-game',
-    textClass: 'text-white',
+    bgClass: 'bg-[#FDE047]',
+    textClass: 'text-gray-950 font-bold',
     rotateClass: 'rotate-4',
-    shadowClass: 'shadow-xl shadow-purple-400/40',
-    colorHex: '#8B5CF6',
+    shadowClass: 'shadow-md shadow-yellow-100',
+    colorHex: '#FDE047',
   },
   {
     name: 'Web Development',
     label: 'Cloud & Web',
-    bgClass: 'bg-track-web',
-    textClass: 'text-white',
+    bgClass: 'bg-white',
+    textClass: 'text-gray-800 font-bold',
     rotateClass: 'rotate-1',
-    shadowClass: 'shadow-xl shadow-blue-400/40',
-    colorHex: '#4285F4',
+    shadowClass: 'shadow-md shadow-gray-200/60 border border-gray-100',
+    colorHex: '#FFFFFF',
   },
   {
     name: 'Design',
     label: 'Design & UX',
-    bgClass: 'bg-track-design',
-    textClass: 'text-white',
+    bgClass: 'bg-[#F472B6]',
+    textClass: 'text-gray-950 font-bold',
     rotateClass: '-rotate-4',
-    shadowClass: 'shadow-xl shadow-pink-400/40',
-    colorHex: '#EC4899',
+    shadowClass: 'shadow-md shadow-pink-100',
+    colorHex: '#F472B6',
   },
   {
     name: 'Research',
     label: 'Research & AI',
-    bgClass: 'bg-track-research',
-    textClass: 'text-white',
+    bgClass: 'bg-[#C084FC]',
+    textClass: 'text-gray-950 font-bold',
     rotateClass: 'rotate-3',
-    shadowClass: 'shadow-xl shadow-cyan-400/40',
-    colorHex: '#06B6D4',
+    shadowClass: 'shadow-md shadow-purple-100',
+    colorHex: '#C084FC',
   },
   {
     name: 'Product Management',
     label: 'Product Management',
-    bgClass: 'bg-track-pm',
-    textClass: 'text-white',
+    bgClass: 'bg-white',
+    textClass: 'text-gray-800 font-bold',
     rotateClass: '-rotate-2',
-    shadowClass: 'shadow-xl shadow-teal-400/40',
-    colorHex: '#0D9488',
+    shadowClass: 'shadow-md shadow-gray-200/60 border border-gray-100',
+    colorHex: '#FFFFFF',
   },
   {
     name: 'Quantum Computing',
     label: 'Quantum Computing',
-    bgClass: 'bg-track-quantum',
-    textClass: 'text-white',
+    bgClass: 'bg-[#818CF8]',
+    textClass: 'text-white font-bold',
     rotateClass: 'rotate-2',
-    shadowClass: 'shadow-xl shadow-indigo-400/40',
-    colorHex: '#6366F1',
+    shadowClass: 'shadow-md shadow-indigo-100',
+    colorHex: '#818CF8',
   },
 ];
 
@@ -165,7 +165,7 @@ export const LandingPage: React.FC = () => {
             Main Showcase · Obafemi Awolowo University
           </motion.p>
 
-          {/* Pill CTA Buttons - SOLID VIBRANT GOOGLE COLORS (NO BLACK, NO PLAIN WHITE OUTLINE) */}
+          {/* Pill CTA Buttons - SLEEK & BALANCED */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -174,28 +174,25 @@ export const LandingPage: React.FC = () => {
           >
             <Link
               to="/gallery"
-              style={{ backgroundColor: '#4285F4' }}
-              className="bg-gdg-blue hover:bg-gdg-blue-hover text-white px-8 py-3.5 rounded-full text-sm font-extrabold shadow-xl shadow-blue-400/40 hover:-translate-y-0.5 active:translate-y-0 transition-all hover:scale-105"
+              className="bg-gray-900 hover:bg-black text-white px-8 py-3.5 rounded-full text-sm font-bold shadow-md shadow-gray-900/10 hover:-translate-y-0.5 active:translate-y-0 transition-all hover:scale-105"
             >
               Explore Projects
             </Link>
             <Link
               to="/submit"
-              style={{ backgroundColor: '#188038' }}
-              className="bg-gdg-green hover:bg-gdg-green-hover text-white px-8 py-3.5 rounded-full text-sm font-extrabold shadow-xl shadow-green-400/40 hover:-translate-y-0.5 active:translate-y-0 transition-all hover:scale-105"
+              className="bg-gdg-green hover:bg-gdg-green-hover text-white px-8 py-3.5 rounded-full text-sm font-bold shadow-md shadow-green-600/20 hover:-translate-y-0.5 active:translate-y-0 transition-all hover:scale-105"
             >
               Submit Project
             </Link>
             <Link
               to="/leaderboard"
-              style={{ backgroundColor: '#FBBC04' }}
-              className="bg-gdg-yellow hover:bg-gdg-yellow-hover text-gray-900 px-8 py-3.5 rounded-full text-sm font-black shadow-xl shadow-yellow-400/40 hover:-translate-y-0.5 transition-all hover:scale-105"
+              className="bg-amber-100/80 hover:bg-amber-200/80 text-amber-950 px-7 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-105 border border-amber-200/60"
             >
               Leaderboards
             </Link>
           </motion.div>
 
-          {/* ── FLOATING COLORFUL COMMUNITY BADGES (ALL SOLID COLORS, NO WHITE) ── */}
+          {/* ── FLOATING COMMUNITY BADGES (BALANCED PASTELS & CRISP WHITE STICKERS) ── */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -206,7 +203,7 @@ export const LandingPage: React.FC = () => {
               <motion.button
                 key={pill.name}
                 style={{ backgroundColor: pill.colorHex }}
-                whileHover={{ scale: 1.1, rotate: 0 }}
+                whileHover={{ scale: 1.08, rotate: 0 }}
                 whileTap={{ scale: 0.95 }}
                 animate={{
                   y: [0, idx % 2 === 0 ? -4 : 4, 0],
@@ -219,7 +216,7 @@ export const LandingPage: React.FC = () => {
                   },
                 }}
                 onClick={() => navigate(`/gallery?community=${encodeURIComponent(pill.name)}`)}
-                className={`cursor-pointer px-5 py-2.5 rounded-full text-xs sm:text-sm font-extrabold transition-all transform ${pill.rotateClass} ${pill.bgClass} ${pill.textClass} ${pill.shadowClass} hover:shadow-2xl`}
+                className={`cursor-pointer px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all transform ${pill.rotateClass} ${pill.bgClass} ${pill.textClass} ${pill.shadowClass} hover:shadow-lg`}
               >
                 {pill.label}
               </motion.button>
@@ -229,59 +226,59 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* ── VIBRANT GOOGLE COLOR METRICS CARDS ── */}
+      {/* ── CLEAN, ELEVATED METRICS CARDS WITH GDG BRAND ACCENTS ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <div
-            style={{ backgroundColor: '#4285F4' }}
-            className="bg-gdg-blue rounded-3xl p-6 text-white shadow-xl shadow-blue-400/30"
-          >
-            <span className="text-xs font-black uppercase tracking-wider text-blue-100 block mb-1">
-              Projects Built
-            </span>
-            <p className="stat-number text-4xl sm:text-5xl font-black text-white">
+          <div className="bg-white/95 backdrop-blur-sm border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
+                Projects Built
+              </span>
+              <span className="w-2.5 h-2.5 rounded-full bg-gdg-blue" />
+            </div>
+            <p className="stat-number text-4xl sm:text-5xl font-black text-gdg-blue tracking-tight">
               {projects.length}
             </p>
-            <p className="text-xs text-blue-100 mt-2 font-bold">Submitted across campus</p>
+            <p className="text-xs text-gray-500 mt-2 font-medium">Submitted across campus</p>
           </div>
 
-          <div
-            style={{ backgroundColor: '#188038' }}
-            className="bg-gdg-green rounded-3xl p-6 text-white shadow-xl shadow-green-400/30"
-          >
-            <span className="text-xs font-black uppercase tracking-wider text-emerald-100 block mb-1">
-              Active Builders
-            </span>
-            <p className="stat-number text-4xl sm:text-5xl font-black text-white">
+          <div className="bg-white/95 backdrop-blur-sm border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
+                Active Builders
+              </span>
+              <span className="w-2.5 h-2.5 rounded-full bg-gdg-green" />
+            </div>
+            <p className="stat-number text-4xl sm:text-5xl font-black text-gdg-green tracking-tight">
               {totalBuilders}
             </p>
-            <p className="text-xs text-emerald-100 mt-2 font-bold">Students & innovators</p>
+            <p className="text-xs text-gray-500 mt-2 font-medium">Students & innovators</p>
           </div>
 
-          <div
-            style={{ backgroundColor: '#FBBC04' }}
-            className="bg-gdg-yellow rounded-3xl p-6 text-gray-950 shadow-xl shadow-yellow-400/30"
-          >
-            <span className="text-xs font-black uppercase tracking-wider text-amber-950 block mb-1">
-              Community Tracks
-            </span>
-            <p className="stat-number text-4xl sm:text-5xl font-black text-gray-950">
+          <div className="bg-white/95 backdrop-blur-sm border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
+                Community Tracks
+              </span>
+              <span className="w-2.5 h-2.5 rounded-full bg-gdg-yellow" />
+            </div>
+            <p className="stat-number text-4xl sm:text-5xl font-black text-amber-500 tracking-tight">
               {communities.length}
             </p>
-            <p className="text-xs text-amber-950 mt-2 font-black">Competing for track cup</p>
+            <p className="text-xs text-gray-500 mt-2 font-medium">Competing for track cup</p>
           </div>
 
-          <div
-            style={{ backgroundColor: '#EA4335' }}
-            className="bg-gdg-red rounded-3xl p-6 text-white shadow-xl shadow-red-400/30"
-          >
-            <span className="text-xs font-black uppercase tracking-wider text-rose-100 block mb-1">
-              Community Votes
-            </span>
-            <p className="stat-number text-4xl sm:text-5xl font-black text-white">
+          <div className="bg-white/95 backdrop-blur-sm border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
+                Community Votes
+              </span>
+              <span className="w-2.5 h-2.5 rounded-full bg-gdg-red" />
+            </div>
+            <p className="stat-number text-4xl sm:text-5xl font-black text-gdg-red tracking-tight">
               {votes.length}
             </p>
-            <p className="text-xs text-rose-100 mt-2 font-bold">Cast by attendees</p>
+            <p className="text-xs text-gray-500 mt-2 font-medium">Cast by attendees</p>
           </div>
         </div>
       </section>
