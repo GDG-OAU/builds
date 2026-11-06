@@ -179,15 +179,19 @@ export const calculateIndividualScores = (
     });
 
     const avgCompleteness = userProjects.length > 0 ? (totalCompleteness / userProjects.length) : 0;
-    const completenessScore = avgCompleteness * 100 * individual.completenessWeight;
+    const completenessScore = Math.round(avgCompleteness * 100);
 
     const countedProjects = Math.min(userProjects.length, individual.projectCap);
-    const projectCountScore = (countedProjects / individual.projectCap) * 100 * individual.projectCountWeight;
+    const projectCountScore = (countedProjects / individual.projectCap) * 100;
 
     const cappedVotes = Math.min(totalVotes, individual.voteCap);
-    const votesScore = (cappedVotes / individual.voteCap) * 100 * individual.communityVotesWeight;
+    const votesScore = (cappedVotes / individual.voteCap) * 100;
 
-    const compositeScore = Math.round((completenessScore + projectCountScore + votesScore) * 10) / 10;
+    const compositeScore = Math.round(
+      ((completenessScore * individual.completenessWeight) +
+       (projectCountScore * individual.projectCountWeight) +
+       (votesScore * individual.communityVotesWeight)) * 10
+    ) / 10;
 
     scores.push({
       builderName: name,
