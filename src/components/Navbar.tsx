@@ -96,14 +96,14 @@ export const Navbar: React.FC = () => {
 
             {user ? (
               <div className="flex items-center gap-2 pl-2 border-l border-gray-200">
-                {user.photoURL ? (
+                {user.photoURL && !user.photoURL.includes('bottts') ? (
                   <img
                     src={user.photoURL}
                     alt={user.displayName}
-                    className="w-8 h-8 rounded-full border border-gray-200 object-cover"
+                    className="w-8 h-8 rounded-full border border-gray-200 object-cover shadow-xs"
                   />
                 ) : (
-                  <div className="w-8 h-8 rounded-full bg-gdg-green text-white font-bold text-xs flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-full bg-gdg-green text-white font-bold text-xs flex items-center justify-center shadow-xs">
                     {user.displayName.charAt(0).toUpperCase()}
                   </div>
                 )}

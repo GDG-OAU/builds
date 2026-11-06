@@ -127,7 +127,7 @@ export const LandingPage: React.FC = () => {
 
       {/* ── HERO SECTION WITH GRAPH PAPER GRID & COLORFUL PASTEL CORNER BLOBS ── */}
       <section className="relative inspo-grid overflow-hidden border-b border-gray-100 pt-16 pb-20 sm:pt-24 sm:pb-28">
-        
+
         {/* Soft pastel corner blobs */}
         <div className="absolute top-0 left-0 w-64 sm:w-96 h-40 sm:h-64 bg-gradient-to-br from-gdg-red-light to-track-design-light rounded-br-[160px] pointer-events-none blur-xs opacity-75" />
         <div className="absolute bottom-0 left-0 w-56 sm:w-80 h-36 sm:h-56 bg-gradient-to-tr from-gdg-green-light to-track-pm-light rounded-tr-[160px] pointer-events-none blur-xs opacity-75" />
@@ -164,7 +164,7 @@ export const LandingPage: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.18 }}
             className="text-base sm:text-xl font-bold text-gray-700 max-w-2xl mx-auto leading-relaxed"
           >
-            One day. Nine communities. Real AI. Real builds.
+            Eleven communities. Real AI. Real builds.
           </motion.p>
 
           {/* Location & Context */}
@@ -340,7 +340,7 @@ export const LandingPage: React.FC = () => {
         <div className="bg-gradient-to-r from-gray-900 via-gray-950 to-gray-900 text-white rounded-3xl p-8 sm:p-14 relative overflow-hidden shadow-2xl">
           <div className="absolute top-0 right-0 w-80 h-80 bg-gdg-green/20 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-gdg-blue/20 rounded-full blur-3xl pointer-events-none" />
-          
+
           <div className="relative max-w-2xl mx-auto space-y-4">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-emerald-300 text-xs font-bold uppercase tracking-wider border border-white/20">
               <Rocket className="w-3.5 h-3.5" />

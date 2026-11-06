@@ -39,7 +39,18 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<UserProfile | null>(() => {
     const saved = localStorage.getItem('gdg_builderjam_current_user');
-    return saved ? JSON.parse(saved) : null;
+    if (!saved) return null;
+    try {
+      const parsed = JSON.parse(saved);
+      // Clean up legacy dicebear bottts (pumpkin/robot) avatar if present in localStorage
+      if (parsed.photoURL && parsed.photoURL.includes('bottts')) {
+        parsed.photoURL = `https://ui-avatars.com/api/?name=${encodeURIComponent(parsed.displayName || 'Builder')}&background=188038&color=fff&bold=true`;
+        localStorage.setItem('gdg_builderjam_current_user', JSON.stringify(parsed));
+      }
+      return parsed;
+    } catch {
+      return null;
+    }
   });
   const [projects, setProjects] = useState<Project[]>(getStoredProjects);
   const [votes, setVotes] = useState<VoteRecord[]>(getStoredVotes);
@@ -92,7 +103,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       uid: `user-${Date.now()}`,
       email,
       displayName: name,
-      photoURL: `https://api.dicebear.com/7.x/bottts/svg?seed=${name}`
+      photoURL: `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=188038&color=fff&bold=true`
     };
     setUser(profile);
     localStorage.setItem('gdg_builderjam_current_user', JSON.stringify(profile));
