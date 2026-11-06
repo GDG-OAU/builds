@@ -103,11 +103,10 @@ const FLOATING_PILLS: FloatingPill[] = [
 ];
 
 export const LandingPage: React.FC = () => {
-  const { projects, communities, votes } = useApp();
+  const { projects, communities } = useApp();
   const [selectedProject, setSelectedProject] = React.useState<Project | null>(null);
   const navigate = useNavigate();
 
-  const totalBuilders = new Set(projects.map((p) => p.submitterEmail.toLowerCase())).size;
   const recentProjects = [...projects].sort((a, b) => b.createdAt - a.createdAt).slice(0, 6);
 
   return (
@@ -165,7 +164,7 @@ export const LandingPage: React.FC = () => {
             Main Showcase · Obafemi Awolowo University
           </motion.p>
 
-          {/* Pill CTA Buttons - SLEEK & BALANCED */}
+          {/* Pill CTA Buttons - SLEEK & POLISHED MATCHING INSPO */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -174,19 +173,19 @@ export const LandingPage: React.FC = () => {
           >
             <Link
               to="/gallery"
-              className="bg-gray-900 hover:bg-black text-white px-8 py-3.5 rounded-full text-sm font-bold shadow-md shadow-gray-900/10 hover:-translate-y-0.5 active:translate-y-0 transition-all hover:scale-105"
+              className="bg-black hover:bg-gray-800 text-white px-8 py-3.5 rounded-full text-sm font-bold shadow-md shadow-black/10 hover:-translate-y-0.5 active:translate-y-0 transition-all hover:scale-105"
             >
               Explore Projects
             </Link>
             <Link
               to="/submit"
-              className="bg-gdg-green hover:bg-gdg-green-hover text-white px-8 py-3.5 rounded-full text-sm font-bold shadow-md shadow-green-600/20 hover:-translate-y-0.5 active:translate-y-0 transition-all hover:scale-105"
+              className="bg-black hover:bg-gray-800 text-white px-8 py-3.5 rounded-full text-sm font-bold shadow-md shadow-black/10 hover:-translate-y-0.5 active:translate-y-0 transition-all hover:scale-105"
             >
               Submit Project
             </Link>
             <Link
               to="/leaderboard"
-              className="bg-amber-100/80 hover:bg-amber-200/80 text-amber-950 px-7 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-105 border border-amber-200/60"
+              className="bg-amber-100/90 hover:bg-amber-200 text-amber-950 px-7 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-105 border border-amber-200/80 shadow-xs"
             >
               Leaderboards
             </Link>
@@ -223,63 +222,6 @@ export const LandingPage: React.FC = () => {
             ))}
           </motion.div>
 
-        </div>
-      </section>
-
-      {/* ── CLEAN, ELEVATED METRICS CARDS WITH GDG BRAND ACCENTS ── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-white/95 backdrop-blur-sm border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
-                Projects Built
-              </span>
-              <span className="w-2.5 h-2.5 rounded-full bg-gdg-blue" />
-            </div>
-            <p className="stat-number text-4xl sm:text-5xl font-black text-gdg-blue tracking-tight">
-              {projects.length}
-            </p>
-            <p className="text-xs text-gray-500 mt-2 font-medium">Submitted across campus</p>
-          </div>
-
-          <div className="bg-white/95 backdrop-blur-sm border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
-                Active Builders
-              </span>
-              <span className="w-2.5 h-2.5 rounded-full bg-gdg-green" />
-            </div>
-            <p className="stat-number text-4xl sm:text-5xl font-black text-gdg-green tracking-tight">
-              {totalBuilders}
-            </p>
-            <p className="text-xs text-gray-500 mt-2 font-medium">Students & innovators</p>
-          </div>
-
-          <div className="bg-white/95 backdrop-blur-sm border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
-                Community Tracks
-              </span>
-              <span className="w-2.5 h-2.5 rounded-full bg-gdg-yellow" />
-            </div>
-            <p className="stat-number text-4xl sm:text-5xl font-black text-amber-500 tracking-tight">
-              {communities.length}
-            </p>
-            <p className="text-xs text-gray-500 mt-2 font-medium">Competing for track cup</p>
-          </div>
-
-          <div className="bg-white/95 backdrop-blur-sm border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
-                Community Votes
-              </span>
-              <span className="w-2.5 h-2.5 rounded-full bg-gdg-red" />
-            </div>
-            <p className="stat-number text-4xl sm:text-5xl font-black text-gdg-red tracking-tight">
-              {votes.length}
-            </p>
-            <p className="text-xs text-gray-500 mt-2 font-medium">Cast by attendees</p>
-          </div>
         </div>
       </section>
 

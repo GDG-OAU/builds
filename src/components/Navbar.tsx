@@ -83,12 +83,11 @@ export const Navbar: React.FC = () => {
             )}
           </nav>
 
-          {/* Right Action Buttons - VIBRANT GDG COLORS */}
+          {/* Right Action Buttons */}
           <div className="hidden md:flex items-center gap-3">
             <Link
               to="/submit"
-              style={{ backgroundColor: '#188038' }}
-              className="flex items-center gap-1.5 bg-gdg-green hover:bg-gdg-green-hover text-white text-xs font-extrabold px-5 py-2.5 rounded-full shadow-md shadow-green-200 transition-all hover:scale-105 active:scale-95"
+              className="flex items-center gap-1.5 bg-black hover:bg-gray-800 text-white text-xs font-bold px-5 py-2.5 rounded-full shadow-sm transition-all hover:scale-105 active:scale-95"
             >
               <Plus className="w-3.5 h-3.5" />
               Submit Project
