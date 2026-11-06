@@ -87,6 +87,7 @@ export const Navbar: React.FC = () => {
           <div className="hidden md:flex items-center gap-3">
             <Link
               to="/submit"
+              style={{ backgroundColor: '#188038' }}
               className="flex items-center gap-1.5 bg-gdg-green hover:bg-gdg-green-hover text-white text-xs font-extrabold px-5 py-2.5 rounded-full shadow-md shadow-green-200 transition-all hover:scale-105 active:scale-95"
             >
               <Plus className="w-3.5 h-3.5" />
@@ -117,6 +118,7 @@ export const Navbar: React.FC = () => {
             ) : (
               <button
                 onClick={signInWithGoogle}
+                style={{ backgroundColor: '#4285F4' }}
                 className="flex items-center gap-2 text-xs font-extrabold text-white bg-gdg-blue hover:bg-gdg-blue-hover rounded-full px-5 py-2.5 shadow-md shadow-blue-200 transition-all hover:scale-105"
               >
                 <svg className="w-3.5 h-3.5" viewBox="0 0 24 24">

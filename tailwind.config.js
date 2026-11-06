@@ -93,5 +93,13 @@ export default {
       },
     },
   },
+  safelist: [
+    {
+      pattern: /^(bg|text|border|from|to|via)-(gdg|track|tool)-/,
+    },
+    {
+      pattern: /^(bg|text|border)-(emerald|blue|amber|rose|pink|purple|teal|cyan|indigo)-(50|100|200|400|500|600|700|800|900)/,
+    },
+  ],
   plugins: [],
 }

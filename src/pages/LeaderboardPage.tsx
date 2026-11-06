@@ -37,6 +37,7 @@ export const LeaderboardPage: React.FC = () => {
           <div className="flex items-center gap-2 bg-gray-100 p-1.5 rounded-full self-start sm:self-auto shadow-inner">
             <button
               onClick={() => setTab('individual')}
+              style={tab === 'individual' ? { backgroundColor: '#FBBC04' } : undefined}
               className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-extrabold transition-all ${
                 tab === 'individual'
                   ? 'bg-gdg-yellow text-gray-900 shadow-md shadow-amber-200 scale-105'
@@ -48,13 +49,14 @@ export const LeaderboardPage: React.FC = () => {
             </button>
             <button
               onClick={() => setTab('community')}
+              style={tab === 'community' ? { backgroundColor: '#188038' } : undefined}
               className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-extrabold transition-all ${
                 tab === 'community'
                   ? 'bg-gdg-green text-white shadow-md shadow-green-200 scale-105'
                   : 'text-gray-700 hover:text-black'
               }`}
             >
-              <Users className="w-4 h-4 text-white" />
+              <Users className={`w-4 h-4 ${tab === 'community' ? 'text-white' : 'text-gray-700'}`} />
               <span>Community Tracks</span>
             </button>
           </div>

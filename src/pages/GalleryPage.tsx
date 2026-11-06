@@ -167,8 +167,8 @@ export const GalleryPage: React.FC = () => {
             onClick={() => handleSelectCommunity('ALL')}
             className={`px-5 py-2.5 rounded-full text-xs font-extrabold whitespace-nowrap transition-all ${
               community === 'ALL'
-                ? 'bg-gradient-to-r from-gdg-blue to-gdg-green text-white shadow-md shadow-green-200 scale-105'
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                ? 'bg-gdg-green text-white shadow-md shadow-green-300 scale-105'
+                : 'bg-emerald-100 text-emerald-900 hover:bg-emerald-200'
             }`}
           >
             All Tracks ({projects.length})

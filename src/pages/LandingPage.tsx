@@ -15,6 +15,7 @@ interface FloatingPill {
   textClass: string;
   rotateClass: string;
   shadowClass?: string;
+  colorHex: string;
 }
 
 const FLOATING_PILLS: FloatingPill[] = [
@@ -24,7 +25,8 @@ const FLOATING_PILLS: FloatingPill[] = [
     bgClass: 'bg-track-ml',
     textClass: 'text-white',
     rotateClass: '-rotate-3',
-    shadowClass: 'shadow-lg shadow-emerald-200',
+    shadowClass: 'shadow-xl shadow-emerald-400/40',
+    colorHex: '#188038',
   },
   {
     name: 'Mobile App Development',
@@ -32,7 +34,8 @@ const FLOATING_PILLS: FloatingPill[] = [
     bgClass: 'bg-track-mobile',
     textClass: 'text-white',
     rotateClass: 'rotate-2',
-    shadowClass: 'shadow-lg shadow-amber-200',
+    shadowClass: 'shadow-xl shadow-amber-400/40',
+    colorHex: '#F59E0B',
   },
   {
     name: 'Cybersecurity',
@@ -40,7 +43,8 @@ const FLOATING_PILLS: FloatingPill[] = [
     bgClass: 'bg-track-cyber',
     textClass: 'text-white',
     rotateClass: '-rotate-2',
-    shadowClass: 'shadow-lg shadow-rose-200',
+    shadowClass: 'shadow-xl shadow-rose-400/40',
+    colorHex: '#EA4335',
   },
   {
     name: 'Game Development',
@@ -48,7 +52,8 @@ const FLOATING_PILLS: FloatingPill[] = [
     bgClass: 'bg-track-game',
     textClass: 'text-white',
     rotateClass: 'rotate-4',
-    shadowClass: 'shadow-lg shadow-purple-200',
+    shadowClass: 'shadow-xl shadow-purple-400/40',
+    colorHex: '#8B5CF6',
   },
   {
     name: 'Web Development',
@@ -56,7 +61,8 @@ const FLOATING_PILLS: FloatingPill[] = [
     bgClass: 'bg-track-web',
     textClass: 'text-white',
     rotateClass: 'rotate-1',
-    shadowClass: 'shadow-lg shadow-blue-200',
+    shadowClass: 'shadow-xl shadow-blue-400/40',
+    colorHex: '#4285F4',
   },
   {
     name: 'Design',
@@ -64,7 +70,8 @@ const FLOATING_PILLS: FloatingPill[] = [
     bgClass: 'bg-track-design',
     textClass: 'text-white',
     rotateClass: '-rotate-4',
-    shadowClass: 'shadow-lg shadow-pink-200',
+    shadowClass: 'shadow-xl shadow-pink-400/40',
+    colorHex: '#EC4899',
   },
   {
     name: 'Research',
@@ -72,7 +79,8 @@ const FLOATING_PILLS: FloatingPill[] = [
     bgClass: 'bg-track-research',
     textClass: 'text-white',
     rotateClass: 'rotate-3',
-    shadowClass: 'shadow-lg shadow-cyan-200',
+    shadowClass: 'shadow-xl shadow-cyan-400/40',
+    colorHex: '#06B6D4',
   },
   {
     name: 'Product Management',
@@ -80,7 +88,8 @@ const FLOATING_PILLS: FloatingPill[] = [
     bgClass: 'bg-track-pm',
     textClass: 'text-white',
     rotateClass: '-rotate-2',
-    shadowClass: 'shadow-lg shadow-teal-200',
+    shadowClass: 'shadow-xl shadow-teal-400/40',
+    colorHex: '#0D9488',
   },
   {
     name: 'Quantum Computing',
@@ -88,7 +97,8 @@ const FLOATING_PILLS: FloatingPill[] = [
     bgClass: 'bg-track-quantum',
     textClass: 'text-white',
     rotateClass: 'rotate-2',
-    shadowClass: 'shadow-lg shadow-indigo-200',
+    shadowClass: 'shadow-xl shadow-indigo-400/40',
+    colorHex: '#6366F1',
   },
 ];
 
@@ -164,19 +174,22 @@ export const LandingPage: React.FC = () => {
           >
             <Link
               to="/gallery"
-              className="bg-gdg-blue hover:bg-gdg-blue-hover text-white px-8 py-3.5 rounded-full text-sm font-extrabold shadow-lg shadow-blue-200 hover:-translate-y-0.5 active:translate-y-0 transition-all hover:scale-105"
+              style={{ backgroundColor: '#4285F4' }}
+              className="bg-gdg-blue hover:bg-gdg-blue-hover text-white px-8 py-3.5 rounded-full text-sm font-extrabold shadow-xl shadow-blue-400/40 hover:-translate-y-0.5 active:translate-y-0 transition-all hover:scale-105"
             >
               Explore Projects
             </Link>
             <Link
               to="/submit"
-              className="bg-gdg-green hover:bg-gdg-green-hover text-white px-8 py-3.5 rounded-full text-sm font-extrabold shadow-lg shadow-green-200 hover:-translate-y-0.5 active:translate-y-0 transition-all hover:scale-105"
+              style={{ backgroundColor: '#188038' }}
+              className="bg-gdg-green hover:bg-gdg-green-hover text-white px-8 py-3.5 rounded-full text-sm font-extrabold shadow-xl shadow-green-400/40 hover:-translate-y-0.5 active:translate-y-0 transition-all hover:scale-105"
             >
               Submit Project
             </Link>
             <Link
               to="/leaderboard"
-              className="bg-gdg-yellow hover:bg-gdg-yellow-hover text-gray-900 px-8 py-3.5 rounded-full text-sm font-extrabold shadow-lg shadow-yellow-200 hover:-translate-y-0.5 transition-all hover:scale-105"
+              style={{ backgroundColor: '#FBBC04' }}
+              className="bg-gdg-yellow hover:bg-gdg-yellow-hover text-gray-900 px-8 py-3.5 rounded-full text-sm font-black shadow-xl shadow-yellow-400/40 hover:-translate-y-0.5 transition-all hover:scale-105"
             >
               Leaderboards
             </Link>
@@ -192,6 +205,7 @@ export const LandingPage: React.FC = () => {
             {FLOATING_PILLS.map((pill, idx) => (
               <motion.button
                 key={pill.name}
+                style={{ backgroundColor: pill.colorHex }}
                 whileHover={{ scale: 1.1, rotate: 0 }}
                 whileTap={{ scale: 0.95 }}
                 animate={{
@@ -218,44 +232,56 @@ export const LandingPage: React.FC = () => {
       {/* ── VIBRANT GOOGLE COLOR METRICS CARDS ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-gradient-to-br from-gdg-blue to-blue-600 rounded-3xl p-6 text-white shadow-lg shadow-blue-200/50">
-            <span className="text-xs font-bold uppercase tracking-wider text-blue-100 block mb-1">
+          <div
+            style={{ backgroundColor: '#4285F4' }}
+            className="bg-gdg-blue rounded-3xl p-6 text-white shadow-xl shadow-blue-400/30"
+          >
+            <span className="text-xs font-black uppercase tracking-wider text-blue-100 block mb-1">
               Projects Built
             </span>
-            <p className="stat-number text-4xl sm:text-5xl font-black">
+            <p className="stat-number text-4xl sm:text-5xl font-black text-white">
               {projects.length}
             </p>
-            <p className="text-xs text-blue-100 mt-2 font-medium">Submitted across campus</p>
+            <p className="text-xs text-blue-100 mt-2 font-bold">Submitted across campus</p>
           </div>
 
-          <div className="bg-gradient-to-br from-gdg-green to-emerald-700 rounded-3xl p-6 text-white shadow-lg shadow-emerald-200/50">
-            <span className="text-xs font-bold uppercase tracking-wider text-emerald-100 block mb-1">
+          <div
+            style={{ backgroundColor: '#188038' }}
+            className="bg-gdg-green rounded-3xl p-6 text-white shadow-xl shadow-green-400/30"
+          >
+            <span className="text-xs font-black uppercase tracking-wider text-emerald-100 block mb-1">
               Active Builders
             </span>
-            <p className="stat-number text-4xl sm:text-5xl font-black">
+            <p className="stat-number text-4xl sm:text-5xl font-black text-white">
               {totalBuilders}
             </p>
-            <p className="text-xs text-emerald-100 mt-2 font-medium">Students & innovators</p>
+            <p className="text-xs text-emerald-100 mt-2 font-bold">Students & innovators</p>
           </div>
 
-          <div className="bg-gradient-to-br from-gdg-yellow to-amber-500 rounded-3xl p-6 text-gray-900 shadow-lg shadow-amber-200/50">
-            <span className="text-xs font-bold uppercase tracking-wider text-amber-900 block mb-1">
+          <div
+            style={{ backgroundColor: '#FBBC04' }}
+            className="bg-gdg-yellow rounded-3xl p-6 text-gray-950 shadow-xl shadow-yellow-400/30"
+          >
+            <span className="text-xs font-black uppercase tracking-wider text-amber-950 block mb-1">
               Community Tracks
             </span>
-            <p className="stat-number text-4xl sm:text-5xl font-black">
+            <p className="stat-number text-4xl sm:text-5xl font-black text-gray-950">
               {communities.length}
             </p>
-            <p className="text-xs text-amber-900 mt-2 font-semibold">Competing for track cup</p>
+            <p className="text-xs text-amber-950 mt-2 font-black">Competing for track cup</p>
           </div>
 
-          <div className="bg-gradient-to-br from-gdg-red to-red-600 rounded-3xl p-6 text-white shadow-lg shadow-rose-200/50">
-            <span className="text-xs font-bold uppercase tracking-wider text-rose-100 block mb-1">
+          <div
+            style={{ backgroundColor: '#EA4335' }}
+            className="bg-gdg-red rounded-3xl p-6 text-white shadow-xl shadow-red-400/30"
+          >
+            <span className="text-xs font-black uppercase tracking-wider text-rose-100 block mb-1">
               Community Votes
             </span>
-            <p className="stat-number text-4xl sm:text-5xl font-black">
+            <p className="stat-number text-4xl sm:text-5xl font-black text-white">
               {votes.length}
             </p>
-            <p className="text-xs text-rose-100 mt-2 font-medium">Cast by attendees</p>
+            <p className="text-xs text-rose-100 mt-2 font-bold">Cast by attendees</p>
           </div>
         </div>
       </section>
