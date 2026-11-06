@@ -18,18 +18,16 @@ import { COMMUNITY_THEMES, TOOL_THEMES } from '../utils/theme';
 
 const COMMUNITIES: CommunityName[] = [
   'Web Development',
+  'Game Development',
+  'Research',
+  'Product Management',
+  'Mobile App Development',
+  'Data Science / Machine Learning',
+  'Design',
+  'Quantum Computing',
   'Cybersecurity',
   'Quantitative Finance',
-  'Blockchain',
-  'Product Management',
-  'Quantum Computing',
   'Cloud Computing',
-  'Researchers',
-  'Data Science / Machine Learning',
-  'Data Analysis',
-  'Design',
-  'Mobile App Development',
-  'Game Development',
 ];
 
 const GOOGLE_TOOLS: GoogleTool[] = [

@@ -18,19 +18,28 @@ interface FloatingPill {
 
 const FLOATING_PILLS: FloatingPill[] = [
   {
+    name: 'Web Development',
+    label: 'Web Development',
+    bgClass: 'bg-[#4285F4]',
+    textClass: 'text-white font-extrabold',
+    rotateClass: '-rotate-2',
+    shadowClass: 'shadow-md shadow-blue-200',
+    colorHex: '#4285F4',
+  },
+  {
     name: 'Data Science / Machine Learning',
     label: 'Data Science & ML',
     bgClass: 'bg-[#38BDF8]',
-    textClass: 'text-gray-950 font-bold',
+    textClass: 'text-gray-950 font-extrabold',
     rotateClass: '-rotate-3',
     shadowClass: 'shadow-md shadow-sky-100',
     colorHex: '#38BDF8',
   },
   {
     name: 'Mobile App Development',
-    label: 'Mobile & Web Dev',
+    label: 'Mobile App Dev',
     bgClass: 'bg-[#4ADE80]',
-    textClass: 'text-gray-950 font-bold',
+    textClass: 'text-gray-950 font-extrabold',
     rotateClass: 'rotate-2',
     shadowClass: 'shadow-md shadow-emerald-100',
     colorHex: '#4ADE80',
@@ -38,17 +47,17 @@ const FLOATING_PILLS: FloatingPill[] = [
   {
     name: 'Cybersecurity',
     label: 'Cybersecurity',
-    bgClass: 'bg-white',
-    textClass: 'text-gray-800 font-bold',
+    bgClass: 'bg-[#F87171]',
+    textClass: 'text-white font-extrabold',
     rotateClass: '-rotate-2',
-    shadowClass: 'shadow-md shadow-gray-200/60 border border-gray-100',
-    colorHex: '#FFFFFF',
+    shadowClass: 'shadow-md shadow-red-200',
+    colorHex: '#F87171',
   },
   {
     name: 'Quantitative Finance',
     label: 'Quantitative Finance',
     bgClass: 'bg-[#F472B6]',
-    textClass: 'text-gray-950 font-bold',
+    textClass: 'text-gray-950 font-extrabold',
     rotateClass: 'rotate-3',
     shadowClass: 'shadow-md shadow-pink-100',
     colorHex: '#F472B6',
@@ -57,43 +66,34 @@ const FLOATING_PILLS: FloatingPill[] = [
     name: 'Game Development',
     label: 'Game Development',
     bgClass: 'bg-[#FDE047]',
-    textClass: 'text-gray-950 font-bold',
+    textClass: 'text-gray-950 font-extrabold',
     rotateClass: 'rotate-4',
     shadowClass: 'shadow-md shadow-yellow-100',
     colorHex: '#FDE047',
   },
   {
-    name: 'Blockchain',
-    label: 'Blockchain',
-    bgClass: 'bg-[#FB923C]',
-    textClass: 'text-gray-950 font-bold',
-    rotateClass: '-rotate-3',
-    shadowClass: 'shadow-md shadow-orange-100',
-    colorHex: '#FB923C',
-  },
-  {
     name: 'Cloud Computing',
     label: 'Cloud Computing',
-    bgClass: 'bg-white',
-    textClass: 'text-gray-800 font-bold',
+    bgClass: 'bg-[#60A5FA]',
+    textClass: 'text-gray-950 font-extrabold',
     rotateClass: 'rotate-1',
-    shadowClass: 'shadow-md shadow-gray-200/60 border border-gray-100',
-    colorHex: '#FFFFFF',
+    shadowClass: 'shadow-md shadow-blue-100',
+    colorHex: '#60A5FA',
   },
   {
     name: 'Design',
     label: 'Design',
     bgClass: 'bg-[#FB7185]',
-    textClass: 'text-gray-950 font-bold',
+    textClass: 'text-gray-950 font-extrabold',
     rotateClass: '-rotate-4',
     shadowClass: 'shadow-md shadow-rose-100',
     colorHex: '#FB7185',
   },
   {
-    name: 'Researchers',
-    label: 'Researchers',
+    name: 'Research',
+    label: 'Research',
     bgClass: 'bg-[#C084FC]',
-    textClass: 'text-gray-950 font-bold',
+    textClass: 'text-gray-950 font-extrabold',
     rotateClass: 'rotate-3',
     shadowClass: 'shadow-md shadow-purple-100',
     colorHex: '#C084FC',
@@ -101,17 +101,17 @@ const FLOATING_PILLS: FloatingPill[] = [
   {
     name: 'Product Management',
     label: 'Product Management',
-    bgClass: 'bg-white',
-    textClass: 'text-gray-800 font-bold',
+    bgClass: 'bg-[#2DD4BF]',
+    textClass: 'text-gray-950 font-extrabold',
     rotateClass: '-rotate-2',
-    shadowClass: 'shadow-md shadow-gray-200/60 border border-gray-100',
-    colorHex: '#FFFFFF',
+    shadowClass: 'shadow-md shadow-teal-100',
+    colorHex: '#2DD4BF',
   },
   {
     name: 'Quantum Computing',
     label: 'Quantum Computing',
     bgClass: 'bg-[#818CF8]',
-    textClass: 'text-white font-bold',
+    textClass: 'text-white font-extrabold',
     rotateClass: 'rotate-2',
     shadowClass: 'shadow-md shadow-indigo-100',
     colorHex: '#818CF8',
@@ -192,13 +192,13 @@ export const LandingPage: React.FC = () => {
             </Link>
             <Link
               to="/submit"
-              className="bg-black hover:bg-gray-800 text-white px-8 py-3.5 rounded-full text-sm font-bold shadow-md shadow-black/10 hover:-translate-y-0.5 active:translate-y-0 transition-all hover:scale-105"
+              className="bg-gdg-green hover:bg-emerald-600 text-white px-8 py-3.5 rounded-full text-sm font-bold shadow-md shadow-green-600/20 hover:-translate-y-0.5 active:translate-y-0 transition-all hover:scale-105"
             >
               Submit Project
             </Link>
             <Link
               to="/leaderboard"
-              className="bg-amber-100/90 hover:bg-amber-200 text-amber-950 px-7 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-105 border border-amber-200/80 shadow-xs"
+              className="bg-amber-100 hover:bg-amber-200 text-amber-950 px-7 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-105 border border-amber-200/80 shadow-xs"
             >
               Leaderboards
             </Link>
@@ -262,13 +262,13 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* ── TRACKS EXPLORER GRID (12 OFFICIAL GDG OAU TRACKS) ── */}
+      {/* ── TRACKS EXPLORER GRID (11 OFFICIAL GDG OAU TRACKS) ── */}
       <section className="bg-gradient-to-b from-gray-50/60 to-white border-t border-gray-100 py-20 sm:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-14">
             <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-gdg-blue bg-gdg-blue-light px-3.5 py-1.5 rounded-full border border-blue-200">
               <Users className="w-3.5 h-3.5" />
-              <span>12 Specialized Tracks</span>
+              <span>11 Specialized Tracks</span>
             </span>
             <h2 className="text-3xl sm:text-5xl font-extrabold text-gray-900 tracking-tight mt-3">
               Explore by Community Track

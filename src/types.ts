@@ -1,18 +1,15 @@
 export type CommunityName =
   | 'Web Development'
+  | 'Game Development'
+  | 'Research'
+  | 'Product Management'
+  | 'Mobile App Development'
+  | 'Data Science / Machine Learning'
+  | 'Design'
+  | 'Quantum Computing'
   | 'Cybersecurity'
   | 'Quantitative Finance'
-  | 'Blockchain'
-  | 'Product Management'
-  | 'Quantum Computing'
-  | 'Cloud Computing'
-  | 'Researchers'
-  | 'Research'
-  | 'Data Science / Machine Learning'
-  | 'Data Analysis'
-  | 'Design'
-  | 'Mobile App Development'
-  | 'Game Development';
+  | 'Cloud Computing';
 
 export type GoogleTool =
   | 'Google AI Studio'
