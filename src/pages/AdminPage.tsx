@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import { exportSubmissionsToCSV } from '../services/appState';
-import type { CommunityName } from '../types';
+import type { CommunityName, Project } from '../types';
 import { GithubIcon } from '../components/GithubIcon';
+import { ConfirmModal } from '../components/ConfirmModal';
 import { Shield, Download, Trash2, Lock, Unlock, Calendar, Users, CheckCircle2 } from 'lucide-react';
 import { COMMUNITY_THEMES, TOOL_THEMES } from '../utils/theme';
 
@@ -16,6 +17,7 @@ export const AdminPage: React.FC = () => {
     toggleVotingClosed,
     removeProject,
     updateCommunity,
+    showToast,
   } = useApp();
 
   const [communityInputs, setCommunityInputs] = useState<
@@ -29,6 +31,8 @@ export const AdminPage: React.FC = () => {
   });
 
   const [savedCommunity, setSavedCommunity] = useState<string | null>(null);
+  const [deleteConfirmProject, setDeleteConfirmProject] = useState<Project | null>(null);
+  const [showVotingConfirm, setShowVotingConfirm] = useState(false);
 
   if (!isAdmin) {
     return (
@@ -91,8 +95,8 @@ export const AdminPage: React.FC = () => {
             </button>
 
             <button
-              onClick={() => toggleVotingClosed(!votingClosed)}
-              className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-xs sm:text-sm font-extrabold shadow-md transition-all hover:scale-105 ${
+              onClick={() => setShowVotingConfirm(true)}
+              className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-xs sm:text-sm font-extrabold shadow-md transition-all hover:scale-105 cursor-pointer ${
                 votingClosed
                   ? 'bg-gdg-green hover:bg-gdg-green-hover text-white shadow-green-200'
                   : 'bg-gdg-red hover:bg-gdg-red-hover text-white shadow-red-200'
@@ -188,12 +192,8 @@ export const AdminPage: React.FC = () => {
                       </td>
                       <td className="px-4 py-3 text-right whitespace-nowrap">
                         <button
-                          onClick={() => {
-                            if (confirm(`Are you sure you want to delete "${p.title}"?`)) {
-                              removeProject(p.id);
-                            }
-                          }}
-                          className="text-gdg-red hover:text-gdg-red-hover p-2 rounded-xl hover:bg-gdg-red-light transition-colors"
+                          onClick={() => setDeleteConfirmProject(p)}
+                          className="text-gdg-red hover:text-gdg-red-hover p-2 rounded-xl hover:bg-gdg-red-light transition-colors cursor-pointer"
                           title="Remove submission"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -290,6 +290,54 @@ export const AdminPage: React.FC = () => {
         </section>
 
       </div>
+
+      {/* Delete Project Confirmation Modal */}
+      <ConfirmModal
+        isOpen={Boolean(deleteConfirmProject)}
+        title="Delete Project Submission"
+        message={
+          deleteConfirmProject
+            ? `Are you sure you want to permanently delete "${deleteConfirmProject.title}" by ${deleteConfirmProject.builderName}? This will remove it from the gallery and recalculate leaderboard rankings.`
+            : ''
+        }
+        confirmLabel="Delete Project"
+        cancelLabel="Cancel"
+        variant="danger"
+        icon="delete"
+        onConfirm={() => {
+          if (deleteConfirmProject) {
+            removeProject(deleteConfirmProject.id);
+            showToast(`Deleted "${deleteConfirmProject.title}".`, 'info');
+            setDeleteConfirmProject(null);
+          }
+        }}
+        onCancel={() => setDeleteConfirmProject(null)}
+      />
+
+      {/* Toggle Voting Confirmation Modal */}
+      <ConfirmModal
+        isOpen={showVotingConfirm}
+        title={votingClosed ? 'Re-open Public Voting' : 'Pause Live Voting'}
+        message={
+          votingClosed
+            ? 'Are you sure you want to re-open public voting? Attendees will immediately be able to cast votes for projects across all tracks.'
+            : 'Are you sure you want to pause public voting? Attendees will not be able to cast new votes until you re-open it.'
+        }
+        confirmLabel={votingClosed ? 'Re-open Voting' : 'Pause Voting'}
+        cancelLabel="Cancel"
+        variant={votingClosed ? 'primary' : 'warning'}
+        icon="warning"
+        onConfirm={() => {
+          const nextState = !votingClosed;
+          toggleVotingClosed(nextState);
+          showToast(
+            nextState ? 'Public voting has been paused.' : 'Public voting is now live!',
+            nextState ? 'warning' : 'success'
+          );
+          setShowVotingConfirm(false);
+        }}
+        onCancel={() => setShowVotingConfirm(false)}
+      />
     </div>
   );
 };

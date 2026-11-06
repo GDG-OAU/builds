@@ -3,12 +3,15 @@ import { Link, useLocation } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { Menu, X, LogOut, Shield, Plus } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { UserAvatar } from './UserAvatar';
+import { ConfirmModal } from './ConfirmModal';
 import gdgLogo from '../assets/gdg-logo.jpg';
 
 export const Navbar: React.FC = () => {
   const { user, isAdmin, signInWithGoogle, signOutUser } = useApp();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -86,21 +89,17 @@ export const Navbar: React.FC = () => {
             </Link>
 
             {user ? (
-              <div className="flex items-center gap-2 pl-2 border-l border-gray-200">
-                {user.photoURL && !user.photoURL.includes('bottts') ? (
-                  <img
-                    src={user.photoURL}
-                    alt={user.displayName}
-                    className="w-8 h-8 rounded-full border border-gray-200 object-cover shadow-xs"
-                  />
-                ) : (
-                  <div className="w-8 h-8 rounded-full bg-gdg-green text-white font-bold text-xs flex items-center justify-center shadow-xs">
-                    {user.displayName.charAt(0).toUpperCase()}
-                  </div>
-                )}
+              <div className="flex items-center gap-2.5 pl-2 border-l border-gray-200">
+                <UserAvatar user={user} size="sm" />
+                <span
+                  className="text-xs font-bold text-gray-800 max-w-[130px] truncate hidden sm:inline"
+                  title={user.displayName || user.email}
+                >
+                  {user.displayName || user.email.split('@')[0]}
+                </span>
                 <button
-                  onClick={signOutUser}
-                  className="p-1.5 text-gray-400 hover:text-gdg-red rounded-full hover:bg-gdg-red-light transition-colors"
+                  onClick={() => setShowLogoutConfirm(true)}
+                  className="p-1.5 text-gray-400 hover:text-gdg-red rounded-full hover:bg-gdg-red-light transition-colors cursor-pointer"
                   title="Sign out"
                 >
                   <LogOut className="w-4 h-4" />
@@ -180,10 +179,15 @@ export const Navbar: React.FC = () => {
               <div className="pt-3 border-t border-gray-100 mt-2">
                 {user ? (
                   <div className="flex items-center justify-between px-3 py-1">
-                    <span className="text-sm font-bold text-gray-900">{user.displayName}</span>
+                    <div className="flex items-center gap-2 min-w-0">
+                      <UserAvatar user={user} size="sm" />
+                      <span className="text-sm font-bold text-gray-900 truncate max-w-[150px]">
+                        {user.displayName || user.email.split('@')[0]}
+                      </span>
+                    </div>
                     <button
-                      onClick={signOutUser}
-                      className="text-xs text-gdg-red font-bold hover:underline"
+                      onClick={() => setShowLogoutConfirm(true)}
+                      className="text-xs text-gdg-red font-bold hover:underline cursor-pointer"
                     >
                       Sign Out
                     </button>
@@ -201,6 +205,19 @@ export const Navbar: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Logout Confirmation Modal */}
+      <ConfirmModal
+        isOpen={showLogoutConfirm}
+        title="Sign Out"
+        message="Are you sure you want to sign out of your account?"
+        confirmLabel="Sign Out"
+        cancelLabel="Stay Signed In"
+        variant="danger"
+        icon="logout"
+        onConfirm={signOutUser}
+        onCancel={() => setShowLogoutConfirm(false)}
+      />
     </header>
   );
 };
