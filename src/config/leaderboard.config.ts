@@ -1,6 +1,9 @@
 export const LEADERBOARD_CONFIG = {
   adminEmails: [
-    'rebeccaayodele08@gmail.com'
+    'rebeccaayodele08@gmail.com',
+    'temitope@gdgoau.com',
+    'prestige@gdgoau.com',
+    'aribad@gdgoau.com'
   ],
   individual: {
     completenessWeight: 0.40,

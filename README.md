@@ -16,7 +16,7 @@ Built with React, Vite, Tailwind CSS, Framer Motion, and Firebase.
   - **Individual Board:** 40% Completeness (Demo link > Google tools > Description) + 30% Number of projects (capped at 3) + 30% Community votes (capped at 50).
   - **Community Board:** 70% Submission rate + 30% Multi-submission builder ratio, with "Coming Soon / Event Live Soon" badges.
   - Fully adjustable in `src/config/leaderboard.config.ts`.
-- **Admin Console:** Whitelisted access for organizers (`rebeccaayodele08@gmail.com`) to delete projects, toggle voting open/close, edit community event dates, and export data to CSV.
+- **Admin Console:** Whitelisted access for organizers (`rebeccaayodele08@gmail.com`, `temitope@gdgoau.com`, `prestige@gdgoau.com`, `aribad@gdgoau.com`) to delete projects, toggle voting open/close, edit community event dates, and export data to CSV.
 
 ---
 
