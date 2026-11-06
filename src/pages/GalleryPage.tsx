@@ -5,6 +5,7 @@ import { ProjectCard } from '../components/ProjectCard';
 import { ProjectDetailModal } from '../components/ProjectDetailModal';
 import type { Project, CommunityName, GoogleTool } from '../types';
 import { Search, X, Plus, Filter, Sparkles } from 'lucide-react';
+import { COMMUNITY_THEMES } from '../utils/theme';
 
 const ALL_COMMUNITIES: CommunityName[] = [
   'Web Development',
@@ -93,37 +94,37 @@ export const GalleryPage: React.FC = () => {
         {/* Gallery Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 pb-6 border-b border-gray-100">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-50 border border-green-200 text-[#188038] text-xs font-bold uppercase tracking-wider mb-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gdg-green-light border border-green-200 text-gdg-green text-xs font-bold uppercase tracking-wider mb-2">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>GDG OAU Showcase</span>
+              <span>GDG on Campus OAU</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
+            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-gray-900">
               Project Gallery
             </h1>
-            <p className="text-gray-500 text-sm mt-1">
+            <p className="text-gray-500 text-sm sm:text-base mt-1 font-medium">
               Explore {projects.length} submissions from builders across Obafemi Awolowo University.
             </p>
           </div>
 
           <Link
             to="/submit"
-            className="inline-flex items-center gap-1.5 bg-black hover:bg-gray-800 text-white text-xs font-semibold px-5 py-2.5 rounded-full shadow-2xs transition-all self-start sm:self-auto"
+            className="inline-flex items-center gap-2 bg-gdg-green hover:bg-gdg-green-hover text-white text-xs sm:text-sm font-bold px-6 py-3 rounded-full shadow-md shadow-green-200 transition-all self-start sm:self-auto hover:scale-105"
           >
-            <Plus className="w-3.5 h-3.5" />
+            <Plus className="w-4 h-4" />
             Submit Your Project
           </Link>
         </div>
 
-        {/* Search & Tool Filter Row */}
-        <div className="flex flex-col sm:flex-row gap-3 mb-4">
+        {/* Search & Tool Filter Controls */}
+        <div className="flex flex-col sm:flex-row gap-3 mb-6">
           <div className="relative flex-1">
-            <Search className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-gdg-green absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search by project title, description, or builder..."
-              className="w-full pl-10 pr-10 py-2.5 bg-gray-50/70 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:bg-white focus:border-[#188038] focus:ring-1 focus:ring-[#188038]/20 transition-all"
+              placeholder="Search by project name, description, or builder..."
+              className="w-full pl-10 pr-10 py-3 bg-gray-50/80 border border-gray-200 rounded-2xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:bg-white focus:border-gdg-green focus:ring-2 focus:ring-gdg-green/20 transition-all shadow-2xs"
             />
             {query && (
               <button
@@ -139,9 +140,9 @@ export const GalleryPage: React.FC = () => {
             <select
               value={tool}
               onChange={(e) => setTool(e.target.value)}
-              className="px-3.5 py-2.5 bg-gray-50/70 border border-gray-200 rounded-xl text-sm font-medium text-gray-700 focus:outline-none focus:bg-white focus:border-[#188038] transition-all"
+              className="px-4 py-3 bg-gray-50/80 border border-gray-200 rounded-2xl text-sm font-semibold text-gray-700 focus:outline-none focus:bg-white focus:border-gdg-green transition-all shadow-2xs"
             >
-              <option value="ALL">All Google Tools</option>
+              <option value="ALL">All Google Tools ({ALL_TOOLS.length})</option>
               {ALL_TOOLS.map((t) => (
                 <option key={t} value={t}>
                   {t}
@@ -152,22 +153,22 @@ export const GalleryPage: React.FC = () => {
             {(query || community !== 'ALL' || tool !== 'ALL') && (
               <button
                 onClick={handleResetFilters}
-                className="text-xs font-semibold text-gray-500 hover:text-gray-900 px-3 py-2.5 hover:bg-gray-100 rounded-xl transition-colors whitespace-nowrap"
+                className="text-xs font-bold text-gdg-red hover:text-gdg-red-hover px-3.5 py-3 hover:bg-gdg-red-light rounded-2xl transition-colors whitespace-nowrap"
               >
-                Clear Filters
+                Reset Filters
               </button>
             )}
           </div>
         </div>
 
-        {/* Track Pills Horizontal Scrollbar */}
+        {/* Dynamic Colorful Community Filter Chips */}
         <div className="flex items-center gap-2 overflow-x-auto pb-4 pt-1 no-scrollbar mb-8">
           <button
             onClick={() => handleSelectCommunity('ALL')}
-            className={`px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+            className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
               community === 'ALL'
-                ? 'bg-black text-white shadow-2xs'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                ? 'bg-black text-white shadow-md'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
             All Tracks ({projects.length})
@@ -176,14 +177,15 @@ export const GalleryPage: React.FC = () => {
           {ALL_COMMUNITIES.map((c) => {
             const count = projects.filter((p) => p.community === c).length;
             const active = community === c;
+            const theme = COMMUNITY_THEMES[c];
             return (
               <button
                 key={c}
                 onClick={() => handleSelectCommunity(c)}
-                className={`px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+                className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all border ${
                   active
-                    ? 'bg-[#188038] text-white shadow-2xs'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    ? theme.chipActiveClass
+                    : theme.chipClass
                 }`}
               >
                 {c} {count > 0 && `(${count})`}
@@ -193,9 +195,11 @@ export const GalleryPage: React.FC = () => {
         </div>
 
         {/* Results Info */}
-        <div className="flex items-center justify-between text-xs text-gray-500 mb-6">
-          <span>Showing {filtered.length} {filtered.length === 1 ? 'project' : 'projects'}</span>
-          <span>Sorted by newest</span>
+        <div className="flex items-center justify-between text-xs font-semibold text-gray-500 mb-6">
+          <span className="bg-gray-100 px-3 py-1 rounded-full">
+            Showing {filtered.length} {filtered.length === 1 ? 'project' : 'projects'}
+          </span>
+          <span className="text-gray-400">Sorted by newest</span>
         </div>
 
         {/* Projects Grid */}
@@ -210,15 +214,15 @@ export const GalleryPage: React.FC = () => {
             ))}
           </div>
         ) : (
-          <div className="text-center py-20 bg-gray-50 rounded-2xl border border-dashed border-gray-200 p-8">
-            <Filter className="w-10 h-10 text-gray-300 mx-auto mb-3" />
-            <h3 className="text-base font-bold text-gray-900 mb-1">No projects matched your filters</h3>
-            <p className="text-xs text-gray-500 max-w-sm mx-auto mb-4">
-              Try searching for something else or clearing your community and tool filters.
+          <div className="text-center py-20 bg-gradient-to-br from-gray-50 to-emerald-50/20 rounded-3xl border border-dashed border-gray-300 p-8">
+            <Filter className="w-12 h-12 text-gdg-green mx-auto mb-3 opacity-60" />
+            <h3 className="text-lg font-extrabold text-gray-900 mb-1">No builds found</h3>
+            <p className="text-xs sm:text-sm text-gray-500 max-w-sm mx-auto mb-5">
+              Try adjusting your search query, or clear your community and Google tool filters.
             </p>
             <button
               onClick={handleResetFilters}
-              className="px-4 py-2 bg-black text-white text-xs font-semibold rounded-full hover:bg-gray-800 transition-colors"
+              className="px-6 py-2.5 bg-black text-white text-xs font-bold rounded-full hover:bg-gray-800 transition-colors shadow-sm"
             >
               Reset All Filters
             </button>

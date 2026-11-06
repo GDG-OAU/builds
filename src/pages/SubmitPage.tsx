@@ -11,8 +11,10 @@ import {
   AlertCircle,
   Sparkles,
   Image as ImageIcon,
-  Loader2
+  Loader2,
+  Rocket
 } from 'lucide-react';
+import { COMMUNITY_THEMES, TOOL_THEMES } from '../utils/theme';
 
 const COMMUNITIES: CommunityName[] = [
   'Web Development',
@@ -157,7 +159,7 @@ export const SubmitPage: React.FC = () => {
     if (!res.success) {
       setErrorMsg(res.error || 'Failed to submit project.');
     } else {
-      setSuccessMsg('Project successfully submitted! Redirecting to gallery...');
+      setSuccessMsg('Project successfully submitted! Taking you to the gallery...');
       setTimeout(() => {
         navigate('/gallery');
       }, 1500);
@@ -167,21 +169,24 @@ export const SubmitPage: React.FC = () => {
   if (!user) {
     return (
       <div className="max-w-md mx-auto px-4 py-20 text-center">
-        <div className="bg-white rounded-3xl border border-gray-200 p-8 sm:p-10 shadow-xs space-y-6">
-          <div className="w-16 h-16 rounded-2xl bg-green-50 text-[#188038] flex items-center justify-center mx-auto">
-            <Sparkles className="w-8 h-8" />
+        <div className="bg-gradient-to-b from-white to-emerald-50/30 rounded-3xl border border-gray-200 p-8 sm:p-12 shadow-xl space-y-6">
+          <div className="w-16 h-16 rounded-3xl bg-gradient-to-tr from-gdg-green to-teal-600 text-white flex items-center justify-center mx-auto shadow-lg shadow-emerald-200">
+            <Rocket className="w-8 h-8" />
           </div>
           <div>
-            <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">
+            <span className="text-xs font-bold uppercase tracking-widest text-gdg-green bg-gdg-green-light px-3 py-1 rounded-full border border-green-200">
+              Builder Jam 2026
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight mt-3">
               Sign In to Submit
             </h2>
             <p className="text-sm text-gray-500 mt-2 leading-relaxed">
-              Submissions are credited directly to your builder profile and count toward your community track’s leaderboard rank.
+              Submissions are linked to your builder profile and earn points toward your community track’s leaderboard rank.
             </p>
           </div>
           <button
             onClick={signInWithGoogle}
-            className="w-full inline-flex items-center justify-center space-x-3 bg-white border border-gray-300 hover:border-gray-400 text-gray-800 px-6 py-3 rounded-full text-sm font-semibold shadow-2xs hover:shadow-xs transition-all"
+            className="w-full inline-flex items-center justify-center space-x-3 bg-white border border-gray-300 hover:border-gray-400 text-gray-800 px-6 py-3.5 rounded-full text-sm font-bold shadow-md hover:shadow-lg transition-all hover:scale-102"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path
@@ -208,70 +213,77 @@ export const SubmitPage: React.FC = () => {
     );
   }
 
+  const selectedCommunityTheme = COMMUNITY_THEMES[community];
+
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
-      <div className="bg-white rounded-3xl border border-gray-200/90 shadow-xs p-6 sm:p-10 space-y-8">
+      <div className="bg-white rounded-3xl border border-gray-200/90 shadow-lg p-6 sm:p-10 space-y-8">
         
+        {/* Form Title & Builder Info */}
         <div className="border-b border-gray-100 pb-5">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-50 border border-green-200 text-[#188038] text-xs font-bold uppercase tracking-wider mb-2">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gdg-green-light border border-green-200 text-gdg-green text-xs font-bold uppercase tracking-wider mb-2">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Builder Jam Submission</span>
+            <span>GDG on Campus OAU</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">
+          <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
             Submit Your Project
           </h1>
           <p className="text-xs sm:text-sm text-gray-500 mt-1">
-            Submitting as <span className="font-semibold text-gray-800">{user.displayName}</span> ({user.email})
+            Submitting as <span className="font-bold text-gray-800">{user.displayName}</span> ({user.email})
           </p>
         </div>
 
         {errorMsg && (
-          <div className="bg-red-50 border border-red-200 text-[#D93025] px-4 py-3 rounded-2xl text-xs sm:text-sm flex items-start space-x-2">
-            <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-            <span>{errorMsg}</span>
+          <div className="bg-gdg-red-light border border-red-200 text-gdg-red px-4 py-3 rounded-2xl text-xs sm:text-sm flex items-start space-x-2">
+            <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-gdg-red" />
+            <span className="font-semibold">{errorMsg}</span>
           </div>
         )}
 
         {successMsg && (
-          <div className="bg-green-50 border border-green-200 text-[#188038] px-4 py-3 rounded-2xl text-xs sm:text-sm flex items-center space-x-2">
-            <CheckCircle2 className="w-4 h-4 shrink-0" />
-            <span>{successMsg}</span>
+          <div className="bg-gdg-green-light border border-green-200 text-gdg-green-dark px-4 py-3 rounded-2xl text-xs sm:text-sm flex items-center space-x-2">
+            <CheckCircle2 className="w-4 h-4 shrink-0 text-gdg-green" />
+            <span className="font-semibold">{successMsg}</span>
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
+          
+          {/* Project Title */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">
-              Project Title <span className="text-red-500">*</span>
+            <label className="block text-xs font-extrabold uppercase tracking-wider text-gray-700 mb-1.5">
+              Project Title <span className="text-gdg-red">*</span>
             </label>
             <input
               type="text"
               required
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="e.g., CampusPulse OAU"
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-[#188038] focus:ring-2 focus:ring-[#188038]/20 text-sm outline-hidden transition-all"
+              placeholder="e.g., CampusPulse OAU or SmartStudy AI"
+              className="w-full px-4 py-3 rounded-2xl bg-gray-50/80 border border-gray-200 focus:bg-white focus:border-gdg-green focus:ring-2 focus:ring-gdg-green/20 text-sm font-medium outline-hidden transition-all"
             />
           </div>
 
+          {/* One-Line Description */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">
-              One-Line Description <span className="text-red-500">*</span>
+            <label className="block text-xs font-extrabold uppercase tracking-wider text-gray-700 mb-1.5">
+              One-Line Description <span className="text-gdg-red">*</span>
             </label>
             <textarea
               required
               rows={2}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Explain what it does and the campus problem it addresses..."
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-[#188038] focus:ring-2 focus:ring-[#188038]/20 text-sm outline-hidden resize-none transition-all"
+              placeholder="Explain what it does and the campus or real-world problem it solves..."
+              className="w-full px-4 py-3 rounded-2xl bg-gray-50/80 border border-gray-200 focus:bg-white focus:border-gdg-green focus:ring-2 focus:ring-gdg-green/20 text-sm font-medium outline-hidden resize-none transition-all"
             />
           </div>
 
+          {/* Links Row */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5 flex items-center gap-1.5">
-                <GithubIcon className="w-3.5 h-3.5 text-gray-800" /> GitHub Repository <span className="text-red-500">*</span>
+              <label className="block text-xs font-extrabold uppercase tracking-wider text-gray-700 mb-1.5 flex items-center gap-1.5">
+                <GithubIcon className="w-4 h-4 text-gray-900" /> GitHub Repository <span className="text-gdg-red">*</span>
               </label>
               <input
                 type="url"
@@ -279,94 +291,119 @@ export const SubmitPage: React.FC = () => {
                 value={githubUrl}
                 onChange={(e) => setGithubUrl(e.target.value)}
                 placeholder="https://github.com/username/project"
-                className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-[#188038] focus:ring-2 focus:ring-[#188038]/20 text-sm outline-hidden transition-all"
+                className="w-full px-4 py-3 rounded-2xl bg-gray-50/80 border border-gray-200 focus:bg-white focus:border-gdg-green focus:ring-2 focus:ring-gdg-green/20 text-sm font-medium outline-hidden transition-all"
               />
-              <p className="text-[11px] text-gray-400 mt-1">Must be a valid github.com link</p>
+              <p className="text-[11px] text-gray-400 mt-1">Must be a valid github.com repository link</p>
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5 flex items-center gap-1.5">
-                <LinkIcon className="w-3.5 h-3.5 text-[#188038]" /> Live Demo Link (Optional)
+              <label className="block text-xs font-extrabold uppercase tracking-wider text-gray-700 mb-1.5 flex items-center gap-1.5">
+                <LinkIcon className="w-4 h-4 text-gdg-green" /> Live Demo Link (Optional)
               </label>
               <input
                 type="url"
                 value={demoUrl}
                 onChange={(e) => setDemoUrl(e.target.value)}
                 placeholder="https://your-demo.web.app"
-                className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-[#188038] focus:ring-2 focus:ring-[#188038]/20 text-sm outline-hidden transition-all"
+                className="w-full px-4 py-3 rounded-2xl bg-gray-50/80 border border-gray-200 focus:bg-white focus:border-gdg-green focus:ring-2 focus:ring-gdg-green/20 text-sm font-medium outline-hidden transition-all"
               />
-              <p className="text-[11px] text-[#188038] font-semibold mt-1">Boosts your leaderboard completeness score!</p>
+              <p className="text-[11px] text-gdg-green font-bold mt-1">⭐ Adds 50% to your completeness score!</p>
             </div>
           </div>
 
+          {/* Community Track Picker */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">
-              Community Track <span className="text-red-500">*</span>
+            <label className="block text-xs font-extrabold uppercase tracking-wider text-gray-700 mb-1.5">
+              Community Track <span className="text-gdg-red">*</span>
             </label>
-            <select
-              value={community}
-              onChange={(e) => setCommunity(e.target.value as CommunityName)}
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-300 bg-white text-sm text-gray-800 focus:border-[#188038] focus:ring-2 focus:ring-[#188038]/20 outline-hidden transition-all"
-            >
-              {COMMUNITIES.map((c) => (
-                <option key={c} value={c}>{c}</option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <div className="flex items-center justify-between mb-2">
-              <label className="block text-xs font-bold uppercase tracking-wider text-gray-700">
-                Google Tools Used (Multi-select) <span className="text-red-500">*</span>
-              </label>
-              <span className="text-xs text-gray-400 font-medium">
-                {selectedTools.length} selected {selectedTools.length >= 2 && '· 2+ boosts score ✓'}
+            <div className="relative">
+              <select
+                value={community}
+                onChange={(e) => setCommunity(e.target.value as CommunityName)}
+                className="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-gray-50/80 text-sm font-bold text-gray-800 focus:bg-white focus:border-gdg-green focus:ring-2 focus:ring-gdg-green/20 outline-hidden transition-all"
+              >
+                {COMMUNITIES.map((c) => (
+                  <option key={c} value={c}>{c}</option>
+                ))}
+              </select>
+            </div>
+            <div className="mt-2 flex items-center gap-2">
+              <span
+                className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full border ${selectedCommunityTheme.badgeClass}`}
+              >
+                <span className={`w-2 h-2 rounded-full ${selectedCommunityTheme.dotClass}`} />
+                Representing {community}
               </span>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+          </div>
+
+          {/* Authentic Google Tools Multi-Select (Colorful Pills) */}
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <label className="block text-xs font-extrabold uppercase tracking-wider text-gray-700">
+                Google Tools Used (Multi-select) <span className="text-gdg-red">*</span>
+              </label>
+              <span className="text-xs font-bold text-gray-500">
+                {selectedTools.length} selected {selectedTools.length >= 2 ? '· 2+ boosts score ✓' : '· pick at least 1'}
+              </span>
+            </div>
+            
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
               {GOOGLE_TOOLS.map((tool) => {
                 const active = selectedTools.includes(tool);
+                const toolTheme = TOOL_THEMES[tool] || {
+                  label: tool,
+                  pillClass: 'bg-gray-100 text-gray-700 border-gray-200',
+                  dotClass: 'bg-gray-400',
+                };
+
                 return (
                   <button
                     type="button"
                     key={tool}
                     onClick={() => toggleTool(tool)}
-                    className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold border transition-all text-left ${
+                    className={`flex items-center justify-between px-3.5 py-2.5 rounded-2xl text-xs font-bold border transition-all text-left ${
                       active
-                        ? 'bg-green-50 border-[#188038] text-[#188038] shadow-2xs'
-                        : 'bg-white border-gray-200 text-gray-700 hover:border-gray-300 hover:bg-gray-50'
+                        ? 'bg-black text-white border-black shadow-md shadow-gray-200 scale-102'
+                        : `${toolTheme.pillClass} hover:scale-101 hover:shadow-xs`
                     }`}
                   >
-                    <span className="truncate">{tool}</span>
-                    {active && <CheckCircle2 className="w-3.5 h-3.5 shrink-0 ml-1 text-[#188038]" />}
+                    <span className="flex items-center gap-1.5 truncate">
+                      <span
+                        className={`w-2 h-2 rounded-full shrink-0 ${active ? 'bg-white' : toolTheme.dotClass}`}
+                      />
+                      <span className="truncate">{tool}</span>
+                    </span>
+                    {active && <CheckCircle2 className="w-3.5 h-3.5 shrink-0 ml-1 text-emerald-400" />}
                   </button>
                 );
               })}
             </div>
           </div>
 
+          {/* Project Screenshot Mode */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">
-              Project Screenshot <span className="text-red-500">*</span>
+            <label className="block text-xs font-extrabold uppercase tracking-wider text-gray-700 mb-2">
+              Project Screenshot <span className="text-gdg-red">*</span>
             </label>
             <div className="flex space-x-2 mb-3">
               <button
                 type="button"
                 onClick={() => setScreenshotMode('upload')}
-                className={`px-4 py-1.5 text-xs font-bold rounded-full transition-all ${
+                className={`px-4 py-2 text-xs font-bold rounded-full transition-all ${
                   screenshotMode === 'upload'
-                    ? 'bg-black text-white shadow-2xs'
+                    ? 'bg-black text-white shadow-md'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
-                Upload File
+                Upload Image File
               </button>
               <button
                 type="button"
                 onClick={() => setScreenshotMode('url')}
-                className={`px-4 py-1.5 text-xs font-bold rounded-full transition-all ${
+                className={`px-4 py-2 text-xs font-bold rounded-full transition-all ${
                   screenshotMode === 'url'
-                    ? 'bg-black text-white shadow-2xs'
+                    ? 'bg-black text-white shadow-md'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
@@ -375,13 +412,13 @@ export const SubmitPage: React.FC = () => {
             </div>
 
             {screenshotMode === 'upload' ? (
-              <div className="border-2 border-dashed border-gray-300 rounded-2xl p-6 text-center hover:border-gray-400 transition-colors">
+              <div className="border-2 border-dashed border-gray-300 rounded-3xl p-6 text-center hover:border-gdg-green hover:bg-gdg-green-light/20 transition-colors">
                 {filePreview ? (
                   <div className="space-y-3">
                     <img
                       src={filePreview}
                       alt="Preview"
-                      className="max-h-48 mx-auto rounded-lg object-contain shadow-2xs border border-gray-200"
+                      className="max-h-52 mx-auto rounded-2xl object-contain shadow-md border border-gray-200"
                     />
                     <button
                       type="button"
@@ -389,17 +426,17 @@ export const SubmitPage: React.FC = () => {
                         setSelectedFile(null);
                         setFilePreview('');
                       }}
-                      className="text-xs text-red-600 font-semibold hover:underline"
+                      className="text-xs text-gdg-red font-bold hover:underline"
                     >
-                      Remove image
+                      Remove and choose different image
                     </button>
                   </div>
                 ) : (
                   <div>
-                    <ImageIcon className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+                    <ImageIcon className="w-9 h-9 text-gdg-green mx-auto mb-2 opacity-80" />
                     <label className="cursor-pointer">
-                      <span className="text-xs sm:text-sm font-semibold text-[#188038] hover:underline">
-                        Click to select an image
+                      <span className="text-xs sm:text-sm font-bold text-gdg-green hover:underline">
+                        Click to select an image from your device
                       </span>
                       <input
                         type="file"
@@ -408,7 +445,7 @@ export const SubmitPage: React.FC = () => {
                         onChange={handleFileChange}
                       />
                     </label>
-                    <p className="text-[11px] text-gray-400 mt-1">PNG, JPG, or WEBP up to 5MB</p>
+                    <p className="text-[11px] text-gray-400 mt-1 font-medium">PNG, JPG, or WEBP up to 5MB</p>
                   </div>
                 )}
               </div>
@@ -419,15 +456,15 @@ export const SubmitPage: React.FC = () => {
                   value={screenshotUrl}
                   onChange={(e) => setScreenshotUrl(e.target.value)}
                   placeholder="https://example.com/screenshot.png"
-                  className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-[#188038] focus:ring-2 focus:ring-[#188038]/20 text-sm outline-hidden"
+                  className="w-full px-4 py-3 rounded-2xl bg-gray-50/80 border border-gray-200 focus:bg-white focus:border-gdg-green focus:ring-2 focus:ring-gdg-green/20 text-sm font-medium outline-hidden transition-all"
                 />
                 {screenshotUrl && (
                   <div className="mt-3">
-                    <p className="text-xs text-gray-500 mb-1">Image Preview:</p>
+                    <p className="text-xs text-gray-500 font-bold mb-1">Image Preview:</p>
                     <img
                       src={screenshotUrl}
                       alt="Preview"
-                      className="max-h-44 rounded-lg border border-gray-200 object-cover"
+                      className="max-h-48 rounded-2xl border border-gray-200 object-cover shadow-md"
                       onError={() => setErrorMsg('Unable to load image from the provided URL.')}
                     />
                   </div>
@@ -436,21 +473,22 @@ export const SubmitPage: React.FC = () => {
             )}
           </div>
 
+          {/* Form Actions */}
           <div className="pt-4 border-t border-gray-100 flex items-center justify-end space-x-3">
             <button
               type="button"
               onClick={() => navigate('/gallery')}
-              className="px-5 py-2.5 rounded-full border border-gray-300 text-gray-700 text-xs sm:text-sm font-semibold hover:bg-gray-50 transition-all"
+              className="px-6 py-3 rounded-full border border-gray-300 text-gray-700 text-xs sm:text-sm font-bold hover:bg-gray-50 transition-all"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={uploading}
-              className="flex items-center space-x-2 bg-black hover:bg-gray-800 text-white px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold shadow-xs hover:shadow-md transition-all disabled:opacity-50"
+              className="flex items-center space-x-2 bg-gdg-green hover:bg-gdg-green-hover text-white px-8 py-3.5 rounded-full text-xs sm:text-sm font-bold shadow-lg shadow-green-200 transition-all hover:scale-102 disabled:opacity-50"
             >
               {uploading && <Loader2 className="w-4 h-4 animate-spin" />}
-              <span>{uploading ? 'Uploading...' : 'Publish Submission'}</span>
+              <span>{uploading ? 'Publishing...' : 'Publish Submission'}</span>
             </button>
           </div>
         </form>
