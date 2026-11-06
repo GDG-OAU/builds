@@ -200,7 +200,7 @@ export const LandingPage: React.FC = () => {
             <Link
               to="/leaderboard"
               style={{ backgroundColor: '#FEF3C7', color: '#78350F' }}
-              className="bg-amber-100 hover:bg-amber-200 text-amber-950 px-7 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-105 border border-amber-200/80 shadow-xs"
+              className="bg-amber-100 hover:bg-amber-200 text-amber-950 px-7 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-105 shadow-xs"
             >
               Leaderboards
             </Link>

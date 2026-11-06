@@ -14,6 +14,14 @@ function ToastWrapper() {
   return <Toast toast={toast} onDismiss={dismissToast} />;
 }
 
+function AdminProtectedRoute() {
+  const { isAdmin, user } = useApp();
+  if (!user || !isAdmin) {
+    return <Navigate to="/" replace />;
+  }
+  return <AdminPage />;
+}
+
 export function App() {
   return (
     <AppProvider>
@@ -27,7 +35,7 @@ export function App() {
               <Route path="/gallery" element={<GalleryPage />} />
               <Route path="/submit" element={<SubmitPage />} />
               <Route path="/leaderboard" element={<LeaderboardPage />} />
-              <Route path="/admin" element={<AdminPage />} />
+              <Route path="/admin" element={<AdminProtectedRoute />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </main>

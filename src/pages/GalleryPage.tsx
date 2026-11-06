@@ -4,7 +4,7 @@ import { useApp } from '../context/AppContext';
 import { ProjectCard } from '../components/ProjectCard';
 import { ProjectDetailModal } from '../components/ProjectDetailModal';
 import type { Project, CommunityName, GoogleTool } from '../types';
-import { Search, X, Plus, Terminal, ArrowUpDown } from 'lucide-react';
+import { Search, X, Plus, Rocket, Sparkles } from 'lucide-react';
 import { COMMUNITY_THEMES } from '../utils/theme';
 import { getVotesCountForProject } from '../services/appState';
 
@@ -101,59 +101,68 @@ export const GalleryPage: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#FAFAFA] min-h-screen py-8 sm:py-12 text-slate-900">
+    <div className="bg-[#FAFBFD] min-h-screen py-8 sm:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Developer Directory Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 mb-8 border-b border-slate-200">
+        {/* Vibrant GDG Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 mb-8 border-b border-gray-200">
           <div>
-            <div className="flex items-center gap-2 text-[11px] font-mono font-bold uppercase tracking-wider text-slate-500 mb-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>GDG OAU · BUILDER JAM 2026</span>
-              <span className="text-slate-300">/</span>
-              <span>SHOWCASE</span>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-gdg-blue text-xs font-extrabold uppercase tracking-wider mb-2.5">
+              <Sparkles className="w-3.5 h-3.5 text-gdg-blue" />
+              <span>GDG on Campus OAU · Builder Jam 2026</span>
             </div>
-            <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-950 tracking-tight">
-              Projects Directory
+
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-gray-900 tracking-tight">
+              Project Showcase <span className="text-gdg-blue">& Gallery</span>
             </h1>
-            <p className="text-sm text-slate-600 mt-1 max-w-2xl">
-              Software, AI applications, and systems shipped by OAU builders across 11 technical tracks.
+
+            <p className="text-sm sm:text-base text-gray-600 mt-2 max-w-2xl font-medium">
+              Explore and vote for real-world software, AI prototypes, and applications built by developers across Obafemi Awolowo University.
             </p>
-          </div>
 
-          <div className="flex items-center gap-3 shrink-0">
-            <div className="hidden sm:flex items-center gap-2 px-3 py-2 bg-white rounded-xl border border-slate-200 text-xs font-mono text-slate-600">
-              <span className="font-bold text-slate-900">{projects.length}</span> builds
-              <span className="text-slate-300">·</span>
-              <span className="font-bold text-slate-900">{ALL_COMMUNITIES.length}</span> tracks
+            {/* Live Stats Row */}
+            <div className="flex flex-wrap items-center gap-2 mt-4">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200">
+                <span className="w-2 h-2 rounded-full bg-blue-500" />
+                11 Communities
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                {projects.length} {projects.length === 1 ? 'Build' : 'Total Builds'}
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200">
+                <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                Community Voting Active
+              </span>
             </div>
-
-            <Link
-              to="/submit"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-slate-950 hover:bg-slate-800 text-white transition-all shadow-sm active:scale-95 cursor-pointer"
-            >
-              <Plus className="w-4 h-4 text-emerald-400" />
-              <span>Submit Build</span>
-            </Link>
           </div>
+
+          <Link
+            to="/submit"
+            style={{ backgroundColor: '#188038', color: '#FFFFFF' }}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs sm:text-sm font-extrabold bg-gdg-green hover:bg-emerald-700 text-white transition-all shadow-md shadow-green-200 hover:scale-105 active:scale-95 shrink-0 self-start md:self-auto cursor-pointer"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Submit Your Build</span>
+          </Link>
         </div>
 
         {/* Filter Toolbar: Search, Tools, Sort */}
-        <div className="flex flex-col sm:flex-row gap-3 mb-4">
+        <div className="flex flex-col sm:flex-row gap-3 mb-6">
           {/* Search Box */}
           <div className="relative flex-1">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-gdg-blue absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search by title, description, or builder name..."
-              className="w-full pl-9 pr-9 py-2.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 transition-all shadow-2xs font-medium"
+              placeholder="Search by project title, description, or builder..."
+              className="w-full pl-10 pr-9 py-3 bg-white border border-gray-200 rounded-2xl text-sm font-medium text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-gdg-blue focus:ring-2 focus:ring-blue-100 transition-all shadow-xs"
             />
             {query && (
               <button
                 onClick={() => setQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-0.5 cursor-pointer"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 p-0.5 cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -165,7 +174,7 @@ export const GalleryPage: React.FC = () => {
             <select
               value={tool}
               onChange={(e) => setTool(e.target.value)}
-              className="px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm font-medium text-slate-700 focus:outline-none focus:border-slate-900 transition-all shadow-2xs cursor-pointer"
+              className="px-4 py-3 bg-white border border-gray-200 rounded-2xl text-xs sm:text-sm font-bold text-gray-800 focus:outline-none focus:border-gdg-blue focus:ring-2 focus:ring-blue-100 transition-all shadow-xs cursor-pointer"
             >
               <option value="ALL">All Google Tools ({ALL_TOOLS.length})</option>
               {ALL_TOOLS.map((t) => (
@@ -176,107 +185,121 @@ export const GalleryPage: React.FC = () => {
             </select>
 
             {/* Sort Dropdown */}
-            <div className="relative">
-              <select
-                value={sort}
-                onChange={(e) => setSort(e.target.value as SortMode)}
-                className="px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm font-medium text-slate-700 focus:outline-none focus:border-slate-900 transition-all shadow-2xs cursor-pointer"
-              >
-                <option value="newest">Sort: Newest</option>
-                <option value="votes">Sort: Most Upvoted</option>
-              </select>
-            </div>
+            <select
+              value={sort}
+              onChange={(e) => setSort(e.target.value as SortMode)}
+              className="px-4 py-3 bg-white border border-gray-200 rounded-2xl text-xs sm:text-sm font-bold text-gray-800 focus:outline-none focus:border-gdg-blue focus:ring-2 focus:ring-blue-100 transition-all shadow-xs cursor-pointer"
+            >
+              <option value="newest">Sort: Newest</option>
+              <option value="votes">Sort: Most Upvoted</option>
+            </select>
 
             {(query || community !== 'ALL' || tool !== 'ALL') && (
               <button
                 onClick={handleResetFilters}
-                className="text-xs font-semibold text-rose-600 bg-rose-50 hover:bg-rose-100 border border-rose-200 px-3 py-2.5 rounded-xl transition-all whitespace-nowrap cursor-pointer"
+                style={{ backgroundColor: '#EA4335', color: '#FFFFFF' }}
+                className="text-xs font-bold text-white bg-gdg-red hover:bg-red-700 px-4 py-3 rounded-2xl transition-all shadow-xs whitespace-nowrap cursor-pointer"
               >
-                Clear Filters
+                Reset Filters
               </button>
             )}
           </div>
         </div>
 
-        {/* Track Filter Segmented Control Bar */}
-        <div className="bg-slate-100/80 p-1.5 rounded-2xl border border-slate-200/90 mb-8">
-          <div className="flex flex-wrap items-center gap-1.5">
-            {/* All Tracks */}
-            <button
-              onClick={() => handleSelectCommunity('ALL')}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer ${
+        {/* Vibrant Community Track Filter Chips */}
+        <div className="flex flex-wrap items-center gap-2 mb-8">
+          {/* All Tracks */}
+          <button
+            onClick={() => handleSelectCommunity('ALL')}
+            style={
+              community === 'ALL'
+                ? { backgroundColor: '#4285F4', color: '#FFFFFF' }
+                : { backgroundColor: '#F3F4F6', color: '#374151' }
+            }
+            className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+              community === 'ALL'
+                ? 'shadow-sm scale-102 font-extrabold'
+                : 'hover:bg-gray-200'
+            }`}
+          >
+            <span>All Tracks</span>
+            <span
+              className={`font-mono text-[10px] px-1.5 py-0.5 rounded-full ${
                 community === 'ALL'
-                  ? 'bg-slate-950 text-white shadow-xs font-bold'
-                  : 'bg-white hover:bg-slate-50 text-slate-700 border border-slate-200/80 shadow-2xs'
+                  ? 'bg-white/25 text-white font-bold'
+                  : 'bg-gray-200 text-gray-700'
               }`}
             >
-              <span>All Tracks</span>
-              <span
-                className={`font-mono text-[10px] px-1.5 py-0.5 rounded ${
-                  community === 'ALL'
-                    ? 'bg-white/20 text-white font-bold'
-                    : 'bg-slate-100 text-slate-500'
+              {projects.length}
+            </span>
+          </button>
+
+          {/* 11 Communities - Each with its authentic signature vibrant brand color! */}
+          {ALL_COMMUNITIES.map((c) => {
+            const count = projects.filter((p) => p.community === c).length;
+            const active = community === c;
+            const theme = COMMUNITY_THEMES[c] || {
+              color: '#4285F4',
+              bgLight: '#E8F0FE',
+              textDark: '#1E40AF',
+            };
+
+            return (
+              <button
+                key={c}
+                onClick={() => handleSelectCommunity(c)}
+                style={
+                  active
+                    ? {
+                        backgroundColor: theme.color,
+                        color: '#FFFFFF',
+                      }
+                    : {
+                        backgroundColor: theme.bgLight,
+                        color: theme.textDark,
+                      }
+                }
+                className={`px-3.5 py-2 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                  active
+                    ? 'shadow-sm scale-102 font-extrabold'
+                    : 'hover:opacity-90'
                 }`}
               >
-                {projects.length}
-              </span>
-            </button>
-
-            {/* Individual Tracks */}
-            {ALL_COMMUNITIES.map((c) => {
-              const count = projects.filter((p) => p.community === c).length;
-              const active = community === c;
-              const theme = COMMUNITY_THEMES[c] || {
-                color: '#188038',
-              };
-
-              return (
-                <button
-                  key={c}
-                  onClick={() => handleSelectCommunity(c)}
-                  style={
+                <span
+                  className="w-2 h-2 rounded-full shrink-0"
+                  style={{
+                    backgroundColor: active ? '#FFFFFF' : theme.color,
+                  }}
+                />
+                <span>{c}</span>
+                <span
+                  className={`font-mono text-[10px] px-1.5 py-0.5 rounded-full ${
                     active
-                      ? { backgroundColor: '#0F172A', color: '#FFFFFF' }
-                      : undefined
-                  }
-                  className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer ${
-                    active
-                      ? 'bg-slate-900 text-white shadow-xs font-bold'
-                      : 'bg-white hover:bg-slate-50 text-slate-700 border border-slate-200/80 shadow-2xs'
+                      ? 'bg-white/30 text-white font-bold'
+                      : 'bg-white/80 text-gray-800'
                   }`}
                 >
-                  <span
-                    className="w-2 h-2 rounded-full shrink-0"
-                    style={{ backgroundColor: theme.color }}
-                  />
-                  <span>{c}</span>
-                  <span
-                    className={`font-mono text-[10px] px-1.5 py-0.5 rounded ${
-                      active
-                        ? 'bg-white/20 text-white font-bold'
-                        : 'bg-slate-100 text-slate-500'
-                    }`}
-                  >
-                    {count}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+                  {count}
+                </span>
+              </button>
+            );
+          })}
         </div>
 
-        {/* Directory Results Header */}
-        <div className="flex items-center justify-between text-xs font-mono text-slate-500 mb-5">
-          <span>
-            {filtered.length === 1 ? '1 PROJECT' : `${filtered.length} PROJECTS`}{' '}
-            {community !== 'ALL' && `IN ${community.toUpperCase()}`}
+        {/* Results Counter Banner */}
+        <div className="flex items-center justify-between text-xs font-bold text-gray-500 mb-6 px-1">
+          <span className="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1 rounded-full font-bold">
+            Showing {filtered.length} {filtered.length === 1 ? 'project' : 'projects'}{' '}
+            {community !== 'ALL' && `in ${community}`}
           </span>
-          <span>ORDERED BY {sort === 'votes' ? 'VOTES' : 'RECENCY'}</span>
+          <span className="font-mono text-gray-400">
+            {sort === 'votes' ? 'Ranked by highest community votes' : 'Sorted by newest submission'}
+          </span>
         </div>
 
         {/* Projects Grid */}
         {filtered.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((p) => (
               <ProjectCard
                 key={p.id}
@@ -286,40 +309,42 @@ export const GalleryPage: React.FC = () => {
             ))}
           </div>
         ) : projects.length === 0 ? (
-          /* Empty State: Pre-Launch / Zero Submissions */
-          <div className="bg-white border border-slate-200 rounded-2xl p-10 sm:p-16 text-center max-w-xl mx-auto shadow-2xs">
-            <div className="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center mx-auto mb-4 text-slate-600">
-              <Terminal className="w-6 h-6" />
+          /* Empty State: Fresh Event Launch */
+          <div className="bg-white border border-gray-200 rounded-3xl p-10 sm:p-16 text-center max-w-xl mx-auto shadow-sm">
+            <div className="w-16 h-16 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center mx-auto mb-4 text-gdg-green">
+              <Rocket className="w-8 h-8" />
             </div>
-            <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-1.5">
-              No builds submitted yet
+            <h3 className="text-xl font-extrabold text-gray-900 mb-2">
+              Submissions Are Live!
             </h3>
-            <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto mb-6 leading-relaxed">
-              Submissions are officially open for all 11 GDG OAU communities. Be the very first builder on campus to showcase your project.
+            <p className="text-sm text-gray-600 max-w-md mx-auto mb-6 leading-relaxed font-medium">
+              Submissions are officially open across all 11 GDG OAU communities. Be the very first builder on campus to showcase your project!
             </p>
             <Link
               to="/submit"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-950 hover:bg-slate-800 text-white text-xs font-semibold rounded-xl transition-all shadow-sm"
+              style={{ backgroundColor: '#188038', color: '#FFFFFF' }}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gdg-green hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold rounded-full transition-all shadow-md shadow-green-200 hover:scale-105 active:scale-95"
             >
-              <Plus className="w-4 h-4 text-emerald-400" />
+              <Plus className="w-4 h-4" />
               <span>Submit First Project</span>
             </Link>
           </div>
         ) : (
           /* Empty State: Filter Returned No Match */
-          <div className="bg-white border border-slate-200 rounded-2xl p-10 sm:p-14 text-center max-w-xl mx-auto shadow-2xs">
-            <div className="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center mx-auto mb-4 text-slate-600">
-              <ArrowUpDown className="w-6 h-6" />
+          <div className="bg-white border border-gray-200 rounded-3xl p-10 sm:p-14 text-center max-w-xl mx-auto shadow-sm">
+            <div className="w-14 h-14 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center mx-auto mb-4 text-amber-600">
+              <Search className="w-6 h-6" />
             </div>
-            <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-1.5">
-              No builds match current filter
+            <h3 className="text-lg font-extrabold text-gray-900 mb-1.5">
+              No builds found
             </h3>
-            <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto mb-5 leading-relaxed">
-              No projects found for the selected track or tool criteria. Try broadening your query.
+            <p className="text-sm text-gray-500 max-w-md mx-auto mb-5 leading-relaxed font-medium">
+              No projects match your current search or community filters. Try clearing your filters or searching for something else.
             </p>
             <button
               onClick={handleResetFilters}
-              className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded-xl transition-all cursor-pointer shadow-xs"
+              style={{ backgroundColor: '#4285F4', color: '#FFFFFF' }}
+              className="px-6 py-2.5 bg-gdg-blue hover:bg-blue-600 text-white text-xs font-bold rounded-full transition-all shadow-md shadow-blue-200 hover:scale-105 cursor-pointer"
             >
               Reset All Filters
             </button>

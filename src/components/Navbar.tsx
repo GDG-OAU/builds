@@ -61,7 +61,7 @@ export const Navbar: React.FC = () => {
                 </Link>
               );
             })}
-            {isAdmin && (
+            {Boolean(user && isAdmin) && (
               <Link
                 to="/admin"
                 className={`text-sm font-bold transition-colors flex items-center gap-1 ${
@@ -168,7 +168,7 @@ export const Navbar: React.FC = () => {
                 Submit Project
               </Link>
 
-              {isAdmin && (
+              {Boolean(user && isAdmin) && (
                 <Link
                   to="/admin"
                   className="flex items-center gap-2 px-3 py-2 text-sm font-bold text-gdg-red"

@@ -50,10 +50,10 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     if (!saved) return null;
     try {
       const parsed = JSON.parse(saved);
-      // Clean up legacy dicebear bottts (pumpkin/robot) avatar if present in localStorage
-      if (parsed.photoURL && parsed.photoURL.includes('bottts')) {
-        parsed.photoURL = `https://ui-avatars.com/api/?name=${encodeURIComponent(parsed.displayName || 'Builder')}&background=188038&color=fff&bold=true`;
-        localStorage.setItem('gdg_builderjam_current_user', JSON.stringify(parsed));
+      // Clean up legacy mock logins or test users so user actually signs in
+      if (!parsed.uid || parsed.uid.startsWith('user-') || parsed.uid.startsWith('mock-')) {
+        localStorage.removeItem('gdg_builderjam_current_user');
+        return null;
       }
       return parsed;
     } catch {
@@ -119,18 +119,28 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         };
         setUser(profile);
         localStorage.setItem('gdg_builderjam_current_user', JSON.stringify(profile));
+        showToast(`Signed in as ${profile.displayName}!`, 'success');
       } catch (err: any) {
         console.error('Firebase Auth popup error:', err);
-        throw err;
+        if (err.code === 'auth/popup-closed-by-user') {
+          showToast('Sign-in popup was closed before completion.', 'info');
+        } else if (err.code === 'auth/unauthorized-domain') {
+          showToast('Domain not authorized in Firebase. Add current domain to Firebase Console > Auth > Settings > Authorized domains.', 'error');
+        } else if (err.code === 'auth/popup-blocked') {
+          showToast('Sign-in popup was blocked by your browser. Please allow popups.', 'warning');
+        } else {
+          showToast(`Google Sign-In error: ${err.message || 'Please try again.'}`, 'error');
+        }
       }
     } else {
-      mockSignIn();
+      showToast('Firebase Authentication is currently initializing. Please try again in a moment.', 'warning');
     }
   };
 
-  const mockSignIn = (email = 'rebeccaayodele08@gmail.com', name = 'Rebecca Ayodele') => {
+  const mockSignIn = (email = 'builder@oauife.edu.ng', name = 'OAU Builder') => {
+    // Only used as local fallback if auth is disabled
     const profile: UserProfile = {
-      uid: `user-${Date.now()}`,
+      uid: `local-${Date.now()}`,
       email,
       displayName: name,
       photoURL: `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=188038&color=fff&bold=true`
