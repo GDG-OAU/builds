@@ -108,7 +108,7 @@ export const GalleryPage: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 mb-8 border-b border-gray-200">
           <div>
             <h1 className="text-3xl sm:text-5xl font-extrabold text-gray-900 tracking-tight">
-              Project Showcase <span className="text-gdg-blue">& Gallery</span>
+              Project Showcase
             </h1>
 
             <p className="text-sm sm:text-base text-gray-600 mt-2 max-w-2xl font-medium">
@@ -195,19 +195,17 @@ export const GalleryPage: React.FC = () => {
                 ? { backgroundColor: '#4285F4', color: '#FFFFFF' }
                 : { backgroundColor: '#F3F4F6', color: '#374151' }
             }
-            className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
-              community === 'ALL'
+            className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${community === 'ALL'
                 ? 'shadow-sm scale-102 font-extrabold'
                 : 'hover:bg-gray-200'
-            }`}
+              }`}
           >
             <span>All Tracks</span>
             <span
-              className={`font-mono text-[10px] px-1.5 py-0.5 rounded-full ${
-                community === 'ALL'
+              className={`font-mono text-[10px] px-1.5 py-0.5 rounded-full ${community === 'ALL'
                   ? 'bg-white/25 text-white font-bold'
                   : 'bg-gray-200 text-gray-700'
-              }`}
+                }`}
             >
               {projects.length}
             </span>
@@ -230,19 +228,18 @@ export const GalleryPage: React.FC = () => {
                 style={
                   active
                     ? {
-                        backgroundColor: theme.color,
-                        color: '#FFFFFF',
-                      }
+                      backgroundColor: theme.color,
+                      color: '#FFFFFF',
+                    }
                     : {
-                        backgroundColor: theme.bgLight,
-                        color: theme.textDark,
-                      }
+                      backgroundColor: theme.bgLight,
+                      color: theme.textDark,
+                    }
                 }
-                className={`px-3.5 py-2 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
-                  active
+                className={`px-3.5 py-2 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${active
                     ? 'shadow-sm scale-102 font-extrabold'
                     : 'hover:opacity-90'
-                }`}
+                  }`}
               >
                 <span
                   className="w-2 h-2 rounded-full shrink-0"
@@ -252,11 +249,10 @@ export const GalleryPage: React.FC = () => {
                 />
                 <span>{c}</span>
                 <span
-                  className={`font-mono text-[10px] px-1.5 py-0.5 rounded-full ${
-                    active
+                  className={`font-mono text-[10px] px-1.5 py-0.5 rounded-full ${active
                       ? 'bg-white/30 text-white font-bold'
                       : 'bg-white/80 text-gray-800'
-                  }`}
+                    }`}
                 >
                   {count}
                 </span>
