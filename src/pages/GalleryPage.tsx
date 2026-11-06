@@ -4,7 +4,7 @@ import { useApp } from '../context/AppContext';
 import { ProjectCard } from '../components/ProjectCard';
 import { ProjectDetailModal } from '../components/ProjectDetailModal';
 import type { Project, CommunityName, GoogleTool } from '../types';
-import { Search, X, Plus, Rocket, Sparkles } from 'lucide-react';
+import { Search, X, Plus, Rocket } from 'lucide-react';
 import { COMMUNITY_THEMES } from '../utils/theme';
 import { getVotesCountForProject } from '../services/appState';
 
@@ -107,11 +107,6 @@ export const GalleryPage: React.FC = () => {
         {/* Vibrant GDG Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 mb-8 border-b border-gray-200">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-gdg-blue text-xs font-extrabold uppercase tracking-wider mb-2.5">
-              <Sparkles className="w-3.5 h-3.5 text-gdg-blue" />
-              <span>GDG on Campus OAU · Builder Jam 2026</span>
-            </div>
-
             <h1 className="text-3xl sm:text-5xl font-extrabold text-gray-900 tracking-tight">
               Project Showcase <span className="text-gdg-blue">& Gallery</span>
             </h1>
@@ -119,22 +114,6 @@ export const GalleryPage: React.FC = () => {
             <p className="text-sm sm:text-base text-gray-600 mt-2 max-w-2xl font-medium">
               Explore and vote for real-world software, AI prototypes, and applications built by developers across Obafemi Awolowo University.
             </p>
-
-            {/* Live Stats Row */}
-            <div className="flex flex-wrap items-center gap-2 mt-4">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200">
-                <span className="w-2 h-2 rounded-full bg-blue-500" />
-                11 Communities
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                {projects.length} {projects.length === 1 ? 'Build' : 'Total Builds'}
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200">
-                <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-                Community Voting Active
-              </span>
-            </div>
           </div>
 
           <Link
