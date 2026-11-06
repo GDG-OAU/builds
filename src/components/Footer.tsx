@@ -1,6 +1,7 @@
 import React from 'react';
 import { GithubIcon } from './GithubIcon';
 import { Globe, Heart } from 'lucide-react';
+import gdgLogo from '../assets/gdg-logo.jpg';
 
 export const Footer: React.FC = () => {
   return (
@@ -8,24 +9,11 @@ export const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1 px-2 py-1 border border-gray-200 rounded-md bg-white">
-              <span className="font-mono text-xs text-gray-400">{`{`}</span>
-              <div className="flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#4285F4]" />
-                <span className="w-1.5 h-1.5 rounded-full bg-[#EA4335]" />
-                <span className="w-1.5 h-1.5 rounded-full bg-[#FBBC04]" />
-                <span className="w-1.5 h-1.5 rounded-full bg-[#188038]" />
-              </div>
-              <span className="font-mono text-xs text-gray-400">{`}`}</span>
-            </div>
-            <div>
-              <p className="font-bold text-sm text-gray-900 leading-none">
-                GDG on Campus OAU
-              </p>
-              <p className="text-[11px] text-gray-400 font-medium tracking-wide mt-1">
-                Builder Jam '26 · Obafemi Awolowo University
-              </p>
-            </div>
+            <img
+              src={gdgLogo}
+              alt="Google Developer Group on Campus - Obafemi Awolowo University"
+              className="h-8 w-auto object-contain"
+            />
           </div>
 
           <div className="flex items-center gap-6">

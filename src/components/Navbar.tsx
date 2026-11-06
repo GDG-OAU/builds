@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { Menu, X, LogOut, Shield, Plus } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import gdgLogo from '../assets/gdg-logo.jpg';
 
 export const Navbar: React.FC = () => {
   const { user, isAdmin, signInWithGoogle, signOutUser } = useApp();
@@ -34,24 +35,13 @@ export const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
 
-          {/* Logo badge with inspo bracket style */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gdg-green-light border border-green-200 shadow-2xs group-hover:scale-105 transition-all">
-              <span className="font-mono text-xs font-bold text-gray-500">{`{`}</span>
-              <div className="flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-gdg-blue" />
-                <span className="w-2 h-2 rounded-full bg-gdg-red" />
-                <span className="w-2 h-2 rounded-full bg-gdg-yellow" />
-                <span className="w-2 h-2 rounded-full bg-gdg-green" />
-              </div>
-              <span className="text-xs font-extrabold tracking-tight text-gray-900 ml-1">
-                Builder Jam
-              </span>
-              <span className="font-mono text-xs font-bold text-gray-500">{`}`}</span>
-            </div>
-            <span className="hidden sm:inline-block text-xs font-bold text-gray-500 tracking-wider uppercase">
-              OAU
-            </span>
+          {/* Official GDG OAU Community Logo */}
+          <Link to="/" className="flex items-center group py-1" title="Google Developer Group on Campus - Obafemi Awolowo University">
+            <img
+              src={gdgLogo}
+              alt="Google Developer Group on Campus - Obafemi Awolowo University"
+              className="h-8 sm:h-10 md:h-11 w-auto object-contain transition-transform group-hover:scale-102"
+            />
           </Link>
 
           {/* Centered navigation links */}
