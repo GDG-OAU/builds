@@ -193,7 +193,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-black hover:bg-gray-800 text-white text-xs font-bold px-5 py-2.5 rounded-full transition-all shadow-md hover:scale-102"
+                  className="inline-flex items-center gap-2 bg-purple-700 hover:bg-purple-800 text-white text-xs font-extrabold px-5 py-2.5 rounded-full transition-all shadow-md shadow-purple-200 hover:scale-105"
                 >
                   <GithubIcon className="w-4 h-4" />
                   <span>View Repository</span>

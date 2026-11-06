@@ -27,7 +27,7 @@ export const Navbar: React.FC = () => {
   return (
     <header
       className={`sticky top-0 z-50 transition-all duration-200 ${
-        scrolled ? 'nav-frosted shadow-xs' : 'bg-white/80 backdrop-blur-xs'
+        scrolled ? 'nav-frosted shadow-xs' : 'bg-white/90 backdrop-blur-xs'
       }`}
     >
       <div className="h-[3px] gdg-bar w-full" />
@@ -36,20 +36,20 @@ export const Navbar: React.FC = () => {
 
           {/* Logo badge with inspo bracket style */}
           <Link to="/" className="flex items-center gap-2 group">
-            <div className="flex items-center gap-1.5 px-2.5 py-1.5 border border-gray-200 rounded-lg bg-white shadow-2xs group-hover:border-gray-300 transition-all">
-              <span className="font-mono text-xs font-bold text-gray-400">{`{`}</span>
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gdg-green-light border border-green-200 shadow-2xs group-hover:scale-105 transition-all">
+              <span className="font-mono text-xs font-bold text-gray-500">{`{`}</span>
               <div className="flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-[#4285F4]" />
-                <span className="w-2 h-2 rounded-full bg-[#EA4335]" />
-                <span className="w-2 h-2 rounded-full bg-[#FBBC04]" />
-                <span className="w-2 h-2 rounded-full bg-[#188038]" />
+                <span className="w-2 h-2 rounded-full bg-gdg-blue" />
+                <span className="w-2 h-2 rounded-full bg-gdg-red" />
+                <span className="w-2 h-2 rounded-full bg-gdg-yellow" />
+                <span className="w-2 h-2 rounded-full bg-gdg-green" />
               </div>
-              <span className="text-xs font-bold tracking-tight text-gray-900 ml-1">
+              <span className="text-xs font-extrabold tracking-tight text-gray-900 ml-1">
                 Builder Jam
               </span>
-              <span className="font-mono text-xs font-bold text-gray-400">{`}`}</span>
+              <span className="font-mono text-xs font-bold text-gray-500">{`}`}</span>
             </div>
-            <span className="hidden sm:inline-block text-xs font-medium text-gray-400 tracking-wider uppercase">
+            <span className="hidden sm:inline-block text-xs font-bold text-gray-500 tracking-wider uppercase">
               OAU
             </span>
           </Link>
@@ -62,8 +62,8 @@ export const Navbar: React.FC = () => {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`text-sm font-medium transition-colors hover:text-black ${
-                    active ? 'text-black font-semibold' : 'text-gray-600'
+                  className={`text-sm font-bold transition-colors ${
+                    active ? 'text-gdg-green font-extrabold' : 'text-gray-700 hover:text-gdg-green'
                   }`}
                 >
                   {item.label}
@@ -73,21 +73,21 @@ export const Navbar: React.FC = () => {
             {isAdmin && (
               <Link
                 to="/admin"
-                className={`text-sm font-medium transition-colors flex items-center gap-1 ${
-                  location.pathname === '/admin' ? 'text-red-600 font-semibold' : 'text-gray-500 hover:text-red-600'
+                className={`text-sm font-bold transition-colors flex items-center gap-1 ${
+                  location.pathname === '/admin' ? 'text-gdg-red font-extrabold' : 'text-gray-600 hover:text-gdg-red'
                 }`}
               >
-                <Shield className="w-3.5 h-3.5" />
+                <Shield className="w-3.5 h-3.5 text-gdg-red" />
                 Admin
               </Link>
             )}
           </nav>
 
-          {/* Right Action Buttons */}
+          {/* Right Action Buttons - VIBRANT GDG COLORS */}
           <div className="hidden md:flex items-center gap-3">
             <Link
               to="/submit"
-              className="flex items-center gap-1.5 bg-black hover:bg-gray-800 text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-2xs transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="flex items-center gap-1.5 bg-gdg-green hover:bg-gdg-green-hover text-white text-xs font-extrabold px-5 py-2.5 rounded-full shadow-md shadow-green-200 transition-all hover:scale-105 active:scale-95"
             >
               <Plus className="w-3.5 h-3.5" />
               Submit Project
@@ -102,13 +102,13 @@ export const Navbar: React.FC = () => {
                     className="w-8 h-8 rounded-full border border-gray-200 object-cover"
                   />
                 ) : (
-                  <div className="w-8 h-8 rounded-full bg-[#188038] text-white font-bold text-xs flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-full bg-gdg-green text-white font-bold text-xs flex items-center justify-center">
                     {user.displayName.charAt(0).toUpperCase()}
                   </div>
                 )}
                 <button
                   onClick={signOutUser}
-                  className="p-1.5 text-gray-400 hover:text-gray-700 rounded-full hover:bg-gray-100 transition-colors"
+                  className="p-1.5 text-gray-400 hover:text-gdg-red rounded-full hover:bg-gdg-red-light transition-colors"
                   title="Sign out"
                 >
                   <LogOut className="w-4 h-4" />
@@ -117,13 +117,13 @@ export const Navbar: React.FC = () => {
             ) : (
               <button
                 onClick={signInWithGoogle}
-                className="flex items-center gap-2 text-xs font-semibold text-gray-700 bg-white border border-gray-200 rounded-full px-4 py-2 hover:bg-gray-50 transition-all shadow-2xs"
+                className="flex items-center gap-2 text-xs font-extrabold text-white bg-gdg-blue hover:bg-gdg-blue-hover rounded-full px-5 py-2.5 shadow-md shadow-blue-200 transition-all hover:scale-105"
               >
                 <svg className="w-3.5 h-3.5" viewBox="0 0 24 24">
-                  <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
-                  <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
-                  <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
-                  <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.93 6.72-4.93z"/>
+                  <path fill="#ffffff" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+                  <path fill="#ffffff" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
+                  <path fill="#ffffff" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
+                  <path fill="#ffffff" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.93 6.72-4.93z"/>
                 </svg>
                 Sign In
               </button>
@@ -154,10 +154,10 @@ export const Navbar: React.FC = () => {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`block px-3 py-2 rounded-lg text-sm font-medium ${
+                  className={`block px-3 py-2 rounded-lg text-sm font-bold ${
                     location.pathname === item.path
-                      ? 'bg-gray-100 text-black font-semibold'
-                      : 'text-gray-600 hover:text-black hover:bg-gray-50'
+                      ? 'bg-gdg-green-light text-gdg-green'
+                      : 'text-gray-700 hover:text-gdg-green hover:bg-gray-50'
                   }`}
                 >
                   {item.label}
@@ -166,7 +166,7 @@ export const Navbar: React.FC = () => {
 
               <Link
                 to="/submit"
-                className="block text-center bg-black text-white text-sm font-semibold px-4 py-2.5 rounded-full mt-2"
+                className="block text-center bg-gdg-green text-white text-sm font-bold px-4 py-2.5 rounded-full mt-2 shadow-md shadow-green-200"
               >
                 Submit Project
               </Link>
@@ -174,7 +174,7 @@ export const Navbar: React.FC = () => {
               {isAdmin && (
                 <Link
                   to="/admin"
-                  className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-red-600"
+                  className="flex items-center gap-2 px-3 py-2 text-sm font-bold text-gdg-red"
                 >
                   <Shield className="w-4 h-4" /> Admin Console
                 </Link>
@@ -183,10 +183,10 @@ export const Navbar: React.FC = () => {
               <div className="pt-3 border-t border-gray-100 mt-2">
                 {user ? (
                   <div className="flex items-center justify-between px-3 py-1">
-                    <span className="text-sm font-medium text-gray-900">{user.displayName}</span>
+                    <span className="text-sm font-bold text-gray-900">{user.displayName}</span>
                     <button
                       onClick={signOutUser}
-                      className="text-xs text-red-600 font-semibold hover:underline"
+                      className="text-xs text-gdg-red font-bold hover:underline"
                     >
                       Sign Out
                     </button>
@@ -194,7 +194,7 @@ export const Navbar: React.FC = () => {
                 ) : (
                   <button
                     onClick={signInWithGoogle}
-                    className="w-full text-center border border-gray-200 text-gray-800 text-sm font-semibold py-2 rounded-full"
+                    className="w-full text-center bg-gdg-blue text-white text-sm font-bold py-2.5 rounded-full shadow-md shadow-blue-200"
                   >
                     Sign In with Google
                   </button>

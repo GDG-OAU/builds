@@ -39,10 +39,10 @@ export const AdminPage: React.FC = () => {
           </div>
           <div className="space-y-1">
             <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">Admin Access Only</h2>
-            <p className="text-sm text-gray-500 leading-relaxed">
+            <p className="text-sm text-gray-500 leading-relaxed font-medium">
               This console is restricted to authorized organizers.
               {user && (
-                <span className="block font-mono text-xs text-gray-400 mt-2 font-semibold">
+                <span className="block font-mono text-xs text-gray-400 mt-2 font-bold">
                   Signed in as: {user.email}
                 </span>
               )}
@@ -84,15 +84,15 @@ export const AdminPage: React.FC = () => {
           <div className="flex flex-wrap items-center gap-3">
             <button
               onClick={() => exportSubmissionsToCSV(projects)}
-              className="flex items-center gap-2 bg-white border border-gray-300 hover:border-gray-400 text-gray-700 px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold shadow-xs hover:shadow-md transition-all"
+              className="flex items-center gap-2 bg-gdg-blue hover:bg-gdg-blue-hover text-white px-6 py-2.5 rounded-full text-xs sm:text-sm font-extrabold shadow-md shadow-blue-200 transition-all hover:scale-105"
             >
-              <Download className="w-4 h-4 text-gdg-green" />
+              <Download className="w-4 h-4 text-white" />
               <span>Export Submissions (CSV)</span>
             </button>
 
             <button
               onClick={() => toggleVotingClosed(!votingClosed)}
-              className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-xs sm:text-sm font-bold shadow-md transition-all ${
+              className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-xs sm:text-sm font-extrabold shadow-md transition-all hover:scale-105 ${
                 votingClosed
                   ? 'bg-gdg-green hover:bg-gdg-green-hover text-white shadow-green-200'
                   : 'bg-gdg-red hover:bg-gdg-red-hover text-white shadow-red-200'
@@ -278,7 +278,7 @@ export const AdminPage: React.FC = () => {
 
                     <button
                       onClick={() => handleCommunitySave(comm.name)}
-                      className="w-full py-2 bg-black hover:bg-gray-800 text-white text-xs font-bold rounded-xl transition-colors shadow-2xs"
+                      className="w-full py-2.5 bg-gdg-green hover:bg-gdg-green-hover text-white text-xs font-extrabold rounded-xl transition-all shadow-md shadow-green-200 hover:scale-102"
                     >
                       Save Track Settings
                     </button>

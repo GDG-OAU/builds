@@ -174,35 +174,35 @@ export const SubmitPage: React.FC = () => {
             <Rocket className="w-8 h-8" />
           </div>
           <div>
-            <span className="text-xs font-bold uppercase tracking-widest text-gdg-green bg-gdg-green-light px-3 py-1 rounded-full border border-green-200">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-gdg-green bg-gdg-green-light px-3.5 py-1 rounded-full border border-green-200">
               Builder Jam 2026
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight mt-3">
               Sign In to Submit
             </h2>
-            <p className="text-sm text-gray-500 mt-2 leading-relaxed">
+            <p className="text-sm text-gray-500 mt-2 leading-relaxed font-medium">
               Submissions are linked to your builder profile and earn points toward your community track’s leaderboard rank.
             </p>
           </div>
           <button
             onClick={signInWithGoogle}
-            className="w-full inline-flex items-center justify-center space-x-3 bg-white border border-gray-300 hover:border-gray-400 text-gray-800 px-6 py-3.5 rounded-full text-sm font-bold shadow-md hover:shadow-lg transition-all hover:scale-102"
+            className="w-full inline-flex items-center justify-center space-x-3 bg-gdg-blue hover:bg-gdg-blue-hover text-white px-6 py-3.5 rounded-full text-sm font-extrabold shadow-lg shadow-blue-200 transition-all hover:scale-105"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path
-                fill="#4285F4"
+                fill="#ffffff"
                 d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"
               />
               <path
-                fill="#34A853"
+                fill="#ffffff"
                 d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"
               />
               <path
-                fill="#FBBC05"
+                fill="#ffffff"
                 d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z"
               />
               <path
-                fill="#EA4335"
+                fill="#ffffff"
                 d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.93 6.72-4.93z"
               />
             </svg>
@@ -221,7 +221,7 @@ export const SubmitPage: React.FC = () => {
         
         {/* Form Title & Builder Info */}
         <div className="border-b border-gray-100 pb-5">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gdg-green-light border border-green-200 text-gdg-green text-xs font-bold uppercase tracking-wider mb-2">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gdg-green-light border border-green-200 text-gdg-green text-xs font-extrabold uppercase tracking-wider mb-2">
             <Sparkles className="w-3.5 h-3.5" />
             <span>GDG on Campus OAU</span>
           </div>
@@ -260,7 +260,7 @@ export const SubmitPage: React.FC = () => {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g., CampusPulse OAU or SmartStudy AI"
-              className="w-full px-4 py-3 rounded-2xl bg-gray-50/80 border border-gray-200 focus:bg-white focus:border-gdg-green focus:ring-2 focus:ring-gdg-green/20 text-sm font-medium outline-hidden transition-all"
+              className="w-full px-4 py-3 rounded-2xl bg-emerald-50/20 border border-gray-200 focus:bg-white focus:border-gdg-green focus:ring-2 focus:ring-gdg-green/20 text-sm font-medium outline-hidden transition-all"
             />
           </div>
 
@@ -275,7 +275,7 @@ export const SubmitPage: React.FC = () => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Explain what it does and the campus or real-world problem it solves..."
-              className="w-full px-4 py-3 rounded-2xl bg-gray-50/80 border border-gray-200 focus:bg-white focus:border-gdg-green focus:ring-2 focus:ring-gdg-green/20 text-sm font-medium outline-hidden resize-none transition-all"
+              className="w-full px-4 py-3 rounded-2xl bg-emerald-50/20 border border-gray-200 focus:bg-white focus:border-gdg-green focus:ring-2 focus:ring-gdg-green/20 text-sm font-medium outline-hidden resize-none transition-all"
             />
           </div>
 
@@ -291,7 +291,7 @@ export const SubmitPage: React.FC = () => {
                 value={githubUrl}
                 onChange={(e) => setGithubUrl(e.target.value)}
                 placeholder="https://github.com/username/project"
-                className="w-full px-4 py-3 rounded-2xl bg-gray-50/80 border border-gray-200 focus:bg-white focus:border-gdg-green focus:ring-2 focus:ring-gdg-green/20 text-sm font-medium outline-hidden transition-all"
+                className="w-full px-4 py-3 rounded-2xl bg-emerald-50/20 border border-gray-200 focus:bg-white focus:border-gdg-green focus:ring-2 focus:ring-gdg-green/20 text-sm font-medium outline-hidden transition-all"
               />
               <p className="text-[11px] text-gray-400 mt-1">Must be a valid github.com repository link</p>
             </div>
@@ -305,7 +305,7 @@ export const SubmitPage: React.FC = () => {
                 value={demoUrl}
                 onChange={(e) => setDemoUrl(e.target.value)}
                 placeholder="https://your-demo.web.app"
-                className="w-full px-4 py-3 rounded-2xl bg-gray-50/80 border border-gray-200 focus:bg-white focus:border-gdg-green focus:ring-2 focus:ring-gdg-green/20 text-sm font-medium outline-hidden transition-all"
+                className="w-full px-4 py-3 rounded-2xl bg-emerald-50/20 border border-gray-200 focus:bg-white focus:border-gdg-green focus:ring-2 focus:ring-gdg-green/20 text-sm font-medium outline-hidden transition-all"
               />
               <p className="text-[11px] text-gdg-green font-bold mt-1">⭐ Adds 50% to your completeness score!</p>
             </div>
@@ -320,7 +320,7 @@ export const SubmitPage: React.FC = () => {
               <select
                 value={community}
                 onChange={(e) => setCommunity(e.target.value as CommunityName)}
-                className="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-gray-50/80 text-sm font-bold text-gray-800 focus:bg-white focus:border-gdg-green focus:ring-2 focus:ring-gdg-green/20 outline-hidden transition-all"
+                className="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-gray-50 text-sm font-bold text-gray-800 focus:bg-white focus:border-gdg-green focus:ring-2 focus:ring-gdg-green/20 outline-hidden transition-all"
               >
                 {COMMUNITIES.map((c) => (
                   <option key={c} value={c}>{c}</option>
@@ -337,13 +337,13 @@ export const SubmitPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Authentic Google Tools Multi-Select (Colorful Pills) */}
+          {/* Authentic Google Tools Multi-Select (SOLID VIBRANT COLOR WHEN ACTIVE, PASTEL WHEN INACTIVE) */}
           <div>
             <div className="flex items-center justify-between mb-2">
               <label className="block text-xs font-extrabold uppercase tracking-wider text-gray-700">
                 Google Tools Used (Multi-select) <span className="text-gdg-red">*</span>
               </label>
-              <span className="text-xs font-bold text-gray-500">
+              <span className="text-xs font-bold text-gray-600">
                 {selectedTools.length} selected {selectedTools.length >= 2 ? '· 2+ boosts score ✓' : '· pick at least 1'}
               </span>
             </div>
@@ -353,7 +353,8 @@ export const SubmitPage: React.FC = () => {
                 const active = selectedTools.includes(tool);
                 const toolTheme = TOOL_THEMES[tool] || {
                   label: tool,
-                  pillClass: 'bg-gray-100 text-gray-700 border-gray-200',
+                  pillClass: 'bg-gray-100 text-gray-700 hover:bg-gray-200',
+                  activeClass: 'bg-gray-800 text-white shadow-md',
                   dotClass: 'bg-gray-400',
                 };
 
@@ -362,10 +363,10 @@ export const SubmitPage: React.FC = () => {
                     type="button"
                     key={tool}
                     onClick={() => toggleTool(tool)}
-                    className={`flex items-center justify-between px-3.5 py-2.5 rounded-2xl text-xs font-bold border transition-all text-left ${
+                    className={`flex items-center justify-between px-3.5 py-2.5 rounded-2xl text-xs font-extrabold transition-all text-left ${
                       active
-                        ? 'bg-black text-white border-black shadow-md shadow-gray-200 scale-102'
-                        : `${toolTheme.pillClass} hover:scale-101 hover:shadow-xs`
+                        ? `${toolTheme.activeClass} scale-102`
+                        : `${toolTheme.pillClass} hover:scale-101`
                     }`}
                   >
                     <span className="flex items-center gap-1.5 truncate">
@@ -374,14 +375,14 @@ export const SubmitPage: React.FC = () => {
                       />
                       <span className="truncate">{tool}</span>
                     </span>
-                    {active && <CheckCircle2 className="w-3.5 h-3.5 shrink-0 ml-1 text-emerald-400" />}
+                    {active && <CheckCircle2 className="w-3.5 h-3.5 shrink-0 ml-1 text-white" />}
                   </button>
                 );
               })}
             </div>
           </div>
 
-          {/* Project Screenshot Mode */}
+          {/* Project Screenshot Mode (SOLID BUTTONS) */}
           <div>
             <label className="block text-xs font-extrabold uppercase tracking-wider text-gray-700 mb-2">
               Project Screenshot <span className="text-gdg-red">*</span>
@@ -390,10 +391,10 @@ export const SubmitPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setScreenshotMode('upload')}
-                className={`px-4 py-2 text-xs font-bold rounded-full transition-all ${
+                className={`px-5 py-2 text-xs font-extrabold rounded-full transition-all ${
                   screenshotMode === 'upload'
-                    ? 'bg-black text-white shadow-md'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    ? 'bg-gdg-green text-white shadow-md shadow-green-200'
+                    : 'bg-emerald-100 text-emerald-950 hover:bg-emerald-200'
                 }`}
               >
                 Upload Image File
@@ -401,10 +402,10 @@ export const SubmitPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setScreenshotMode('url')}
-                className={`px-4 py-2 text-xs font-bold rounded-full transition-all ${
+                className={`px-5 py-2 text-xs font-extrabold rounded-full transition-all ${
                   screenshotMode === 'url'
-                    ? 'bg-black text-white shadow-md'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    ? 'bg-gdg-green text-white shadow-md shadow-green-200'
+                    : 'bg-emerald-100 text-emerald-950 hover:bg-emerald-200'
                 }`}
               >
                 Paste Image Link
@@ -412,7 +413,7 @@ export const SubmitPage: React.FC = () => {
             </div>
 
             {screenshotMode === 'upload' ? (
-              <div className="border-2 border-dashed border-gray-300 rounded-3xl p-6 text-center hover:border-gdg-green hover:bg-gdg-green-light/20 transition-colors">
+              <div className="border-2 border-dashed border-emerald-300 rounded-3xl p-6 text-center hover:border-gdg-green hover:bg-gdg-green-light/20 transition-colors">
                 {filePreview ? (
                   <div className="space-y-3">
                     <img
@@ -473,19 +474,19 @@ export const SubmitPage: React.FC = () => {
             )}
           </div>
 
-          {/* Form Actions */}
+          {/* Form Actions - SOLID VIBRANT BUTTONS */}
           <div className="pt-4 border-t border-gray-100 flex items-center justify-end space-x-3">
             <button
               type="button"
               onClick={() => navigate('/gallery')}
-              className="px-6 py-3 rounded-full border border-gray-300 text-gray-700 text-xs sm:text-sm font-bold hover:bg-gray-50 transition-all"
+              className="px-6 py-3 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-800 text-xs sm:text-sm font-extrabold transition-all"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={uploading}
-              className="flex items-center space-x-2 bg-gdg-green hover:bg-gdg-green-hover text-white px-8 py-3.5 rounded-full text-xs sm:text-sm font-bold shadow-lg shadow-green-200 transition-all hover:scale-102 disabled:opacity-50"
+              className="flex items-center space-x-2 bg-gdg-green hover:bg-gdg-green-hover text-white px-8 py-3.5 rounded-full text-xs sm:text-sm font-extrabold shadow-lg shadow-green-200 transition-all hover:scale-102 disabled:opacity-50"
             >
               {uploading && <Loader2 className="w-4 h-4 animate-spin" />}
               <span>{uploading ? 'Publishing...' : 'Publish Submission'}</span>

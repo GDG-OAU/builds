@@ -94,7 +94,7 @@ export const GalleryPage: React.FC = () => {
         {/* Gallery Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 pb-6 border-b border-gray-100">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gdg-green-light border border-green-200 text-gdg-green text-xs font-bold uppercase tracking-wider mb-2">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-gdg-green-light border border-green-200 text-gdg-green text-xs font-extrabold uppercase tracking-wider mb-2">
               <Sparkles className="w-3.5 h-3.5" />
               <span>GDG on Campus OAU</span>
             </div>
@@ -108,7 +108,7 @@ export const GalleryPage: React.FC = () => {
 
           <Link
             to="/submit"
-            className="inline-flex items-center gap-2 bg-gdg-green hover:bg-gdg-green-hover text-white text-xs sm:text-sm font-bold px-6 py-3 rounded-full shadow-md shadow-green-200 transition-all self-start sm:self-auto hover:scale-105"
+            className="inline-flex items-center gap-2 bg-gdg-green hover:bg-gdg-green-hover text-white text-xs sm:text-sm font-extrabold px-6 py-3 rounded-full shadow-md shadow-green-200 transition-all self-start sm:self-auto hover:scale-105 active:scale-95"
           >
             <Plus className="w-4 h-4" />
             Submit Your Project
@@ -124,7 +124,7 @@ export const GalleryPage: React.FC = () => {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search by project name, description, or builder..."
-              className="w-full pl-10 pr-10 py-3 bg-gray-50/80 border border-gray-200 rounded-2xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:bg-white focus:border-gdg-green focus:ring-2 focus:ring-gdg-green/20 transition-all shadow-2xs"
+              className="w-full pl-10 pr-10 py-3 bg-emerald-50/30 border border-emerald-200 rounded-2xl text-sm font-medium text-gray-900 placeholder:text-gray-400 focus:outline-none focus:bg-white focus:border-gdg-green focus:ring-2 focus:ring-gdg-green/20 transition-all shadow-2xs"
             />
             {query && (
               <button
@@ -140,7 +140,7 @@ export const GalleryPage: React.FC = () => {
             <select
               value={tool}
               onChange={(e) => setTool(e.target.value)}
-              className="px-4 py-3 bg-gray-50/80 border border-gray-200 rounded-2xl text-sm font-semibold text-gray-700 focus:outline-none focus:bg-white focus:border-gdg-green transition-all shadow-2xs"
+              className="px-4 py-3 bg-blue-50/40 border border-blue-200 rounded-2xl text-sm font-bold text-gray-800 focus:outline-none focus:bg-white focus:border-gdg-blue transition-all shadow-2xs"
             >
               <option value="ALL">All Google Tools ({ALL_TOOLS.length})</option>
               {ALL_TOOLS.map((t) => (
@@ -153,7 +153,7 @@ export const GalleryPage: React.FC = () => {
             {(query || community !== 'ALL' || tool !== 'ALL') && (
               <button
                 onClick={handleResetFilters}
-                className="text-xs font-bold text-gdg-red hover:text-gdg-red-hover px-3.5 py-3 hover:bg-gdg-red-light rounded-2xl transition-colors whitespace-nowrap"
+                className="text-xs font-extrabold text-white bg-gdg-red hover:bg-gdg-red-hover px-4 py-3 rounded-2xl transition-all shadow-sm whitespace-nowrap"
               >
                 Reset Filters
               </button>
@@ -161,14 +161,14 @@ export const GalleryPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Dynamic Colorful Community Filter Chips */}
+        {/* Dynamic Colorful Community Filter Chips (ALL SOLID FILLED COLORS - NO WHITE OUTLINES) */}
         <div className="flex items-center gap-2 overflow-x-auto pb-4 pt-1 no-scrollbar mb-8">
           <button
             onClick={() => handleSelectCommunity('ALL')}
-            className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
+            className={`px-5 py-2.5 rounded-full text-xs font-extrabold whitespace-nowrap transition-all ${
               community === 'ALL'
-                ? 'bg-black text-white shadow-md'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-gradient-to-r from-gdg-blue to-gdg-green text-white shadow-md shadow-green-200 scale-105'
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
             }`}
           >
             All Tracks ({projects.length})
@@ -182,9 +182,9 @@ export const GalleryPage: React.FC = () => {
               <button
                 key={c}
                 onClick={() => handleSelectCommunity(c)}
-                className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all border ${
+                className={`px-5 py-2.5 rounded-full text-xs font-extrabold whitespace-nowrap transition-all ${
                   active
-                    ? theme.chipActiveClass
+                    ? `${theme.chipActiveClass} scale-105`
                     : theme.chipClass
                 }`}
               >
@@ -195,8 +195,8 @@ export const GalleryPage: React.FC = () => {
         </div>
 
         {/* Results Info */}
-        <div className="flex items-center justify-between text-xs font-semibold text-gray-500 mb-6">
-          <span className="bg-gray-100 px-3 py-1 rounded-full">
+        <div className="flex items-center justify-between text-xs font-bold text-gray-500 mb-6">
+          <span className="bg-emerald-50 text-emerald-800 border border-emerald-200 px-3.5 py-1 rounded-full">
             Showing {filtered.length} {filtered.length === 1 ? 'project' : 'projects'}
           </span>
           <span className="text-gray-400">Sorted by newest</span>
@@ -214,15 +214,15 @@ export const GalleryPage: React.FC = () => {
             ))}
           </div>
         ) : (
-          <div className="text-center py-20 bg-gradient-to-br from-gray-50 to-emerald-50/20 rounded-3xl border border-dashed border-gray-300 p-8">
-            <Filter className="w-12 h-12 text-gdg-green mx-auto mb-3 opacity-60" />
+          <div className="text-center py-20 bg-gradient-to-br from-emerald-50/40 to-teal-50/30 rounded-3xl border border-dashed border-emerald-300 p-8">
+            <Filter className="w-12 h-12 text-gdg-green mx-auto mb-3 opacity-70" />
             <h3 className="text-lg font-extrabold text-gray-900 mb-1">No builds found</h3>
-            <p className="text-xs sm:text-sm text-gray-500 max-w-sm mx-auto mb-5">
+            <p className="text-xs sm:text-sm text-gray-500 max-w-sm mx-auto mb-5 font-medium">
               Try adjusting your search query, or clear your community and Google tool filters.
             </p>
             <button
               onClick={handleResetFilters}
-              className="px-6 py-2.5 bg-black text-white text-xs font-bold rounded-full hover:bg-gray-800 transition-colors shadow-sm"
+              className="px-6 py-2.5 bg-gdg-green text-white text-xs font-bold rounded-full hover:bg-gdg-green-hover transition-colors shadow-md shadow-green-200"
             >
               Reset All Filters
             </button>
