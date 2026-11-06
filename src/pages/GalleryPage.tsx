@@ -110,7 +110,8 @@ export const GalleryPage: React.FC = () => {
 
           <Link
             to="/submit"
-            className="inline-flex items-center gap-2 bg-gdg-green hover:bg-gdg-green-hover text-white text-xs sm:text-sm font-extrabold px-6 py-3 rounded-full shadow-md shadow-green-200 transition-all self-start sm:self-auto hover:scale-105 active:scale-95"
+            style={{ backgroundColor: '#188038', color: '#FFFFFF' }}
+            className="inline-flex items-center gap-2 bg-gdg-green hover:bg-emerald-700 text-white text-xs sm:text-sm font-extrabold px-6 py-3 rounded-full shadow-md shadow-green-200 transition-all self-start sm:self-auto hover:scale-105 active:scale-95"
           >
             <Plus className="w-4 h-4" />
             Submit Your Project
@@ -155,7 +156,8 @@ export const GalleryPage: React.FC = () => {
             {(query || community !== 'ALL' || tool !== 'ALL') && (
               <button
                 onClick={handleResetFilters}
-                className="text-xs font-extrabold text-white bg-gdg-red hover:bg-gdg-red-hover px-4 py-3 rounded-2xl transition-all shadow-sm whitespace-nowrap"
+                style={{ backgroundColor: '#EA4335', color: '#FFFFFF' }}
+                className="text-xs font-extrabold text-white bg-gdg-red hover:bg-red-700 px-4 py-3 rounded-2xl transition-all shadow-sm whitespace-nowrap cursor-pointer"
               >
                 Reset Filters
               </button>

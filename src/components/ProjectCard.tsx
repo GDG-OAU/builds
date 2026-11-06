@@ -17,16 +17,16 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenDetails
   const totalVotes = getVotesCountForProject(project.id, votes);
   const hasVoted = Boolean(
     user &&
-      votes.some(
-        (v) =>
-          v.projectId === project.id &&
-          (v.voterUid === user.uid || v.voterEmail.toLowerCase() === user.email.toLowerCase())
-      )
+    votes.some(
+      (v) =>
+        v.projectId === project.id &&
+        (v.voterUid === user.uid || v.voterEmail.toLowerCase() === user.email.toLowerCase())
+    )
   );
   const isOwn = Boolean(
     user &&
-      (project.submitterUid === user.uid ||
-        project.submitterEmail.toLowerCase() === user.email.toLowerCase())
+    (project.submitterUid === user.uid ||
+      project.submitterEmail.toLowerCase() === user.email.toLowerCase())
   );
 
   const theme = COMMUNITY_THEMES[project.community] || {
@@ -83,7 +83,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenDetails
 
       {/* Card Body */}
       <div className="flex flex-col flex-1 p-5 sm:p-6">
-        
+
         {/* Track Badge using semantic Tailwind theme */}
         <div className="flex items-center gap-2 mb-3">
           <span
@@ -152,13 +152,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenDetails
             <button
               onClick={handleVote}
               disabled={isOwn || hasVoted || (votingClosed && !isAdmin)}
-              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition-all shadow-xs ${
-                hasVoted
+              style={!hasVoted && !isOwn && !votingClosed ? { backgroundColor: '#188038', color: '#FFFFFF' } : undefined}
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition-all shadow-xs ${hasVoted
                   ? 'bg-gdg-green-light text-gdg-green border border-green-300'
                   : isOwn || votingClosed
-                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200'
-                  : 'bg-gdg-green hover:bg-gdg-green-hover text-white active:scale-95 shadow-green-200 hover:shadow-md'
-              }`}
+                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200'
+                    : 'bg-gdg-green hover:bg-emerald-700 text-white active:scale-95 shadow-green-200 hover:shadow-md'
+                }`}
             >
               {hasVoted ? (
                 <>

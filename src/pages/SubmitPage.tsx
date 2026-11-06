@@ -172,8 +172,11 @@ export const SubmitPage: React.FC = () => {
     return (
       <div className="max-w-md mx-auto px-4 py-20 text-center">
         <div className="bg-gradient-to-b from-white to-emerald-50/30 rounded-3xl border border-gray-200 p-8 sm:p-12 shadow-xl space-y-6">
-          <div className="w-16 h-16 rounded-3xl bg-gradient-to-tr from-gdg-green to-teal-600 text-white flex items-center justify-center mx-auto shadow-lg shadow-emerald-200">
-            <Rocket className="w-8 h-8" />
+          <div
+            style={{ backgroundColor: '#188038' }}
+            className="w-16 h-16 rounded-3xl bg-gdg-green text-white flex items-center justify-center mx-auto shadow-lg shadow-emerald-200"
+          >
+            <Rocket className="w-8 h-8 text-white" />
           </div>
           <div>
             <span className="text-xs font-extrabold uppercase tracking-widest text-gdg-green bg-gdg-green-light px-3.5 py-1 rounded-full border border-green-200">
@@ -188,7 +191,8 @@ export const SubmitPage: React.FC = () => {
           </div>
           <button
             onClick={signInWithGoogle}
-            className="w-full inline-flex items-center justify-center space-x-3 bg-gdg-blue hover:bg-gdg-blue-hover text-white px-6 py-3.5 rounded-full text-sm font-extrabold shadow-lg shadow-blue-200 transition-all hover:scale-105"
+            style={{ backgroundColor: '#4285F4' }}
+            className="w-full inline-flex items-center justify-center space-x-3 bg-gdg-blue hover:bg-gdg-blue-hover text-white px-6 py-3.5 rounded-full text-sm font-extrabold shadow-lg shadow-blue-200 transition-all hover:scale-105 cursor-pointer"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path
@@ -208,7 +212,7 @@ export const SubmitPage: React.FC = () => {
                 d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.93 6.72-4.93z"
               />
             </svg>
-            <span>Continue with Google</span>
+            <span className="text-white font-extrabold">Continue with Google</span>
           </button>
         </div>
       </div>
@@ -488,7 +492,8 @@ export const SubmitPage: React.FC = () => {
             <button
               type="submit"
               disabled={uploading}
-              className="flex items-center space-x-2 bg-gdg-green hover:bg-gdg-green-hover text-white px-8 py-3.5 rounded-full text-xs sm:text-sm font-extrabold shadow-lg shadow-green-200 transition-all hover:scale-102 disabled:opacity-50"
+              style={{ backgroundColor: '#188038' }}
+              className="flex items-center space-x-2 bg-gdg-green hover:bg-emerald-700 text-white px-8 py-3.5 rounded-full text-xs sm:text-sm font-extrabold shadow-lg shadow-green-200 transition-all hover:scale-102 disabled:opacity-50 cursor-pointer"
             >
               {uploading && <Loader2 className="w-4 h-4 animate-spin" />}
               <span>{uploading ? 'Publishing...' : 'Publish Submission'}</span>

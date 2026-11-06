@@ -68,3 +68,55 @@
   background: #188038;
   color: white;
 }
+
+/* Explicit high-specificity utility overrides for GDG Brand colors */
+@layer utilities {
+  .bg-gdg-green {
+    background-color: #188038 !important;
+  }
+  .bg-gdg-green-hover:hover {
+    background-color: #137333 !important;
+  }
+  .bg-gdg-green-light {
+    background-color: #E6F4EA !important;
+  }
+  .bg-gdg-blue {
+    background-color: #4285F4 !important;
+  }
+  .bg-gdg-blue-hover:hover {
+    background-color: #3367D6 !important;
+  }
+  .bg-gdg-blue-light {
+    background-color: #E8F0FE !important;
+  }
+  .bg-gdg-red {
+    background-color: #EA4335 !important;
+  }
+  .bg-gdg-red-hover:hover {
+    background-color: #D93025 !important;
+  }
+  .bg-gdg-red-light {
+    background-color: #FCE8E6 !important;
+  }
+  .bg-gdg-yellow {
+    background-color: #FBBC04 !important;
+  }
+  .bg-gdg-yellow-hover:hover {
+    background-color: #F29900 !important;
+  }
+  .bg-gdg-yellow-light {
+    background-color: #FEF7E0 !important;
+  }
+  .text-gdg-blue {
+    color: #4285F4 !important;
+  }
+  .text-gdg-green {
+    color: #188038 !important;
+  }
+  .text-gdg-red {
+    color: #EA4335 !important;
+  }
+  .text-gdg-yellow {
+    color: #B06000 !important;
+  }
+}

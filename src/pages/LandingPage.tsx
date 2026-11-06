@@ -192,12 +192,14 @@ export const LandingPage: React.FC = () => {
             </Link>
             <Link
               to="/submit"
-              className="bg-gdg-green hover:bg-emerald-600 text-white px-8 py-3.5 rounded-full text-sm font-bold shadow-md shadow-green-600/20 hover:-translate-y-0.5 active:translate-y-0 transition-all hover:scale-105"
+              style={{ backgroundColor: '#188038' }}
+              className="bg-gdg-green hover:bg-emerald-700 text-white px-8 py-3.5 rounded-full text-sm font-bold shadow-md shadow-green-600/30 hover:-translate-y-0.5 active:translate-y-0 transition-all hover:scale-105"
             >
               Submit Project
             </Link>
             <Link
               to="/leaderboard"
+              style={{ backgroundColor: '#FEF3C7', color: '#78350F' }}
               className="bg-amber-100 hover:bg-amber-200 text-amber-950 px-7 py-3.5 rounded-full text-sm font-bold transition-all hover:scale-105 border border-amber-200/80 shadow-xs"
             >
               Leaderboards
@@ -355,13 +357,15 @@ export const LandingPage: React.FC = () => {
             <div className="pt-3 flex flex-wrap justify-center gap-3">
               <Link
                 to="/submit"
-                className="bg-gdg-green hover:bg-gdg-green-hover text-white font-extrabold px-8 py-3.5 rounded-full text-sm shadow-lg shadow-green-900/50 transition-all hover:scale-105"
+                style={{ backgroundColor: '#188038', color: '#FFFFFF' }}
+                className="bg-gdg-green hover:bg-emerald-700 text-white font-extrabold px-8 py-3.5 rounded-full text-sm shadow-lg shadow-green-900/50 transition-all hover:scale-105"
               >
                 Submit Project Now
               </Link>
               <Link
                 to="/leaderboard"
-                className="bg-gdg-yellow hover:bg-gdg-yellow-hover text-gray-900 font-extrabold px-8 py-3.5 rounded-full text-sm shadow-lg shadow-yellow-900/50 transition-all hover:scale-105"
+                style={{ backgroundColor: '#FBBC04', color: '#111827' }}
+                className="bg-gdg-yellow hover:bg-yellow-400 text-gray-900 font-extrabold px-8 py-3.5 rounded-full text-sm shadow-lg shadow-yellow-900/50 transition-all hover:scale-105"
               >
                 View Standings
               </Link>

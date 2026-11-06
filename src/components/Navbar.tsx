@@ -52,6 +52,7 @@ export const Navbar: React.FC = () => {
                 <Link
                   key={item.path}
                   to={item.path}
+                  style={active ? { color: '#4285F4' } : undefined}
                   className={`text-sm font-bold transition-colors ${
                     active ? 'text-gdg-blue font-extrabold' : 'text-gray-700 hover:text-gdg-blue'
                   }`}
@@ -142,19 +143,23 @@ export const Navbar: React.FC = () => {
             className="md:hidden border-t border-gray-100 bg-white shadow-lg overflow-hidden"
           >
             <div className="px-4 py-4 space-y-2">
-              {navLinks.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`block px-3 py-2 rounded-lg text-sm font-bold ${
-                    location.pathname === item.path
-                      ? 'bg-gdg-blue-light text-gdg-blue'
-                      : 'text-gray-700 hover:text-gdg-blue hover:bg-gray-50'
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {navLinks.map((item) => {
+                const active = location.pathname === item.path;
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    style={active ? { color: '#4285F4', backgroundColor: '#E8F0FE' } : undefined}
+                    className={`block px-3 py-2 rounded-lg text-sm font-bold ${
+                      active
+                        ? 'bg-gdg-blue-light text-gdg-blue'
+                        : 'text-gray-700 hover:text-gdg-blue hover:bg-gray-50'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
 
               <Link
                 to="/submit"

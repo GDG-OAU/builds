@@ -132,12 +132,13 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
               <button
                 onClick={handleVote}
                 disabled={isOwn || hasVoted || (votingClosed && !isAdmin)}
+                style={!hasVoted && !isOwn && !votingClosed ? { backgroundColor: '#188038', color: '#FFFFFF' } : undefined}
                 className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all shadow-md ${
                   hasVoted
                     ? 'bg-gdg-green-light text-gdg-green border border-green-300 shadow-emerald-100'
                     : isOwn || votingClosed
                     ? 'bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200'
-                    : 'bg-gdg-green hover:bg-gdg-green-hover text-white active:scale-95 shadow-green-200 hover:shadow-lg'
+                    : 'bg-gdg-green hover:bg-emerald-700 text-white active:scale-95 shadow-green-200 hover:shadow-lg'
                 }`}
               >
                 {hasVoted ? (
@@ -205,7 +206,8 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
                     href={project.demoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-gdg-blue hover:bg-gdg-blue-hover text-white text-xs font-bold px-5 py-2.5 rounded-full transition-all shadow-md shadow-blue-200 hover:scale-102"
+                    style={{ backgroundColor: '#4285F4', color: '#FFFFFF' }}
+                    className="inline-flex items-center gap-2 bg-gdg-blue hover:bg-blue-600 text-white text-xs font-bold px-5 py-2.5 rounded-full transition-all shadow-md shadow-blue-200 hover:scale-102"
                   >
                     <span>Open Live Demo</span>
                     <ExternalLink className="w-3.5 h-3.5" />
