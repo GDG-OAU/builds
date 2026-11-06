@@ -9,14 +9,17 @@ import { COMMUNITY_THEMES } from '../utils/theme';
 
 const ALL_COMMUNITIES: CommunityName[] = [
   'Web Development',
-  'Game Development',
-  'Research',
+  'Cybersecurity',
+  'Quantitative Finance',
+  'Blockchain',
   'Product Management',
-  'Mobile App Development',
+  'Quantum Computing',
+  'Cloud Computing',
+  'Researchers',
   'Data Science / Machine Learning',
   'Design',
-  'Quantum Computing',
-  'Cybersecurity',
+  'Mobile App Development',
+  'Game Development',
 ];
 
 const ALL_TOOLS: GoogleTool[] = [
@@ -161,14 +164,15 @@ export const GalleryPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Dynamic Colorful Community Filter Chips (ALL SOLID FILLED COLORS - NO WHITE OUTLINES) */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 pt-1 no-scrollbar mb-8">
+        {/* Community Filter Chips (WRAPPED CLEANLY - ZERO HORIZONTAL SCROLLBAR) */}
+        <div className="flex flex-wrap items-center gap-2 mb-8">
           <button
             onClick={() => handleSelectCommunity('ALL')}
-            className={`px-5 py-2.5 rounded-full text-xs font-extrabold whitespace-nowrap transition-all ${
+            style={community === 'ALL' ? { backgroundColor: '#111827' } : { backgroundColor: '#F3F4F6' }}
+            className={`px-5 py-2 rounded-full text-xs font-bold transition-all ${
               community === 'ALL'
-                ? 'bg-gdg-green text-white shadow-md shadow-green-300 scale-105'
-                : 'bg-emerald-100 text-emerald-900 hover:bg-emerald-200'
+                ? 'bg-gray-900 text-white shadow-sm'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
             All Tracks ({projects.length})
@@ -177,14 +181,17 @@ export const GalleryPage: React.FC = () => {
           {ALL_COMMUNITIES.map((c) => {
             const count = projects.filter((p) => p.community === c).length;
             const active = community === c;
-            const theme = COMMUNITY_THEMES[c];
+            const theme = COMMUNITY_THEMES[c] || {
+              chipClass: 'bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold',
+              chipActiveClass: 'bg-gray-900 text-white font-bold',
+            };
             return (
               <button
                 key={c}
                 onClick={() => handleSelectCommunity(c)}
-                className={`px-5 py-2.5 rounded-full text-xs font-extrabold whitespace-nowrap transition-all ${
+                className={`px-4 py-2 rounded-full text-xs font-bold transition-all ${
                   active
-                    ? `${theme.chipActiveClass} scale-105`
+                    ? `${theme.chipActiveClass} shadow-sm scale-102`
                     : theme.chipClass
                 }`}
               >

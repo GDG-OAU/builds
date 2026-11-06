@@ -7,59 +7,96 @@ export const INITIAL_COMMUNITIES: CommunityMeta[] = [
     color: '#4285F4',
     icon: 'Globe',
     eventDate: '2026-11-06',
-    attendeesCount: 120
-  },
-  {
-    name: 'Data Science / Machine Learning',
-    description: 'Intelligent models, predictive analytics, computer vision, and NLP.',
-    color: '#188038',
-    icon: 'Cpu',
-    eventDate: '2026-11-07',
-    attendeesCount: 95
-  },
-  {
-    name: 'Mobile App Development',
-    description: 'Native Android and cross-platform mobile apps for millions of users.',
-    color: '#FBBC04',
-    icon: 'Smartphone',
-    eventDate: '2026-11-08',
-    attendeesCount: 110
+    attendeesCount: 120,
+    joinUrl: 'https://gdgoau.com/page?community=web-development'
   },
   {
     name: 'Cybersecurity',
-    description: 'Defensive architecture, ethical hacking, and secure protocol design.',
+    description: 'Explore digital security, ethical hacking and the techniques used to protect systems.',
     color: '#EA4335',
-    icon: 'ShieldCheck'
+    icon: 'ShieldCheck',
+    joinUrl: 'https://gdgoau.com/page?community=cybersecurity'
   },
   {
-    name: 'Design',
-    description: 'UI/UX prototyping, design systems, and delightful digital experiences.',
-    color: '#FBBC04',
-    icon: 'Palette'
+    name: 'Quantitative Finance',
+    description: 'Explore the intersection of finance, mathematics, programming and financial modelling.',
+    color: '#EC4899',
+    icon: 'TrendingUp',
+    joinUrl: 'https://gdgoau.com/page?community=quantitative-finance'
   },
   {
-    name: 'Game Development',
-    description: 'Immersive interactive games, 2D/3D physics engines, and graphics.',
-    color: '#4285F4',
-    icon: 'Gamepad2'
+    name: 'Blockchain',
+    description: 'Discover decentralized technologies, smart contracts and the possibilities of Web3.',
+    color: '#F97316',
+    icon: 'Blocks',
+    joinUrl: 'https://gdgoau.com/page?community=blockchain'
   },
   {
     name: 'Product Management',
-    description: 'User journeys, feature roadmaps, metrics, and go-to-market strategies.',
-    color: '#188038',
-    icon: 'Briefcase'
-  },
-  {
-    name: 'Research',
-    description: 'Applied computing, foundational AI theories, and scientific publications.',
-    color: '#EA4335',
-    icon: 'GraduationCap'
+    description: 'Learn how to identify problems, understand users and build products that solve real needs.',
+    color: '#10B981',
+    icon: 'Briefcase',
+    joinUrl: 'https://gdgoau.com/page?community=product-management'
   },
   {
     name: 'Quantum Computing',
-    description: 'Quantum algorithms, circuit simulation, and next-gen computing logic.',
-    color: '#4285F4',
-    icon: 'Atom'
+    description: 'Explore quantum mechanics, quantum algorithms and the future of computing.',
+    color: '#6366F1',
+    icon: 'Atom',
+    joinUrl: 'https://gdgoau.com/page?community=quantum-computing'
+  },
+  {
+    name: 'Cloud Computing',
+    description: 'Learn about cloud infrastructure, deployment, scalability and DevOps.',
+    color: '#0EA5E9',
+    icon: 'Cloud',
+    joinUrl: 'https://gdgoau.com/page?community=cloud-computing'
+  },
+  {
+    name: 'Researchers',
+    description: 'Connect with curious minds exploring research, innovation and new ideas.',
+    color: '#06B6D4',
+    icon: 'GraduationCap',
+    joinUrl: 'https://gdgoau.com/page?community=researchers'
+  },
+  {
+    name: 'Data Science / Machine Learning',
+    description: 'Explore artificial intelligence, machine learning and the science behind data.',
+    color: '#188038',
+    icon: 'Cpu',
+    eventDate: '2026-11-07',
+    attendeesCount: 95,
+    joinUrl: 'https://gdgoau.com/page?community=data-science-machine-learning'
+  },
+  {
+    name: 'Data Analysis',
+    description: 'Turn raw data into meaningful insights that support better decisions.',
+    color: '#14B8A6',
+    icon: 'BarChart2',
+    joinUrl: 'https://gdgoau.com/page?community=data-analysis'
+  },
+  {
+    name: 'Design',
+    description: 'Create meaningful visual experiences and learn to design with people in mind.',
+    color: '#F43F5E',
+    icon: 'Palette',
+    joinUrl: 'https://gdgoau.com/page?community=design'
+  },
+  {
+    name: 'Mobile App Development',
+    description: 'Turn ideas into mobile applications and build experiences for everyday users.',
+    color: '#F59E0B',
+    icon: 'Smartphone',
+    eventDate: '2026-11-08',
+    attendeesCount: 110,
+    joinUrl: 'https://gdgoau.com/page?community=mobile-app-development'
+  },
+  {
+    name: 'Game Development',
+    description: 'Explore game design, programming and the creation of interactive experiences.',
+    color: '#8B5CF6',
+    icon: 'Gamepad2',
+    joinUrl: 'https://gdgoau.com/page?community=game-development'
   }
 ];
 

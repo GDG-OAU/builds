@@ -63,7 +63,7 @@ export const Navbar: React.FC = () => {
                   key={item.path}
                   to={item.path}
                   className={`text-sm font-bold transition-colors ${
-                    active ? 'text-gdg-green font-extrabold' : 'text-gray-700 hover:text-gdg-green'
+                    active ? 'text-gdg-blue font-extrabold' : 'text-gray-700 hover:text-gdg-blue'
                   }`}
                 >
                   {item.label}
@@ -87,7 +87,8 @@ export const Navbar: React.FC = () => {
           <div className="hidden md:flex items-center gap-3">
             <Link
               to="/submit"
-              className="flex items-center gap-1.5 bg-black hover:bg-gray-800 text-white text-xs font-bold px-5 py-2.5 rounded-full shadow-sm transition-all hover:scale-105 active:scale-95"
+              style={{ backgroundColor: '#188038' }}
+              className="flex items-center gap-1.5 bg-gdg-green hover:bg-gdg-green-hover text-white text-xs font-bold px-5 py-2.5 rounded-full shadow-md shadow-green-200 transition-all hover:scale-105 active:scale-95"
             >
               <Plus className="w-3.5 h-3.5" />
               Submit Project
@@ -157,8 +158,8 @@ export const Navbar: React.FC = () => {
                   to={item.path}
                   className={`block px-3 py-2 rounded-lg text-sm font-bold ${
                     location.pathname === item.path
-                      ? 'bg-gdg-green-light text-gdg-green'
-                      : 'text-gray-700 hover:text-gdg-green hover:bg-gray-50'
+                      ? 'bg-gdg-blue-light text-gdg-blue'
+                      : 'text-gray-700 hover:text-gdg-blue hover:bg-gray-50'
                   }`}
                 >
                   {item.label}

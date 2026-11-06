@@ -2,10 +2,8 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useApp } from '../context/AppContext';
-import { ProjectCard } from '../components/ProjectCard';
-import { ProjectDetailModal } from '../components/ProjectDetailModal';
-import type { Project, CommunityName } from '../types';
-import { ArrowRight, Sparkles, Rocket, ArrowUpRight } from 'lucide-react';
+import type { CommunityName } from '../types';
+import { Rocket, ArrowUpRight, ExternalLink, Users } from 'lucide-react';
 import { COMMUNITY_THEMES, TOOL_THEMES } from '../utils/theme';
 
 interface FloatingPill {
@@ -47,6 +45,15 @@ const FLOATING_PILLS: FloatingPill[] = [
     colorHex: '#FFFFFF',
   },
   {
+    name: 'Quantitative Finance',
+    label: 'Quantitative Finance',
+    bgClass: 'bg-[#F472B6]',
+    textClass: 'text-gray-950 font-bold',
+    rotateClass: 'rotate-3',
+    shadowClass: 'shadow-md shadow-pink-100',
+    colorHex: '#F472B6',
+  },
+  {
     name: 'Game Development',
     label: 'Game Development',
     bgClass: 'bg-[#FDE047]',
@@ -56,8 +63,17 @@ const FLOATING_PILLS: FloatingPill[] = [
     colorHex: '#FDE047',
   },
   {
-    name: 'Web Development',
-    label: 'Cloud & Web',
+    name: 'Blockchain',
+    label: 'Blockchain',
+    bgClass: 'bg-[#FB923C]',
+    textClass: 'text-gray-950 font-bold',
+    rotateClass: '-rotate-3',
+    shadowClass: 'shadow-md shadow-orange-100',
+    colorHex: '#FB923C',
+  },
+  {
+    name: 'Cloud Computing',
+    label: 'Cloud Computing',
     bgClass: 'bg-white',
     textClass: 'text-gray-800 font-bold',
     rotateClass: 'rotate-1',
@@ -66,16 +82,16 @@ const FLOATING_PILLS: FloatingPill[] = [
   },
   {
     name: 'Design',
-    label: 'Design & UX',
-    bgClass: 'bg-[#F472B6]',
+    label: 'Design',
+    bgClass: 'bg-[#FB7185]',
     textClass: 'text-gray-950 font-bold',
     rotateClass: '-rotate-4',
-    shadowClass: 'shadow-md shadow-pink-100',
-    colorHex: '#F472B6',
+    shadowClass: 'shadow-md shadow-rose-100',
+    colorHex: '#FB7185',
   },
   {
-    name: 'Research',
-    label: 'Research & AI',
+    name: 'Researchers',
+    label: 'Researchers',
     bgClass: 'bg-[#C084FC]',
     textClass: 'text-gray-950 font-bold',
     rotateClass: 'rotate-3',
@@ -104,10 +120,7 @@ const FLOATING_PILLS: FloatingPill[] = [
 
 export const LandingPage: React.FC = () => {
   const { projects, communities } = useApp();
-  const [selectedProject, setSelectedProject] = React.useState<Project | null>(null);
   const navigate = useNavigate();
-
-  const recentProjects = [...projects].sort((a, b) => b.createdAt - a.createdAt).slice(0, 6);
 
   return (
     <div className="bg-white">
@@ -249,86 +262,71 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* ── RECENT PROJECTS SHOWCASE ── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 sm:pb-28">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
-          <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gdg-green-light border border-green-200 text-gdg-green text-xs font-extrabold uppercase tracking-wider mb-2">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Builder Jam Showcase</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
-              Featured Submissions
-            </h2>
-            <p className="text-sm text-gray-500 mt-1 max-w-xl font-medium">
-              Real projects built by OAU students using Gemini, Firebase, Android, BigQuery, and Colab.
-            </p>
-          </div>
-
-          <Link
-            to="/gallery"
-            className="inline-flex items-center gap-2 bg-gdg-green hover:bg-gdg-green-hover text-white text-xs font-bold px-5 py-2.5 rounded-full shadow-md shadow-green-200 transition-all group hover:scale-105"
-          >
-            <span>View all {projects.length} projects</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {recentProjects.map((p) => (
-            <ProjectCard
-              key={p.id}
-              project={p}
-              onOpenDetails={(project) => setSelectedProject(project)}
-            />
-          ))}
-        </div>
-      </section>
-
-      {/* ── TRACKS EXPLORER GRID ── */}
-      <section className="bg-gradient-to-b from-gray-50 to-white border-t border-gray-100 py-20">
+      {/* ── TRACKS EXPLORER GRID (12 OFFICIAL GDG OAU TRACKS) ── */}
+      <section className="bg-gradient-to-b from-gray-50/60 to-white border-t border-gray-100 py-20 sm:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs font-extrabold uppercase tracking-widest text-gdg-blue bg-gdg-blue-light px-3.5 py-1.5 rounded-full border border-blue-200">
-              9 Specialized Tracks
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-gdg-blue bg-gdg-blue-light px-3.5 py-1.5 rounded-full border border-blue-200">
+              <Users className="w-3.5 h-3.5" />
+              <span>12 Specialized Tracks</span>
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight mt-3">
+            <h2 className="text-3xl sm:text-5xl font-extrabold text-gray-900 tracking-tight mt-3">
               Explore by Community Track
             </h2>
-            <p className="text-sm text-gray-500 mt-2 font-medium">
-              Find inspiration, inspect GitHub repositories, and vote for the track that built the best solutions.
+            <p className="text-sm sm:text-base text-gray-600 mt-2 font-medium">
+              Discover what each community is building, inspect repositories, and join the GDG OAU network.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {communities.map((comm) => {
               const theme = COMMUNITY_THEMES[comm.name] || COMMUNITY_THEMES['Web Development'];
               const count = projects.filter((p) => p.community === comm.name).length;
               return (
                 <div
                   key={comm.name}
-                  onClick={() => navigate(`/gallery?community=${encodeURIComponent(comm.name)}`)}
-                  className={`cursor-pointer rounded-3xl p-6 border transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-white border-gray-200 ${theme.cardHoverClass}`}
+                  className="rounded-3xl p-6 border border-gray-200/90 bg-white hover:border-gray-300 transition-all duration-200 hover:shadow-lg flex flex-col justify-between group"
                 >
-                  <div className="flex items-center justify-between mb-4">
-                    <span
-                      className={`inline-flex items-center gap-1.5 text-xs font-extrabold px-3 py-1 rounded-full border ${theme.badgeClass}`}
-                    >
-                      <span className={`w-2 h-2 rounded-full ${theme.dotClass}`} />
-                      {comm.name}
-                    </span>
-                    <span className="text-xs font-extrabold text-gray-700 bg-gray-100 px-3 py-1 rounded-full">
-                      {count} builds
-                    </span>
+                  <div>
+                    <div className="flex items-center justify-between mb-3.5">
+                      <span
+                        className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full border ${theme.badgeClass}`}
+                      >
+                        <span className={`w-2 h-2 rounded-full ${theme.dotClass}`} />
+                        {comm.name}
+                      </span>
+                      <span className="text-xs font-bold text-gray-500 bg-gray-100 px-2.5 py-0.5 rounded-full">
+                        {count} {count === 1 ? 'build' : 'builds'}
+                      </span>
+                    </div>
+
+                    <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-medium mb-6">
+                      {comm.description}
+                    </p>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-4 font-medium">
-                    {comm.description}
-                  </p>
+                  <div className="flex items-center justify-between pt-4 border-t border-gray-100 text-xs font-bold">
+                    {comm.joinUrl ? (
+                      <a
+                        href={comm.joinUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-gray-500 hover:text-black transition-colors"
+                      >
+                        <span>Join community</span>
+                        <ExternalLink className="w-3.5 h-3.5 opacity-60" />
+                      </a>
+                    ) : (
+                      <span />
+                    )}
 
-                  <div className="flex items-center justify-between text-xs font-bold text-gray-900 pt-3 border-t border-gray-100">
-                    <span className="text-gray-500 font-bold">Explore track projects</span>
-                    <ArrowUpRight className="w-4 h-4 text-gdg-green transition-transform group-hover:translate-x-1" />
+                    <button
+                      onClick={() => navigate(`/gallery?community=${encodeURIComponent(comm.name)}`)}
+                      className="inline-flex items-center gap-1 text-gdg-blue hover:text-blue-700 transition-colors font-bold"
+                    >
+                      <span>Explore builds</span>
+                      <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </button>
                   </div>
                 </div>
               );
@@ -339,9 +337,9 @@ export const LandingPage: React.FC = () => {
 
       {/* ── CALL TO ACTION BANNER ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 text-center">
-        <div className="bg-gradient-to-r from-gray-900 via-indigo-950 to-gray-900 text-white rounded-3xl p-8 sm:p-14 relative overflow-hidden shadow-2xl">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-gdg-green/30 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-gdg-blue/30 rounded-full blur-3xl pointer-events-none" />
+        <div className="bg-gradient-to-r from-gray-900 via-gray-950 to-gray-900 text-white rounded-3xl p-8 sm:p-14 relative overflow-hidden shadow-2xl">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-gdg-green/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-gdg-blue/20 rounded-full blur-3xl pointer-events-none" />
           
           <div className="relative max-w-2xl mx-auto space-y-4">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-emerald-300 text-xs font-bold uppercase tracking-wider border border-white/20">
@@ -371,14 +369,6 @@ export const LandingPage: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* Project detail modal */}
-      {selectedProject && (
-        <ProjectDetailModal
-          project={selectedProject}
-          onClose={() => setSelectedProject(null)}
-        />
-      )}
 
     </div>
   );

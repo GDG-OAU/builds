@@ -1,13 +1,18 @@
 export type CommunityName =
   | 'Web Development'
-  | 'Game Development'
-  | 'Research'
+  | 'Cybersecurity'
+  | 'Quantitative Finance'
+  | 'Blockchain'
   | 'Product Management'
-  | 'Mobile App Development'
-  | 'Data Science / Machine Learning'
-  | 'Design'
   | 'Quantum Computing'
-  | 'Cybersecurity';
+  | 'Cloud Computing'
+  | 'Researchers'
+  | 'Research'
+  | 'Data Science / Machine Learning'
+  | 'Data Analysis'
+  | 'Design'
+  | 'Mobile App Development'
+  | 'Game Development';
 
 export type GoogleTool =
   | 'Google AI Studio'
@@ -55,6 +60,7 @@ export interface CommunityMeta {
   description: string;
   color: string;
   icon: string;
+  joinUrl?: string;
 }
 
 export interface IndividualScore {
